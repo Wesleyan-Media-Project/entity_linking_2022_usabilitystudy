@@ -5,8 +5,8 @@ library(stringr)
 library(quanteda)
 
 # File paths
-path_people_file <- "../datasets/people/person_2022_cd101222_v4.csv"
-path_cand_file <- "../datasets/candidates/wmpcand_101422_wmpid.csv"
+path_people_file <- "../../../datasets/people/person_2022_cd101222_v4.csv"
+path_cand_file <- "../../../datasets/candidates/wmpcand_101422_wmpid.csv"
 
 # People file
 # Restrict to only 2022 candidates and other relevant people
@@ -67,7 +67,7 @@ for(i in 1:nrow(people)){
     }
   }
   else if(people$currsen_2022[i] == 1){
-    people$descr[i] <- paste0(people$full_name[i], " is a ", people$party[i], " Senator in ", state_name[i], ".")
+    people$descr[i] <- paste0(people$full_name[i], " is a Senator.")
   }
   else if(people$former_uspres[i] == 1){
     people$descr[i] <- paste0(people$full_name[i], " is a former U.S. president.")
@@ -107,6 +107,9 @@ kb <- people %>%
   select(wmpid, full_name, descr, aliases) %>%
   rename(id = wmpid, name = full_name)
 
-fwrite(kb, "data/people_2022.csv")
+# One-off fixes
+kb$descr[kb$id == "WMPID1289"] <- "Joe Biden is the U.S. president."
+
+fwrite(kb, "../data/people_2022.csv")
 # The 4 variables in this file are the only thing 
 # from this script that enter the entity linker
