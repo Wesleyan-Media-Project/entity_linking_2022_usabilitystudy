@@ -12,3 +12,4 @@ Todo:
 - Include cabinet members and other non-candidates who are currently not-dummified in the persons file
 - Include gubernatorial candidates
 - Include OCR
+- Construct proper training data from 2022 candidate ads and train the entity linker
