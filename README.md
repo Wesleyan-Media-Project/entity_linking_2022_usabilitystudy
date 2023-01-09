@@ -9,7 +9,6 @@ Then we initialize an entity linker with spaCy in `facebook/train/03_untrained_m
 Finally, on the inference data, we apply this entity linker, including some additional modifications to deal with the multiple Harrises etc. problem.
 
 Todo:
-- Include cabinet members and other non-candidates who are currently not-dummified in the persons file
-- Include gubernatorial candidates
 - Include OCR
+- Include Yasmine's name modifications in the knowledge base
 - Construct proper training data from 2022 candidate ads and train the entity linker
