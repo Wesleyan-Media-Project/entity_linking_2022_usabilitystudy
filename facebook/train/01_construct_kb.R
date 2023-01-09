@@ -5,16 +5,22 @@ library(stringr)
 library(quanteda)
 
 # File paths
-path_people_file <- "../../../datasets/people/person_2022_cd101222_v4.csv"
+# In
+path_people_file <- "../../../datasets/people/person_2022_cd101222_v6.csv"
 path_cand_file <- "../../../datasets/candidates/wmpcand_101422_wmpid.csv"
+# Out
+path_kb <- "../data/people_2022.csv"
 
 # People file
 # Restrict to only 2022 candidates and other relevant people
 # Also retain only relevant variables
 people <- fread(path_people_file, encoding = "UTF-8", data.table = F)
+people$pubhealth <- ifelse(people$face_category == "public health related", 1, 0)
+people$cabinet <- ifelse(people$face_category == "cabinet", 1, 0)
+people$historical <- ifelse(people$face_category == "historical figures", 1, 0)
 people <- people %>% 
-  filter(genelect_cd_2022 == 1 | supcourt_2022 == 1 | supcourt_former == 1 | currsen_2022 == 1 | prompol == 1 | former_uspres == 1 | intl_leaders == 1) %>%
-  select(wmpid, full_name, first_name, last_name, fecid_2022a, fecid_2022b, genelect_cd_2022, supcourt_2022, supcourt_former, currsen_2022, prompol, former_uspres, intl_leaders, gov2022_gencd)
+  filter(genelect_cd_2022 == 1 | supcourt_2022 == 1 | supcourt_former == 1 | currsen_2022 == 1 | prompol == 1 | former_uspres == 1 | intl_leaders == 1 | gov2022_gencd == 1 | pubhealth == 1 | cabinet == 1 | historical == 1) %>%
+  select(wmpid, full_name, first_name, last_name, fecid_2022a, fecid_2022b, genelect_cd_2022, supcourt_2022, supcourt_former, currsen_2022, prompol, former_uspres, intl_leaders, gov2022_gencd, pubhealth, cabinet, historical)
 
 people$supcourt_2022[is.na(people$supcourt_2022)] <- 0
 people$supcourt_former[is.na(people$supcourt_former)] <- 0
@@ -84,11 +90,23 @@ for(i in 1:nrow(people)){
   else if(people$supcourt_former[i] == 1){
       people$descr[i] <- paste0(people$full_name[i], " is a former Supreme Court Justice.")
   }
+  else if(people$gov2022_gencd[i] == 1){
+    people$descr[i] <- paste0(people$full_name[i], " is a gubernatorial candidate.")
+  }
+  else if(people$pubhealth[i] == 1){
+    people$descr[i] <- paste0(people$full_name[i], " is a public health official.")
+  }
+  else if(people$cabinet[i] == 1){
+    people$descr[i] <- paste0(people$full_name[i], " is a cabinet member.")
+  }
+  else if(people$historical[i] == 1){
+    people$descr[i] <- paste0(people$full_name[i], " is a historical figure.")
+  }
 }
 
 
 # ----
-# CANDIDATE ALIASES
+# Candidate aliases
 for(i in 1:nrow(people)){
   cand_names <- c(people$full_name[i], people$last_name[i])
   if(substr(cand_names[1], nchar(cand_names[1]), nchar(cand_names[1])) != "s"){
@@ -109,7 +127,8 @@ kb <- people %>%
 
 # One-off fixes
 kb$descr[kb$id == "WMPID1289"] <- "Joe Biden is the U.S. president."
+kb$aliases[[1107]] <- str_remove(kb$aliases[[1107]], ",") # Remove commas from MLK because it screws with the csv
 
-fwrite(kb, "../data/people_2022.csv")
+fwrite(kb, path_kb)
 # The 4 variables in this file are the only thing 
 # from this script that enter the entity linker
