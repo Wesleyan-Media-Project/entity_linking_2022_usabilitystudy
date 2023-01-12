@@ -56,16 +56,11 @@ def is_it_kamala(nlpd_doc, possible_cands, likely_cand, boost_size = 0.1):
     
     return(picked_cand_id)
   
-harrises = ['H8MD01094',
-            'H8KY06222',
-            'S0SC00289',
-            'H0SC06229',
-            'H0MI05170',
-            'H0LA05112',
-            'H0LA03190',
+harrises = ['WMPID1144',
+            'WMPID3207',
             'WMPID2']
 
-barretts = ['H0GA11036',
+barretts = ['WMPID3995',
             'WMPID17']
 
 for f in fields:
@@ -87,8 +82,9 @@ for f in fields:
                 if ent.kb_id_ != 'NIL':
                     
                     # Make sure we don't misclassify House as Steve House
-                    if (ent.kb_id_ == 'H0CO06119') & (ent.label_ == 'ORG'):
-                        pass
+                    # Steve House didn't run in 2022 \o/ yay!
+                    # if (ent.kb_id_ == 'H0CO06119') & (ent.label_ == 'ORG'):
+                    #     pass
                     
                     # Make sure we don't misclassify Kamala as one of the other Harrises
                     elif ent.kb_id_ in harrises:
@@ -98,9 +94,9 @@ for f in fields:
                         entities_in_ad_start.append(ent.start_char)
                         entities_in_ad_end.append(ent.end_char)
                         
-                    # Make sure we don't misclassify Amy Coney Barrett as Dana Barrett
-                    # If the EL detects Dana Barrett
-                    elif ent.kb_id_ == 'H0GA11036':
+                    # Make sure we don't misclassify Amy Coney Barrett as Thomas More Barrett
+                    # If the EL detects Thomas More Barrett
+                    elif ent.kb_id_ == 'WMPID3995':
                         # Check if it is actually Amy Coney
                         barretts_cand = is_it_kamala(test_doc, barretts, 'WMPID17', boost_size = 0.17)
                         entities_in_ad.append(barretts_cand)
