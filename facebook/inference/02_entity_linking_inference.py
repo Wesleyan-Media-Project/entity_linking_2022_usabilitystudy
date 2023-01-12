@@ -87,7 +87,7 @@ for f in fields:
                     #     pass
                     
                     # Make sure we don't misclassify Kamala as one of the other Harrises
-                    elif ent.kb_id_ in harrises:
+                    if ent.kb_id_ in harrises:
                         # Check if it is actually Kamala
                         harrises_cand = is_it_kamala(test_doc, harrises, 'WMPID2', boost_size = 0.16)
                         entities_in_ad.append(harrises_cand)
