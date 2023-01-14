@@ -6,7 +6,7 @@ library(stringi)
 
 # Input files
 path_fb22 <- "../../../datasets/facebook/fb2022_master_0905_1108.csv.gz"
-path_fb22_asr <- "../../../datasets/facebook/fb2022_asr_1108.csv.gz"
+path_fb22_asr <- "../../../datasets/facebook/asr_fb2022_0905_1108.csv"
 # path_fb22_ocr <- ""
 # Output files
 path_prepared_ads <- "../data/inference_all_fb22_ads.csv.gz"
