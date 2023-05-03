@@ -5,7 +5,7 @@ import random
 import json
 import pandas as pd
 import spacy #version '3.2'
-nlp = spacy.load("../models/untrained_entity_linker_spacy3_v3_500/")
+nlp = spacy.load("../models/trained_entity_linker/")
 from spacy.kb import KnowledgeBase #vscode pylinter complains about this, but it actually loads fine
 from spacy.util import minibatch, compounding
 import re
@@ -119,6 +119,62 @@ for f in fields:
     df[f + '_end'] = entities_in_field_end
     
     print(f, "done!")
+
+# Split ids
+df['id'] = df['id'].str.split('|')
+# "Un-deduplicate", or "Re-hydrate", in WMP lingo
+df = df.explode('id')
+# Split into ad id and field
+df_ids = df['id'].str.split('__', expand = True)
+df_ids.columns = ['ad_id', 'field']
+df = pd.concat([df, df_ids], 1)
+df = df.drop(labels = ['id'], axis = 1)
+
+# Split the data frame into disclaimer/page_name, and other
+df_1 = df[df['field'].isin(['disclaimer', 'page_name'])]
+df_2 = df[df['field'].isin(['disclaimer', 'page_name']) == False]
+
+def search_cand(sent, ents_start, ents_end, ents, searchterm, searchterm_id):
+
+  new_ents_start = ents_start.copy()
+  new_ents_end = ents_end.copy()
+  new_ents = ents.copy()
+  
+  search_start = np.array([m.start() for m in re.finditer(searchterm, sent, re.IGNORECASE)])
+  search_end = search_start + (len(searchterm)-1)
+  
+  # Loop over all results returned by the regex search
+  for i in range(len(search_start)):
+    # Loop over all entities already detected by the entity linker
+    # And check whether any given result returned by the regex search was already found
+    already_found = []
+    for j in range(len(ents_start)):
+      # Only do this for the entities that are actually Trump/Biden
+      if ents[j] == searchterm_id:
+        # If the character indices of the regex search are within the character indexes of the entity linker, it's already been detected
+        already_found.append((search_start[i] >= ents_start[j]) and (search_end[i] <= ents_end[j]))
+    
+    # If, for the current regex search result, there are no matches with any of the entity linker's results
+    # Then append to the entity linker's results
+    if any(already_found) == False:
+      new_ents_start.append(search_start[i])
+      new_ents_end.append(search_end[i])
+      new_ents.append(searchterm_id)
+  
+  # Sort the new lists of entities and their indices
+  new_ents = [new_ents[i] for i in np.argsort(new_ents_end)]
+  new_ents_start = sorted(new_ents_start)
+  new_ents_end = sorted(new_ents_end)
+  
+  return([new_ents_start, new_ents_end, new_ents])
+
+
+for i in tqdm(range(len(df_1))):
+  df_1['text_start'].iloc[i], df_1['text_end'].iloc[i], df_1['text_detected_entities'].iloc[i] = search_cand(df_1['text'].iloc[i], df_1['text_start'].iloc[i], df_1['text_end'].iloc[i], df_1['text_detected_entities'].iloc[i], 'Trump', 'P80001571')
+  df_1['text_start'].iloc[i], df_1['text_end'].iloc[i], df_1['text_detected_entities'].iloc[i] = search_cand(df_1['text'].iloc[i], df_1['text_start'].iloc[i], df_1['text_end'].iloc[i], df_1['text_detected_entities'].iloc[i], 'Biden', 'P80000722')
+
+# Recombine the dataframes
+df = pd.concat([df_1, df_2], 0)
 
 df.to_csv(path_el_results, index=False)
 df = df.drop(['text'], axis = 1)
