@@ -8,8 +8,7 @@ library(dplyr)
 library(tidyr)
 library(stringr)
 
-combined <- read_csv("./google/data/new_entity_linking_results_google_2022.csv")
-
+combined <- fread("../data/entity_linking_results_google_2022_20231028.csv.gz")
 #----
 # Combine fields
 combined2 <- combined %>%
@@ -22,5 +21,4 @@ combined3 <- combined2 %>%
   unite(col = detected_entities, ends_with('detected_entities'), sep = ", ", na.rm = T)
 
 # Save version with combined fields
-write_csv(combined3, "./google/data/new_entity_linking_results_google_2022_notext_combined_20231025.csv")
-
+fwrite(combined3, "../data/entity_linking_results_google_2022_notext_combined_20231028.csv.gz")
