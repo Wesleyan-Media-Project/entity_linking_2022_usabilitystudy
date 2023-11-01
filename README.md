@@ -50,9 +50,3 @@ Some scripts require datasets from the datasets repo (which contains datasets th
 
  `en_core_web_lg` requires manual installation, which can be done by running the following command in the terminal:
 `python -m spacy download en_core_web_lg`
-
-Todo:
-
-- Include OCR
-- Include Yasmine's name modifications in the knowledge base
-- Construct proper training data from 2022 candidate ads and train the entity linker
