@@ -9,7 +9,7 @@ library(tidyr)
 # File paths
 # In
 path_people_file <- "../../../datasets/people/person_2022.csv"
-path_cand_file <- "../../../datasets/candidates/wmpcand_041723_wmpid.csv"
+path_cand_file <- "../../../datasets/candidates/wmpcand_120223_wmpid.csv"
 # Out
 path_kb <- "../data/entity_kb.csv"
 
