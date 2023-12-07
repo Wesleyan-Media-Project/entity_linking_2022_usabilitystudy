@@ -1,7 +1,5 @@
 # Post-processing for the entity linking results
-# First, fix Dartanyon Williams by making him a House, not Senate candidate
-# Then, save that result as it is, with separate fields
-# Finally, gather up all detected entities from different fields and put them all together
+
 library(tidyverse)
 library(data.table)
 library(dplyr)
