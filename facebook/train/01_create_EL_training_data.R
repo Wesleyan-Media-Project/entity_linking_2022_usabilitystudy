@@ -4,7 +4,10 @@ library(tidyr)
 
 # Input files
 path_ads <- "../../../fb_2022/fb_2022_adid_text_clean.csv.gz"
-path_adid_to_pageid <- "../../../fb_2022/fb_2022_adid_var1.csv.gz"
+
+#This is the output table from `data-post-production/01-merge-results/01_merge_preprocessed_results`
+path_adid_to_pageid <- "fb_2022_adid_var1.csv.gz"
+
 path_entities_kb <- "../data/entity_kb.csv"
 path_wmpent_file <- "../../../datasets/wmp_entity_files/Facebook/2022/wmp_fb_2022_entities_v120122.csv"
 # Output files
