@@ -3,7 +3,8 @@ library(dplyr)
 library(tidyr)
 
 # Input files
-path_ads <- "../../../fb_2022/fb_2022_adid_text_clean.csv.gz"
+# This is an output from data-post-production/01-merge-results/01_merge_preprocessed_results
+path_ads <- "fb_2022_adid_text.csv.gz"
 
 #This is the output table from `data-post-production/01-merge-results/01_merge_preprocessed_results`
 path_adid_to_pageid <- "fb_2022_adid_var1.csv.gz"

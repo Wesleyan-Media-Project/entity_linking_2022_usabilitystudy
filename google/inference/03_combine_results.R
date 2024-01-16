@@ -5,7 +5,7 @@ library(dplyr)
 library(tidyr)
 library(stringr)
 
-el <- fread("../../../data/entity_linking_results_google_2022.csv.gz")
+el <- fread("../data/entity_linking_results_google_2022.csv.gz")
 
 #----
 # Fix Dartanyon Williams by making him a House, not Senate candidate

@@ -3,7 +3,8 @@ library(dplyr)
 library(tidyr)
 
 # Input files
-path_ads <- "../../../google_2022/g2022_adid_01062021_11082022_text_clean.csv.gz"
+# This is an output from data-post-production/01-merge-results/01_merge_preprocessed_results
+path_ads <- "g2022_adid_01062021_11082022_text.csv.gz"
 # Output files
 path_prepared_ads <- "../data/inference_all_google22_ads.csv.gz"
 
