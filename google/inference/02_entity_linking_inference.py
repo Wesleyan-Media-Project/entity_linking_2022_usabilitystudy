@@ -136,46 +136,46 @@ df_1 = df[df['field'].isin(['advertiser_name'])]
 df_2 = df[df['field'].isin(['advertiser_name']) == False]
 
 
-def search_cand(sent, ents_start, ents_end, ents, searchterm, searchterm_id):
+#def search_cand(sent, ents_start, ents_end, ents, searchterm, searchterm_id):
 
-  new_ents_start = ents_start.copy()
-  new_ents_end = ents_end.copy()
-  new_ents = ents.copy()
+#  new_ents_start = ents_start.copy()
+#  new_ents_end = ents_end.copy()
+#  new_ents = ents.copy()
   
-  search_start = np.array([m.start() for m in re.finditer(searchterm, sent, re.IGNORECASE)])
-  search_end = search_start + (len(searchterm)-1)
+#  search_start = np.array([m.start() for m in re.finditer(searchterm, sent, re.IGNORECASE)])
+#  search_end = search_start + (len(searchterm)-1)
   
   # Loop over all results returned by the regex search
-  for i in range(len(search_start)):
+#  for i in range(len(search_start)):
     # Loop over all entities already detected by the entity linker
     # And check whether any given result returned by the regex search was already found
-    already_found = []
-    for j in range(len(ents_start)):
+#    already_found = []
+#    for j in range(len(ents_start)):
       # Only do this for the entities that are actually Trump/Biden
-      if ents[j] == searchterm_id:
+#      if ents[j] == searchterm_id:
         # If the character indices of the regex search are within the character indexes of the entity linker, it's already been detected
-        already_found.append((search_start[i] >= ents_start[j]) and (search_end[i] <= ents_end[j]))
+#        already_found.append((search_start[i] >= ents_start[j]) and (search_end[i] <= ents_end[j]))
     
     # If, for the current regex search result, there are no matches with any of the entity linker's results
     # Then append to the entity linker's results
-    if any(already_found) == False:
-      new_ents_start.append(search_start[i])
-      new_ents_end.append(search_end[i])
-      new_ents.append(searchterm_id)
+#    if any(already_found) == False:
+#      new_ents_start.append(search_start[i])
+#      new_ents_end.append(search_end[i])
+#      new_ents.append(searchterm_id)
   
   # Sort the new lists of entities and their indices
-  new_ents = [new_ents[i] for i in np.argsort(new_ents_end)]
-  new_ents_start = sorted(new_ents_start)
-  new_ents_end = sorted(new_ents_end)
+#  new_ents = [new_ents[i] for i in np.argsort(new_ents_end)]
+#  new_ents_start = sorted(new_ents_start)
+#  new_ents_end = sorted(new_ents_end)
   
-  return([new_ents_start, new_ents_end, new_ents])
+#  return([new_ents_start, new_ents_end, new_ents])
 
-for i in tqdm(range(len(df_1))):
-  df_1['text_start'].iloc[i], df_1['text_end'].iloc[i], df_1['text_detected_entities'].iloc[i] = search_cand(df_1['text'].iloc[i], df_1['text_start'].iloc[i], df_1['text_end'].iloc[i], df_1['text_detected_entities'].iloc[i], 'Trump', 'WMPID1290')
-  df_1['text_start'].iloc[i], df_1['text_end'].iloc[i], df_1['text_detected_entities'].iloc[i] = search_cand(df_1['text'].iloc[i], df_1['text_start'].iloc[i], df_1['text_end'].iloc[i], df_1['text_detected_entities'].iloc[i], 'Biden', 'WMPID1289')
+#for i in tqdm(range(len(df_1))):
+#  df_1['text_start'].iloc[i], df_1['text_end'].iloc[i], df_1['text_detected_entities'].iloc[i] = search_cand(df_1['text'].iloc[i], df_1['text_start'].iloc[i], df_1['text_end'].iloc[i], df_1['text_detected_entities'].iloc[i], 'Trump', 'WMPID1290')
+#  df_1['text_start'].iloc[i], df_1['text_end'].iloc[i], df_1['text_detected_entities'].iloc[i] = search_cand(df_1['text'].iloc[i], df_1['text_start'].iloc[i], df_1['text_end'].iloc[i], df_1['text_detected_entities'].iloc[i], 'Biden', 'WMPID1289')
 
 # Recombine the dataframes
-df = pd.concat([df_1, df_2], 0)
+df = pd.concat([df_1, df_2], axis = 0)
 
 df.to_csv(path_el_results, index=False)
 df = df.drop(['text'], axis = 1)
