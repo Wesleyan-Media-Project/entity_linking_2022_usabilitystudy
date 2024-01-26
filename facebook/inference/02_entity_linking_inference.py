@@ -63,6 +63,8 @@ harrises = ['WMPID1144',
 barretts = ['WMPID3995',
             'WMPID17']
 
+# This loop can take anywhere from 6-8 hours.
+
 for f in fields:
     
     entities_in_field = []
