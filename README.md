@@ -48,7 +48,7 @@ Some scripts require datasets from the [datasets](https://github.com/Wesleyan-Me
 
 Those repos are assumed to be cloned into the same top-level folder as the entity_linking_2022 repo.
 
-**Note:** "Some scripts operate in a Python environment and need the following packages: `spacy` version 3.2.4 and `en_core_web_lg` from `spacy`. This repo is tried on python 3.10.
+**Note:** "Some scripts operate in a Python environment and need the following packages: `spacy` version 3.2.4 and `en_core_web_lg` from `spacy`. This repo is tried on python 3.10. We recommend creating a Python virtual environment by using Anaconda to run the scripts in this repo. 
 
  `en_core_web_lg` requires manual installation, which can be done by running the following command in the terminal:
 `python -m spacy download en_core_web_lg`
