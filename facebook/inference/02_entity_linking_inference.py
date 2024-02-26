@@ -5,6 +5,7 @@ import random
 import json
 import pandas as pd
 import spacy #version '3.2'
+# trained_entity_linker is output from 02_train_entity_linking.py
 nlp = spacy.load("../models/trained_entity_linker/")
 from spacy.kb import KnowledgeBase #vscode pylinter complains about this, but it actually loads fine
 from spacy.util import minibatch, compounding
