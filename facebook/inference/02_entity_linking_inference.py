@@ -134,8 +134,8 @@ df = pd.concat([df, df_ids], 1)
 df = df.drop(labels = ['id'], axis = 1)
 
 # Split the data frame into disclaimer/page_name, and other
-df_1 = df[df['field'].isin(['disclaimer', 'page_name'])]
-df_2 = df[df['field'].isin(['disclaimer', 'page_name']) == False]
+#df_1 = df[df['field'].isin(['disclaimer', 'page_name'])]
+#df_2 = df[df['field'].isin(['disclaimer', 'page_name']) == False]
 
 #def search_cand(sent, ents_start, ents_end, ents, searchterm, searchterm_id):
 
@@ -177,7 +177,7 @@ df_2 = df[df['field'].isin(['disclaimer', 'page_name']) == False]
 #  df_1['text_start'].iloc[i], df_1['text_end'].iloc[i], df_1['text_detected_entities'].iloc[i] = search_cand(df_1['text'].iloc[i], df_1['text_start'].iloc[i], df_1['text_end'].iloc[i], df_1['text_detected_entities'].iloc[i], 'Biden', 'P80000722')
 
 # Recombine the dataframes
-df = pd.concat([df_1, df_2], axis = 0)
+#df = pd.concat([df_1, df_2], axis = 0)
 
 df.to_csv(path_el_results, index=False)
 df = df.drop(['text'], axis = 1)
