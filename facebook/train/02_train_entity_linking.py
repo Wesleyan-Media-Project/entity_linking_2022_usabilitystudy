@@ -4,7 +4,7 @@ import os
 import random
 import json
 import pandas as pd
-import spacy
+import spacy # Use version 3.2.4
 nlp = spacy.load("en_core_web_lg")
 from spacy.kb import KnowledgeBase #vscode pylinter complains, actually loads fine
 from spacy.util import minibatch, compounding
