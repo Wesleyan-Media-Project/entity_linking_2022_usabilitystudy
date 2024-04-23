@@ -8,10 +8,10 @@ library(stringr)
 
 # Paths
 # In
-path_detected_entities <- "../data/entity_linking_results_fb22_notext.csv.gz"
+path_detected_entities <- "facebook/data/entity_linking_results_fb22_notext.csv.gz"
 # Out
-path_finished_enties <- "../data/detected_entities_fb22.csv.gz"
-path_finished_enties_for_ad_tone <- "../data/detected_entities_fb22_for_ad_tone.csv.gz"
+path_finished_enties <- "facebook/data/detected_entities_fb22.csv.gz"
+path_finished_enties_for_ad_tone <- "facebook/data/detected_entities_fb22_for_ad_tone.csv.gz"
 
 # Read in Spacy's detected entities
 el <- fread(path_detected_entities)
