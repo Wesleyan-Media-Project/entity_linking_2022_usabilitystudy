@@ -4,7 +4,7 @@ import os
 import random
 import json
 import pandas as pd
-import spacy #version '3.2'
+import spacy # Use version '3.2.4'
 # trained_entity_linker is output from 02_train_entity_linking.py
 nlp = spacy.load("../../facebook/models/trained_entity_linker/")
 from spacy.kb import KnowledgeBase #vscode pylinter complains about this, but it actually loads fine
@@ -64,8 +64,6 @@ harrises = ['WMPID1144',
 barretts = ['WMPID3995',
             'WMPID17']
 
-# This loop can take anywhere from 6-8 hours.
-
 for f in fields:
     
     entities_in_field = []
@@ -124,6 +122,7 @@ for f in fields:
     print(f, "done!")
 
 
+## Prepare data for additional dictionary search for Trump and Biden only on advertiser name field
 # Split ids
 df['id'] = df['id'].str.split('|')
 # "Un-deduplicate", or "Re-hydrate", in WMP lingo
@@ -131,55 +130,73 @@ df = df.explode('id')
 # Split into ad id and field
 df_ids = df['id'].str.split('__', expand = True)
 df_ids.columns = ['ad_id', 'field']
-df = pd.concat([df, df_ids], 1)
+df = pd.concat([df, df_ids], axis = 1)
 df = df.drop(labels = ['id'], axis = 1)
 
-# Split the data frame into disclaimer/page_name, and other
+# Split the data frame into advertiser_name, and other
 df_1 = df[df['field'].isin(['advertiser_name'])]
 df_2 = df[df['field'].isin(['advertiser_name']) == False]
 
 
-#def search_cand(sent, ents_start, ents_end, ents, searchterm, searchterm_id):
+# Make a copy of df_1
+df1 = df_1.copy()
+df1.reset_index(drop=True, inplace=True)
 
-#  new_ents_start = ents_start.copy()
-#  new_ents_end = ents_end.copy()
-#  new_ents = ents.copy()
-  
-#  search_start = np.array([m.start() for m in re.finditer(searchterm, sent, re.IGNORECASE)])
-#  search_end = search_start + (len(searchterm)-1)
-  
-  # Loop over all results returned by the regex search
-#  for i in range(len(search_start)):
-    # Loop over all entities already detected by the entity linker
-    # And check whether any given result returned by the regex search was already found
-#    already_found = []
-#    for j in range(len(ents_start)):
-      # Only do this for the entities that are actually Trump/Biden
-#      if ents[j] == searchterm_id:
-        # If the character indices of the regex search are within the character indexes of the entity linker, it's already been detected
-#        already_found.append((search_start[i] >= ents_start[j]) and (search_end[i] <= ents_end[j]))
-    
-    # If, for the current regex search result, there are no matches with any of the entity linker's results
-    # Then append to the entity linker's results
-#    if any(already_found) == False:
-#      new_ents_start.append(search_start[i])
-#      new_ents_end.append(search_end[i])
-#      new_ents.append(searchterm_id)
-  
-  # Sort the new lists of entities and their indices
-#  new_ents = [new_ents[i] for i in np.argsort(new_ents_end)]
-#  new_ents_start = sorted(new_ents_start)
-#  new_ents_end = sorted(new_ents_end)
-  
-#  return([new_ents_start, new_ents_end, new_ents])
+# This function does a simple dictionary search on advertiser name field. 
+# It only does this search for Biden and Trump. 
+# If this dictionary search finds any entity that was not detected by the model, it adds the corresponding WMPID to the detected entities list.
 
-#for i in tqdm(range(len(df_1))):
-#  df_1['text_start'].iloc[i], df_1['text_end'].iloc[i], df_1['text_detected_entities'].iloc[i] = search_cand(df_1['text'].iloc[i], df_1['text_start'].iloc[i], df_1['text_end'].iloc[i], df_1['text_detected_entities'].iloc[i], 'Trump', 'WMPID1290')
-#  df_1['text_start'].iloc[i], df_1['text_end'].iloc[i], df_1['text_detected_entities'].iloc[i] = search_cand(df_1['text'].iloc[i], df_1['text_start'].iloc[i], df_1['text_end'].iloc[i], df_1['text_detected_entities'].iloc[i], 'Biden', 'WMPID1289')
+def update_detected_entities(df):
+    # Mapping of names to their corresponding ids
+    name_to_id = {'biden': 'WMPID1289', 'trump': 'WMPID1290'}
+
+    # Iterate over each row in the DataFrame with tqdm
+    for index, row in tqdm(df.iterrows(), total=len(df), desc="Processing rows"):
+        # Split the text_detected_entities column to a list
+        detected_entities = row['text_detected_entities']
+        
+        # Initialize lists to store start and end indices
+        start_indices = row['text_start']
+        end_indices = row['text_end']
+
+        # Convert the text to lowercase
+        text = row['text'].lower()
+
+        # Iterate over each name to be detected
+        for name in name_to_id.keys():
+            # Find all occurrences of the name in the text
+            name_occurrences = [i for i in range(len(text)) if text.startswith(name, i)]
+
+            # Check each occurrence of the name
+            for start_index in name_occurrences:
+                # Check if the name is already detected by the entity linking model
+                already_detected = False
+                for start, end in zip(start_indices, end_indices):
+                    if start <= start_index < end:
+                        already_detected = True
+                        break
+
+                # If the name is not already detected, add its ID
+                if not already_detected:
+                    end_index = start_index + len(name)
+                    detected_entities.append(name_to_id[name])
+                    start_indices.append(start_index)
+                    end_indices.append(end_index)
+
+        # Update the DataFrame with the modified lists
+        df.at[index, 'text_detected_entities'] = detected_entities
+        df.at[index, 'text_start'] = start_indices
+        df.at[index, 'text_end'] = end_indices
+
+    return df
+
+
+df2 = update_detected_entities(df1)
 
 # Recombine the dataframes
-df = pd.concat([df_1, df_2], axis = 0)
+df = pd.concat([df2, df_2], axis = 0)
 
+# Save results
 df.to_csv(path_el_results, index=False)
 df = df.drop(['text'], axis = 1)
 df.to_csv(path_el_results_notext, index=False)
