@@ -17,7 +17,7 @@ from tqdm import tqdm
 path_prepared_ads = "../data/inference_all_google22_ads.csv.gz"
 # Output files
 path_el_results = "../data/entity_linking_results_google_2022.csv.gz"
-path_el_results_notext = "../data/entity_linking_results_google_2022_notext_new.csv.gz"
+path_el_results_notext = "../data/entity_linking_results_google_2022_notext.csv.gz"
 
 # Read in prepared ads
 df = pd.read_csv(path_prepared_ads)
