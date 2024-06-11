@@ -1,3 +1,5 @@
+# This is optional, only to be used if you want to have an untrained model. For our inference scripts, you need to run the training script
+
 import csv
 from pathlib import Path
 import os
