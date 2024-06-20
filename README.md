@@ -36,7 +36,7 @@ There are separate folders for running the entity linker depending on whether yo
 
    The first task is to construct a knowledge base of political entities (people) of interest.
 
-   The knowledge base of people of interest is constructed from [facebook/knowledge_base/01_construct_kb.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/issue-2/facebook/knowledge_base/01_construct_kb.R). The input to the file is the data sourced from the 2022 WMP persons file [person_2022.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/people/person_2022.csv). The script constructs one sentence for each person with a basic description. Districts and party are sourced from the 2022 WMP candidates file [wmpcand_120223_wmpid.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/candidates/wmpcand_120223_wmpid.csv), a comprehensive file with names of candidates.
+   The knowledge base of people of interest is constructed from [facebook/knowledge_base/01_construct_kb.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/knowledge_base/01_construct_kb.R). The input to the file is the data sourced from the 2022 WMP persons file [person_2022.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/people/person_2022.csv). The script constructs one sentence for each person with a basic description. Districts and party are sourced from the 2022 WMP candidates file [wmpcand_120223_wmpid.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/candidates/wmpcand_120223_wmpid.csv), a comprehensive file with names of candidates.
 
    The knowledge base has four columns that include entities' `id`, `name`, `descr` (for description), and `aliases`. Examples of aliases include Joseph R. Biden being referred to as Joe or Robert Francis O’Rourke generally being known as Beto O’Rourke. Here is an example of one row in the knowledge base:
 
@@ -50,7 +50,7 @@ There are separate folders for running the entity linker depending on whether yo
 
    The second task is to train an entity linking model using the knowledge base.
 
-   Once the knowledge base of people of interest is constructed, the entity linker can be initialized with [spaCy](https://spacy.io/), a natural language processing library we use, in [facebook/train/02_train_entity_linking.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/issue-2/facebook/train/02_train_entity_linking.py).
+   Once the knowledge base of people of interest is constructed, the entity linker can be initialized with [spaCy](https://spacy.io/), a natural language processing library we use, in [facebook/train/02_train_entity_linking.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/02_train_entity_linking.py).
 
    **Note**: The training of the entity linking models is optional for running the scripts in this repo. You can run the inference scripts with our pre-trained model by downloading it [here](https://figshare.wesleyan.edu/account/projects/185302/articles/25773600). If you want to train your own models, you can follow the same instructions for the [inference set up](#3-setup) to set up your Python virtual environment and R working directory. After that, run the training scripts in this repo according to their numbering. For example, if you want to run the training pipeline, you can run the scripts in the following order:
 
@@ -73,7 +73,7 @@ There are separate folders for running the entity linker depending on whether yo
 
    The third task is to make inferences with the trained model to automatically identify and link entities mentioned in new political ad text.
 
-   To perform this task you can use the scripts in the inferences folders, [facebook/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/issue-2/facebook/inference) and [google/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/issue-2/google/inference). The folders incluced variations of scripts to disambiguate people, for example, multiple "Harrises" (e.g., Kamala Harris and Andy Harris).
+   To perform this task you can use the scripts in the inferences folders, [facebook/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/inference) and [google/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/google/inference). The folders incluced variations of scripts to disambiguate people, for example, multiple "Harrises" (e.g., Kamala Harris and Andy Harris).
 
 ## 3. Setup
 
@@ -154,7 +154,7 @@ After successfully running the above scripts in the inference folder, you should
 
 ## 4. Results Storage
 
-When you run the inference scripts, the entity linking results are stored in the `data` folder. The data will be in `csv.gz` and `csv` format. Here is an example of the entity linking results [facebook/data/entity_linking_results_fb22.csv.gz](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/issue-2/facebook/data/entity_linking_results_fb22.csv.gz):
+When you run the inference scripts, the entity linking results are stored in the `data` folder. The data will be in `csv.gz` and `csv` format. Here is an example of the entity linking results [facebook/data/entity_linking_results_fb22.csv.gz](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_linking_results_fb22.csv.gz):
 
 | text                                                  | text_detected_entities | text_start | text_end | ad_id  | field            |
 | ----------------------------------------------------- | ---------------------- | ---------- | -------- | ------ | ---------------- |
@@ -170,7 +170,7 @@ In this example,
 
 ## 5. Results Analysis
 
-The `csv.gz` files produced in this repo are usually large and may contain millions of rows. To make it easier to read and analyze the data we have provided two scripts, [readcsvgz.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/issue-2/readcsvgz.py) and [readcsvGUI](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/issue-2/readcsvGUI.py), in the root folder of this repo.
+The `csv.gz` files produced in this repo are usually large and may contain millions of rows. To make it easier to read and analyze the data we have provided two scripts, [readcsvgz.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/readcsvgz.py) and [readcsvGUI](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/readcsvGUI.py), in the root folder of this repo.
 
 ### Script `readcsvgz.py`
 
