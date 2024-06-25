@@ -7,6 +7,8 @@ import pandas as pd
 import spacy # Use version 3.2.4
 nlp = spacy.load("en_core_web_lg")
 from spacy.kb import KnowledgeBase #vscode pylinter complains, actually loads fine
+# for spacy version above v3.5
+# from spacy.kb import InMemoryLookupKB
 from spacy.util import minibatch, compounding
 from tqdm import tqdm
 import numpy as np
@@ -62,6 +64,7 @@ print(f"{'WMPID1289'}, name={name_dict['WMPID1289']}, \
 # Now we create a spacy knowledge base and populate it with the data above
 
 # Instantiate a knowledge base with 300-dimensional entity embedding
+# for spacy version above v3.5, instantiate the InMemoryLookupKB class instead of KnowledgeBase, which became an abstract class after v3.5
 kb = KnowledgeBase(vocab=nlp.vocab, entity_vector_length=300)
 
 # Populate the knowledge base from the csv file
