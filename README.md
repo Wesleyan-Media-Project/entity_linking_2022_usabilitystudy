@@ -116,7 +116,7 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
    pip install spacy==3.2.4
    python3 -m spacy download en_core_web_lg
    ```
-Note: We require this version of spacy because this repo used the KnowledgeBase class in spacy.kb implemented up to spacy v3.5. Since v3.5, the KnowledgeBase class became abstract ([reference here](https://spacy.io/api/kb)). If you install a later version of spacy, in particular spacy v3.5 and above, you will need to import the [InMemoryLookupKB]([Source](https://spacy.io/api/inmemorylookupkb)) class instead. Relevant comments can be found in scripts. 
+Note: We require this version of [spaCy](https://spacy.io/) because this repo used the [KnowledgeBase](https://spacy.io/api/kb) class in spacy.kb implemented up to spaCy v3.5. Since v3.5, the KnowledgeBase class became abstract ([reference here](https://spacy.io/api/kb)). If you install a later version of spaCy, in particular spaCy v3.5 and above, you will need to import the [InMemoryLookupKB]([Source](https://spacy.io/api/inmemorylookupkb)) class instead. Relevant comments can be found in scripts. 
 
 6. Additionally, some scripts in this repository require pandas 2.1.1. To install it, run:
 
