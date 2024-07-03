@@ -10,15 +10,17 @@ def parse_arguments():
     parser = argparse.ArgumentParser(description="Filter large CSV files and save results to an Excel file.")
     parser.add_argument('--file', type=str, required=True, help='Path to the CSV file.')
     parser.add_argument('--skiprows', type=int, default=0, help='Number of rows to skip at the start of the file.')
-    parser.add_argument('--nrows', type=int, default=1000, help='Number of rows to read from the file.')
+    parser.add_argument('--nrows', type=int, default=None, help='Number of rows to read from the file. Read all rows if not specified.')
     parser.add_argument('--filter_text', type=str, default='', help='Text to filter the rows.')
     return parser.parse_args()
 
 def load_data(file_path, skiprows, nrows):
-    # Load data from the CSV file 
-    # with specified rows to skip and number of rows to read
+    # Load data from the CSV file with specified rows to skip and number of rows to read
     try:
-        return pd.read_csv(file_path, skiprows=skiprows, nrows=nrows)
+        df = pd.read_csv(file_path, skiprows=skiprows, nrows=nrows)
+        if nrows is not None and df.shape[0] < nrows:
+            print(f"Warning: This data has only {df.shape[0]} rows and is less than the requested {nrows} rows. The script will read all rows in the data in this case.")
+        return df
     except FileNotFoundError:
         print(f"File not found: {file_path}")
         exit(1)
@@ -43,6 +45,17 @@ def save_to_excel(df, file_prefix='Readcsvgz_Output'):
 def main():
     # Parse command-line arguments
     args = parse_arguments()
+    
+    # Output the entered options
+    skiprows_desc =   args.skiprows
+    nrows_desc = "Read all rows" if args.nrows is None else args.nrows
+    filter_text_desc = "No filter is applied" if args.filter_text == '' else args.filter_text
+    
+    print(f"Input file: {args.file}")
+    print(f"Start reading data from row: {skiprows_desc}")
+    print(f"Number of rows to read: {nrows_desc}")
+    print(f"Filter text: {filter_text_desc}")
+    
     df = load_data(args.file, args.skiprows, args.nrows)
     filtered_df = filter_data(df, args.filter_text)
     

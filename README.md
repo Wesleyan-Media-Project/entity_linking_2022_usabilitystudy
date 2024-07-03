@@ -116,7 +116,8 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
    pip install spacy==3.2.4
    python3 -m spacy download en_core_web_lg
    ```
-* Note: We require this version of [spaCy](https://spacy.io/) because this repo used the [KnowledgeBase](https://spacy.io/api/kb) class in spacy.kb implemented up to spaCy v3.5. Since v3.5, the KnowledgeBase class became abstract ([reference here](https://spacy.io/api/kb)). If you install a later version of spaCy, in particular spaCy v3.5 and above, you will need to import the [InMemoryLookupKB](https://spacy.io/api/inmemorylookupkb) class instead. Relevant comments have been made in scripts. 
+
+- Note: We require this version of [spaCy](https://spacy.io/) because this repo used the [KnowledgeBase](https://spacy.io/api/kb) class in spacy.kb implemented up to spaCy v3.5. Since v3.5, the KnowledgeBase class became abstract ([reference here](https://spacy.io/api/kb)). If you install a later version of spaCy, in particular spaCy v3.5 and above, you will need to import the [InMemoryLookupKB](https://spacy.io/api/inmemorylookupkb) class instead. Relevant comments have been made in scripts.
 
 6. Additionally, some scripts in this repository require pandas 2.1.1. To install it, run:
 
@@ -180,7 +181,7 @@ The `csv.gz` files produced in this repo are usually large and may contain milli
 The script `readcsvgz.py` is a Python script that reads and filters the `csv.gz` files and saves the filtered data in an Excel file. It has the following features:
 
 - Load a specified number of rows from a CSV file.
-- Skip a specified number of initial rows.
+- Skip a specified number of initial rows to read the data.
 - Filter rows based on the presence of a specified text (case-insensitive).
 
 #### Usage
@@ -193,7 +194,7 @@ pip install pandas
 
 After installing the required packages, you can run the script with the command line arguments.
 
-For example, to run the script with the default arguments (start from row 0, read 1000 rows, no text filter), you can enter the following command in your terminal:
+For example, to run the script with the default arguments (start from row 0, read all rows, no text filter), you can enter the following command in your terminal:
 
 ```bash
 python3 readcsvgz.py --file facebook/data/entity_linking_results_fb22.csv.gz
@@ -203,8 +204,8 @@ You can customize the behavior of the script by providing additional command-lin
 
 - `--file`: Path to the csv.gz file (required).
 - `--skiprows`: Number of rows to skip at the start of the file (default: 0).
-- `--nrows`: Number of rows to read from the file (default: 1000).
-- `--filter_text`: Text to filter the rows (case-insensitive). If empty, no filtering is applied (default: no filter).
+- `--nrows`: Number of rows to read from the file (default: Read all rows in the data).
+- `--filter_text`: Text to filter the rows (case-insensitive). If empty, no filtering is applied (default: No filter).
 
 For example, to filter rows containing the text "Biden", starting from row 0 and reading 100000 rows:
 
@@ -217,6 +218,8 @@ To see a help message with the description of all available arguments, you can r
 ```bash
 python3 readcsvgz.py --h
 ```
+
+Please note that this script may take a while (>10 min) to run depending on the size of the data.
 
 ### Script `readcsvGUI.py`
 
