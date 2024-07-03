@@ -231,7 +231,7 @@ To run the `readcsvGUI.py` script, you need to first install the required packag
 pip install pandas pandasgui
 ```
 
-If you are working on a computer which is not running Windows, you will need to go into the file `.../site-packages/pandasgui/constants.py` and change the line of code
+If you are working on a non-Windows computer, you will need to go into the file `.../site-packages/pandasgui/constants.py` and change the line of code
 ```bash
 SHORTCUT_PATH = os.path.join(os.getenv('APPDATA'), 'Microsoft/Windows/Start Menu/Programs/PandasGUI.lnk')
 ```
