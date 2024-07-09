@@ -15,7 +15,7 @@ def main():
     file_path = args.file
     
     try:
-        df = pd.read_csv(file_path, compression='gzip')
+        df = pd.read_csv(file_path)
     except FileNotFoundError:
         print(f"Error: File not found: {file_path}")
         sys.exit(1)
