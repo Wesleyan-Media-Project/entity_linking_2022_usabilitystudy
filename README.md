@@ -194,7 +194,7 @@ pip install pandas
 
 After installing the required packages, you can run the script with the command line arguments.
 
-For example, to run the script with the default arguments (start from row 0, read all rows, no text filter), you can enter the following command in your terminal:
+For example, to run the script with the default arguments (start from row 0, read 10000 rows, no text filter), you can enter the following command in your terminal:
 
 ```bash
 python3 readcsvgz.py --file facebook/data/entity_linking_results_fb22.csv.gz
@@ -204,7 +204,7 @@ You can customize the behavior of the script by providing additional command-lin
 
 - `--file`: Path to the csv.gz file (required).
 - `--skiprows`: Number of rows to skip at the start of the file (default: 0).
-- `--nrows`: Number of rows to read from the file (default: Read all rows in the data).
+- `--nrows`: Number of rows to read from the file (default: Read 10000 rows in the data).
 - `--filter_text`: Text to filter the rows (case-insensitive). If empty, no filtering is applied (default: No filter).
 
 For example, to filter rows containing the text "Biden", starting from row 0 and reading 100000 rows:
@@ -219,7 +219,7 @@ To see a help message with the description of all available arguments, you can r
 python3 readcsvgz.py --h
 ```
 
-Please note that this script may take a while (>10 min) to run depending on the size of the data.
+Please note that this script may take a while (>10 min) to run depending on the size of the data and the number of rows you requested. If you request the script to read more than 1048570 rows, the output would be saved in multiple Excel files due to the maximum number of rows Excel can handle.
 
 ### Script `readcsvGUI.py`
 
@@ -232,10 +232,13 @@ pip install pandas pandasgui
 ```
 
 If you are working on a non-Windows computer, you will need to go into the file `.../site-packages/pandasgui/constants.py` and change the line of code
+
 ```bash
 SHORTCUT_PATH = os.path.join(os.getenv('APPDATA'), 'Microsoft/Windows/Start Menu/Programs/PandasGUI.lnk')
 ```
-to instead be 
+
+to instead be
+
 ```bash
 if sys.platform == 'win32':
     SHORTCUT_PATH = os.path.join(os.getenv('APPDATA'), 'Microsoft/Windows/Start Menu/Programs/PandasGUI.lnk')
@@ -246,8 +249,10 @@ else:
 After installing the required packages and potentially changing the SHORTCUT_PATH, you can run the script with the following command:
 
 ```bash
-python3 readcsvGUI.py
+python3 readcsvGUI.py --file facebook/data/entity_linking_results_fb22.csv.gz
 ```
+
+You can change the file to read by replacing the path `facebook/data/entity_linking_results_fb22.csv.gz` to other file paths.
 
 Here is an example of the GUI interface:
 ![A picture of the PandasGui interface](PandasGUI_example.png)

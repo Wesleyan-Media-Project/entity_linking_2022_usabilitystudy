@@ -1,10 +1,30 @@
-from pandasgui import show
 import pandas as pd
+import argparse
+import sys
+from pandasgui import show
 
-#This script may take a while (>10 min) to run depending on the size of the data.
+def parse_arguments():
+    parser = argparse.ArgumentParser(description="Open a csv.gz file in a GUI for easy viewing and manipulation.")
+    parser.add_argument('--file', type=str, required=True, help='Path to the CSV file.')
+    return parser.parse_args()
 
-# Read csv.gz file
-df = pd.read_csv('facebook/data/entity_linking_results_fb22.csv.gz', compression='gzip')
+def main():
+    # Parse command-line arguments
+    args = parse_arguments()
+    
+    file_path = args.file
+    
+    try:
+        df = pd.read_csv(file_path, compression='gzip')
+    except FileNotFoundError:
+        print(f"Error: File not found: {file_path}")
+        sys.exit(1)
+    except Exception as e:
+        print(f"Error loading data: {e}")
+        sys.exit(1)
+    
+    # Launch GUI
+    show(df)
 
-# Launch GUI
-show(df)
+if __name__ == "__main__":
+    main()
