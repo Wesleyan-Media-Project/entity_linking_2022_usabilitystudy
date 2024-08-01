@@ -13,8 +13,8 @@ library(tidyr)
 
 # Input files
 # This is an output from data-post-production/01-merge-results/01_merge_preprocessed_results.
-# After downloading this file from figshare (see the README), you should move it
-# into the same directory that the entity_linking_2022 folder is located
+# After downloading this file from figshare (https://figshare.wesleyan.edu/account/articles/26124295),
+# you should move it into the same directory that the entity_linking_2022 folder is located
 path_ads <- "../fb_2022_adid_text.csv.gz"
 # Output files
 path_prepared_ads <- "facebook/data/inference_all_fb22_ads.csv.gz"
