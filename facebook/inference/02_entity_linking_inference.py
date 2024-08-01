@@ -5,8 +5,10 @@ import random
 import json
 import pandas as pd
 import spacy # Use version '3.2.4'
-# trained_entity_linker is output from 02_train_entity_linking.py
-nlp = spacy.load("../models/trained_entity_linker/")
+# After downloading the trained_entity_linker folder (see README), it should be
+# moved into a 'models' folder within the entity_linking_2022 directory,
+# otherwise the path below may need to be adjusted.
+nlp = spacy.load("./models/trained_entity_linker/") # trained_entity_linker is output from 02_train_entity_linking.py
 from spacy.kb import KnowledgeBase #vscode pylinter complains about this, but it actually loads fine
 from spacy.util import minibatch, compounding
 import re
@@ -14,13 +16,21 @@ import numpy as np
 from tqdm import tqdm
 
 # Input files
-path_prepared_ads = "../data/inference_all_fb22_ads.csv.gz"
+path_prepared_ads = "./facebook/data/inference_all_fb22_ads.csv.gz"
 # Output files
-path_el_results = "../data/entity_linking_results_fb22.csv.gz"
-path_el_results_notext = "../data/entity_linking_results_fb22_notext.csv.gz"
+path_el_results = "./facebook/data/entity_linking_results_fb22.csv.gz"
+path_el_results_notext = "./facebook/data/entity_linking_results_fb22_notext.csv.gz"
 
 # Read in prepared ads
 df = pd.read_csv(path_prepared_ads)
+
+# In order to run a random sample of rows from the input dataframe, 
+# uncomment the two lines of code below, where n equals the # of rows
+
+#df = df.sample(n=200)
+#df = df.reset_index(drop=True)
+
+
 df = df.replace(np.nan, '', regex=True)
 fields = ['text']
 
@@ -135,11 +145,9 @@ df_ids = df['id'].str.split('__', expand = True)
 df_ids.columns = ['ad_id', 'field']
 df = pd.concat([df, df_ids], axis = 1)
 df = df.drop(labels = ['id'], axis = 1)
-
 # Split the data frame into disclaimer/page_name, and other
 df_1 = df[df['field'].isin(['disclaimer', 'page_name'])]
 df_2 = df[df['field'].isin(['disclaimer', 'page_name']) == False]
-
 # Make a copy of df_1
 df1 = df_1.copy()
 df1.reset_index(drop=True, inplace=True)
@@ -151,7 +159,6 @@ df1.reset_index(drop=True, inplace=True)
 def update_detected_entities(df):
     # Mapping of names to their corresponding ids
     name_to_id = {'biden': 'WMPID1289', 'trump': 'WMPID1290'}
-
     # Iterate over each row in the DataFrame with tqdm
     for index, row in tqdm(df.iterrows(), total=len(df), desc="Processing rows"):
         # Split the text_detected_entities column to a list

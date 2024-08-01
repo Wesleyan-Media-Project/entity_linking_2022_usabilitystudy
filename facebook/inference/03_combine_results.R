@@ -6,6 +6,15 @@ library(dplyr)
 library(tidyr)
 library(stringr)
 
+# Set your working directory below by uncommenting and inserting your own wd
+# We recommend setting it to the entity_linking_2022 directory
+
+# setwd("local/path/to/entity_linking_2022")
+
+# NOTE: The paths below are written with the assumption that you are running
+# from the entity_linking_2022 directory. If you are running from elsewhere,
+# they may need to be adjusted.
+
 # Paths
 # In
 path_detected_entities <- "facebook/data/entity_linking_results_fb22_notext.csv.gz"
@@ -17,7 +26,7 @@ path_finished_enties_for_ad_tone <- "facebook/data/detected_entities_fb22_for_ad
 el <- fread(path_detected_entities)
 
 # Transform the Python-based detected entities field into an R list
-transform_pylist <- function(x){
+transform_pylist <- function(x) {
   x <- str_remove_all(x, "\\[|\\]|\\'")
   x <- str_remove_all(x, " ")
   return(x)
