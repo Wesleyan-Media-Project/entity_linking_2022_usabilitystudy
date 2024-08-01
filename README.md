@@ -55,16 +55,24 @@ There are separate folders for running the entity linker depending on whether yo
    Once the knowledge base of people of interest is constructed, the entity linker can be initialized with [spaCy](https://spacy.io/), a natural language processing library we use, in [facebook/train/02_train_entity_linking.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/02_train_entity_linking.py).
 
    **Note**: The training of the entity linking models is optional for running the scripts in this repo. You can run the inference scripts with our pre-trained model by downloading it [here](https://figshare.wesleyan.edu/articles/model/Trained_Entity_Linker_Model/25773600/2)) or by using our bash script that automatically downloads it. To use this script, make sure that you are in the entity_linking_2022 directory as your working directory and run the following commands in terminal:
+
    ```bash
    chmod +x download_files.sh
    ./download_files.sh
    ```
-  
-    Once you have done this, the pre-trained model will download. This will take some time, as it takes up 1.44 GB. Once it has finished downloading, run the following command in terminal to unzip the model.
-    ```bash
-    unzip trained_entity_linker.zip
-    ```
-   
+
+   If you are using Windows, you can use our Windows PowerShell equivalent bash script by typing the following command in PowerShell terminal:
+
+   ```bash
+   .\download_files.ps1
+   ```
+
+   Once you have done this, the pre-trained model will download. This will take some time, as it takes up 1.44 GB. Once it has finished downloading, run the following command in terminal to unzip the model.
+
+   ```bash
+   unzip trained_entity_linker.zip
+   ```
+
    If you want to train your own models, you can follow the same instructions for the [inference set up](#3-setup) to set up your Python virtual environment and R working directory. After that, run the training scripts in this repo according to their numbering. For example, if you want to run the training pipeline, you can run the scripts in the following order:
 
    1. [facebook/train/01_create_EL_training_data.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/01_create_EL_training_data.R)
