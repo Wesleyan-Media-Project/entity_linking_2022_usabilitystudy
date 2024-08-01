@@ -6,7 +6,7 @@ This repo is a part of the [Cross-platform Election Advertising Transparency Ini
 
 To analyze the different dimensions of political ad transparency we have developed an analysis pipeline. The scripts in this repo are part of the Data Classification Step in our pipeline.
 
-![A picture of the repo pipeline with this repo highlighted](Creative_Pipelines.png)
+![A picture of the repo pipeline with this repo highlighted](images/Creative_Pipelines.png)
 
 ## Table of Contents
 
@@ -279,7 +279,7 @@ python3 readcsvGUI.py --file facebook/data/entity_linking_results_fb22.csv.gz
 You can change the file to read by replacing the path `facebook/data/entity_linking_results_fb22.csv.gz` to other file paths.
 
 Here is an example of the GUI interface:
-![A picture of the PandasGui interface](PandasGUI_example.png)
+![A picture of the PandasGui interface](images/PandasGUI_example.png)
 For more information on how to use the GUI interface, please refer to the [PandasGui documentation](https://pypi.org/project/pandasgui/).
 
 ## 6. Thank You
@@ -290,7 +290,7 @@ For more information on how to use the GUI interface, please refer to the [Panda
 
 <p align="center" style="display: flex; justify-content: center; align-items: center;">
   <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2235006">
-    <img class="img-fluid" src="nsf.png" height="150px" alt="National Science Foundation Logo">
+    <img class="img-fluid" src="images/nsf.png" height="150px" alt="National Science Foundation Logo">
   </a>
 </p>
 
@@ -298,18 +298,18 @@ For more information on how to use the GUI interface, please refer to the [Panda
 
 <p align="center" style="display: flex; justify-content: center; align-items: center;">
   <a href="https://www.creativewmp.com/">
-    <img class="img-fluid" src="CREATIVE_logo.png"  width="220px" alt="CREATIVE Logo">
+    <img class="img-fluid" src="images/CREATIVE_logo.png"  width="220px" alt="CREATIVE Logo">
   </a>
 </p>
 
 <p align="center" style="display: flex; justify-content: center; align-items: center;">
   <a href="https://mediaproject.wesleyan.edu/">
-    <img src="wmp-logo.png" width="218px" height="100px" alt="Wesleyan Media Project logo">
+    <img src="images/wmp-logo.png" width="218px" height="100px" alt="Wesleyan Media Project logo">
   </a>
 </p>
 
 <p align="center" style="display: flex; justify-content: center; align-items: center;">
   <a href="https://privacytechlab.org/" style="margin-right: 20px;">
-    <img src="./plt_logo.png" width="200px" alt="privacy-tech-lab logo">
+    <img src="images/plt_logo.png" width="200px" alt="privacy-tech-lab logo">
   </a>
 </p>
