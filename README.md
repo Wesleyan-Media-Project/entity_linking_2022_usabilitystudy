@@ -255,7 +255,7 @@ To run the `readcsvGUI.py` script, you need to first install the required packag
 pip install pandas pandasgui
 ```
 
-If you are working on a non-Windows computer, you will need to go into the file `.../site-packages/pandasgui/constants.py`, which is located wherever the package pandasgui is installed in your computer and will likely be outside of the entity_linking_2022 repository file structure, and change the line of code
+If you are working on a non-Windows computer, you will need to go into the file `.../site-packages/pandasgui/constants.py`, which is located wherever pandasgui was installed. If you created and have been using a python virtual environment as recommended, the file would be located at `.../entity_linking_2022/venv/lib/python3.10/site-packages/pandasgui/constants.py`, assuming you created the virtual environment from the repository's local directory. Otherwise, the file will likely be outside of the entity_linking_2022 repository file structure. Change the line of code:
 
 ```bash
 SHORTCUT_PATH = os.path.join(os.getenv('APPDATA'), 'Microsoft/Windows/Start Menu/Programs/PandasGUI.lnk')
