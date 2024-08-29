@@ -54,7 +54,7 @@ There are separate folders for running the entity linker depending on whether yo
 
    Once the knowledge base of people of interest is constructed, the entity linker can be initialized with [spaCy](https://spacy.io/), a natural language processing library we use, in [facebook/train/02_train_entity_linking.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/02_train_entity_linking.py).
 
-   **Note**: The training of the entity linking models is optional for running the scripts in this repo. You can run the inference scripts with our pre-trained model by downloading it [here](https://figshare.wesleyan.edu/articles/model/Trained_Entity_Linker_Model/25773600/2) or by by using the bash script we provide that automates its download. Instructions for using this script can be found below, in the setup section. 
+   **Note**: The training of the entity linking models is optional for running the scripts in this repo. You can run the inference scripts with our pre-trained model by downloading it [here](https://figshare.wesleyan.edu/articles/model/Trained_Entity_Linker_Model/25773600/2) or by using the bash script we provide that automates its download. Instructions for using this script can be found below, in the setup section. 
 
    If you want to train your own models, you can follow the same instructions for the [inference set up](#3-setup) to set up your Python virtual environment and R working directory. After that, run the training scripts in this repo according to their numbering. For example, if you want to run the training pipeline, you can run the scripts in the following order:
 
