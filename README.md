@@ -140,54 +140,44 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
 
 10. If you are using the [pre-trained model](https://figshare.wesleyan.edu/account/projects/185302/articles/25773600) we provide, you will need to download it.
     To do so, you will need to either navigate to Figshare and download from there, or use the Bash file we provide. To use the Bash file, make sure that you are in the entity_linking_2022 directory as your working directory and run the following commands in terminal:
-    `bash
+    ```bash
     chmod +x download_files.sh
     ./download_files.sh -model
-    `
+    ```
     If you are using Windows, you can use our Bash equivalent Windows PowerShell script by typing the following command in PowerShell terminal:
+     ```bash
+     .\download_files.ps1 -model
+     ```
+    Once you have done this, the pre-trained model will download. This will take some time, as it takes up 1.44 GB. Once it has finished downloading, run the following command in terminal to unzip the model.
+     ```bash
+     unzip trained_entity_linker.zip
+     ```
+    Finally, run the inferences scripts in this repo according to their numbering. For example, if you want to run the inference pipeline, you can run the scripts in the following order:
 
-        ```bash
-        .\download_files.ps1 -model
-        ```
+       1. [facebook/inference/01_combine_text_asr_ocr.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/01_combine_text_asr_ocr.R)
+       2. [facebook/inference/02_entity_linking_inference.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/02_entity_linking_inference.py)
+       3. [facebook/inference/03_combine_results.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/03_combine_results.R)
 
-        Once you have done this, the pre-trained model will download. This will take some time, as it takes up 1.44 GB. Once it has finished downloading, run the following command in terminal to unzip the model.
+    To do so, run the following commands in your terminal:
+     ```bash
+     Rscript facebook/inference/01_combine_text_asr_ocr.R
+     python3 facebook/inference/02_entity_linking_inference.py
+     Rscript facebook/inference/03_combine_results.R
+     ```
+    Note that in order to run the scripts in the inferences folders, you will need to download datasets which are hosted on our Figshare. For [facebook/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/inference), you will require the [fb_2022_adid_text.csv.gz](https://figshare.wesleyan.edu/account/articles/26124295) dataset and for [google/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/google/inference) you will require the [g2022_adid_01062021_11082022_text.csv.gz](https://figshare.wesleyan.edu/account/articles/26124343) dataset. When running the inference files, make sure you have changed the file paths so that they match up to how things are set up on your machine.
 
-        ```bash
-        unzip trained_entity_linker.zip
-        ```
+    To download these datasets, you can either navigate to Figshare and download from there, or use the Bash file we provide for this purpose. To use the Bash file, run these commands in terminal.
+       ```bash
+       chmod +x download_files.sh
+       ./download_files.sh -data
+       ```
+    If you are using Windows, you can use our Windows PowerShell equivalent bash script by typing the following command in PowerShell terminal:
+       ```bash
+       .\download_files.ps1 -data
+       ```
+    Note that only the Python script will run in the virtual environment that we initially created. However, all commands can be executed from the virtual environment command prompt.
 
-        Finally, run the inferences scripts in this repo according to their numbering. For example, if you want to run the inference pipeline, you can run the scripts in the following order:
-
-          1. [facebook/inference/01_combine_text_asr_ocr.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/01_combine_text_asr_ocr.R)
-          2. [facebook/inference/02_entity_linking_inference.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/02_entity_linking_inference.py)
-          3. [facebook/inference/03_combine_results.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/03_combine_results.R)
-
-        To do so, run the following commands in your terminal:
-
-        ```bash
-        Rscript facebook/inference/01_combine_text_asr_ocr.R
-        python3 facebook/inference/02_entity_linking_inference.py
-        Rscript facebook/inference/03_combine_results.R
-        ```
-
-        Note that in order to run the scripts in the inferences folders, you will need to download datasets which are hosted on our Figshare. For [facebook/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/inference), you will require the [fb_2022_adid_text.csv.gz](https://figshare.wesleyan.edu/account/articles/26124295) dataset and for [google/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/google/inference) you will require the [g2022_adid_01062021_11082022_text.csv.gz](https://figshare.wesleyan.edu/account/articles/26124343) dataset. When running the inference files, make sure you have changed the file paths so that they match up to how things are set up on your machine.
-
-        To download these datasets, you can either navigate to Figshare and download from there, or use the Bash file we provide for this purpose. To use the Bash file, run these commands in terminal.
-
-        ```bash
-          chmod +x download_files.sh
-          ./download_files.sh -data
-          ```
-
-          If you are using Windows, you can use our Windows PowerShell equivalent bash script by typing the following command in PowerShell terminal:
-
-          ```bash
-          .\download_files.ps1 -data
-          ```
-
-        Note that only the Python script will run in the virtual environment that we initially created. However, all commands can be executed from the virtual environment command prompt.
-
-        After successfully running the above scripts in the inference folder, you should see the following entity linking results in the `data` folder:
+    After successfully running the above scripts in the inference folder, you should see the following entity linking results in the `data` folder:
 
 - `entity_linking_results_fb22.csv.gz`
 - `entity_linking_results_fb22_notext.csv.gz`
