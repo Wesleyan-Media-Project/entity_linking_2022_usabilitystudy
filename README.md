@@ -228,10 +228,11 @@ The script `readcsv.py` is a Python script that reads and filters the `csv.gz` f
 
 #### Usage
 
-To run the script, you need to first install the required packages:
+To run the script, you need to first install the following required packages. Note that if you plan on running this script from the same python virtual environment from the initial setup, you do not have to reinstall `pandas`:
 
 ```bash
-pip install pandas
+pip3 install pandas
+pip3 install openpyxl
 ```
 
 After installing the required packages, you can run the script with the command line arguments.
