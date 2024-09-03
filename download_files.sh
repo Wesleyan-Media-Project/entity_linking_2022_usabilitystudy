@@ -19,7 +19,7 @@ download_file() {
     if [ -f "$output_file" ]; then
         echo "File '$output_file' already exists."
     else
-        wget -O "$output_file" "$url"
+        curl -L -o "$output_file" "$url"
         echo "Downloaded '$output_file'."
     fi
 }
