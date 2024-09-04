@@ -6,18 +6,22 @@ import json
 import pandas as pd
 import spacy # Use version '3.2.4'
 # trained_entity_linker is output from 02_train_entity_linking.py
-nlp = spacy.load("../../facebook/models/trained_entity_linker/")
+nlp = spacy.load("facebook/models/trained_entity_linker/")
 from spacy.kb import KnowledgeBase #vscode pylinter complains about this, but it actually loads fine
 from spacy.util import minibatch, compounding
 import re
 import numpy as np
 from tqdm import tqdm
 
+# NOTE: The paths below are written with the assumption that you are running
+# from the entity_linking_2022 directory. If you are running from elsewhere,
+# they may need to be adjusted.
+
 # Input files
-path_prepared_ads = "../data/inference_all_google22_ads.csv.gz"
+path_prepared_ads = "google/data/inference_all_google22_ads.csv.gz"
 # Output files
-path_el_results = "../data/entity_linking_results_google_2022.csv.gz"
-path_el_results_notext = "../data/entity_linking_results_google_2022_notext.csv.gz"
+path_el_results = "google/data/entity_linking_results_google_2022.csv.gz"
+path_el_results_notext = "google/data/entity_linking_results_google_2022_notext.csv.gz"
 
 # Read in prepared ads
 df = pd.read_csv(path_prepared_ads)

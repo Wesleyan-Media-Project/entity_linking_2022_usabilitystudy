@@ -5,17 +5,23 @@ library(dplyr)
 library(tidyr)
 library(stringr)
 
+# NOTE: The paths below are written with the assumption that you are running
+# from the entity_linking_2022 directory. If you are running from elsewhere,
+# they may need to be adjusted.
+
 df <- fread("google/data/entity_linking_results_google_2022.csv.gz")
 #----
 # Combine fields
 df2 <- df %>%
-  select(ad_id, ends_with('detected_entities'), field) %>% 
-  mutate(across(ends_with('detected_entities'), function(x){str_remove_all(x, "\\[|\\]|\\'")}))
+  select(ad_id, ends_with("detected_entities"), field) %>%
+  mutate(across(ends_with("detected_entities"), function(x) {
+    str_remove_all(x, "\\[|\\]|\\'")
+  }))
 
 df2[df2 == ""] <- NA
 
-df3 <- df2 %>% 
-  unite(col = detected_entities, ends_with('detected_entities'), sep = ", ", na.rm = T)
+df3 <- df2 %>%
+  unite(col = detected_entities, ends_with("detected_entities"), sep = ", ", na.rm = T)
 
 # Remove all ads with no detected entities
 df4 <- df3 %>% filter(detected_entities != "")
