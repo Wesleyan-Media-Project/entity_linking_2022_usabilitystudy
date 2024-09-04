@@ -2,6 +2,15 @@ library(data.table)
 library(dplyr)
 library(tidyr)
 
+# Set your working directory below by uncommenting and inserting your own wd
+# We recommend setting it to the entity_linking_2022 directory
+
+# setwd("local/path/to/entity_linking_2022")
+
+# NOTE: The paths below are written with the assumption that you are running
+# from the entity_linking_2022 directory. If you are running from elsewhere,
+# they may need to be adjusted.
+
 # Input files
 # This is an output from data-post-production/01-merge-results/01_merge_preprocessed_results
 # Select fields of 'ad_id', 'page_name', 'disclaimer', 'ad_creative_body',
@@ -9,15 +18,22 @@ library(tidyr)
 #        'ad_creative_link_description', 'aws_ocr_text_img',
 #        'google_asr_text', 'aws_ocr_text_vid'
 #############################################################################################
-path_ads <- "fb_2022_adid_text.csv.gz"
+#GET FIGSHARE LINK
+#Make sure you place the file in the same directory as entity_linking_2022
+path_ads <- "../fb_2022_adid_text.csv.gz"
 
 #This is the output table from `data-post-production/01-merge-results/01_merge_preprocessed_results`
-path_adid_to_pageid <- "fb_2022_adid_var1.csv.gz"
+#GET FIGSHARE LINK
+#Make sure you place the file in the same directory as entity_linking_2022
+path_adid_to_pageid <- "../fb_2022_adid_var1.csv.gz"
 
-path_entities_kb <- "../data/entity_kb.csv"
-path_wmpent_file <- "../../../datasets/wmp_entity_files/Facebook/2022/wmp_fb_2022_entities_v120122.csv"
+path_entities_kb <- "facebook/data/entity_kb.csv"
+
+#This file is located in our datasets repository (https://github.com/Wesleyan-Media-Project/datasets)
+#Make sure the datasets folder is located in the same directory as entity_linking_2022
+path_wmpent_file <- "../datasets/wmp_entity_files/Facebook/2022/wmp_fb_2022_entities_v120122.csv" # nolint: line_length_linter.
 # Output files
-path_output <- "../data/ads_with_aliases.csv.gz"
+path_output <- "facebook/data/ads_with_aliases.csv.gz"
 
 # Pdid to wmpid
 wmpents <- fread(path_wmpent_file) %>%
@@ -27,8 +43,7 @@ wmpents <- wmpents[wmpents$wmpid != "",]
 # Ads
 df <- fread(path_ads, encoding = "UTF-8")
 
-cols = ['ad_id', 'page_name', 'disclaimer', 'ad_creative_body', 'ad_creative_link_caption', 'ad_creative_link_title', 
-        'ad_creative_link_description', 'aws_ocr_text_img', 'google_asr_text', 'aws_ocr_text_vid']
+cols <- ['ad_id', 'page_name', 'disclaimer', 'ad_creative_body', 'ad_creative_link_caption', 'ad_creative_link_title','ad_creative_link_description', 'aws_ocr_text_img', 'google_asr_text', 'aws_ocr_text_vid'] # nolint
 # Select only the specified columns
 df = df[cols]
 

@@ -15,14 +15,18 @@ import numpy as np
 from spacy.training import Example
 from spacy.ml.models import load_kb
 
+# NOTE: The paths below are written with the assumption that you are running
+# from the entity_linking_2022 directory. If you are running from elsewhere,
+# they may need to be adjusted.
+
 # Input files
-path_candidates = "../data/entity_kb.csv"
-path_training_samples = "../data/ads_with_aliases.csv.gz"
+path_candidates = "facebook/data/entity_kb.csv"
+path_training_samples = "facebook/data/ads_with_aliases.csv.gz"
 # Output files
-path_intermediate_kb = "../models/intermediate_kb"
-path_output_nlp = "../models/trained_entity_linker"
-path_output_kb = "../models/trained_entity_linker"
-path_output_kb_vocab = "../models/trained_entity_linker"
+path_intermediate_kb = "models/intermediate_kb"
+path_output_nlp = "models/trained_entity_linker"
+path_output_kb = "models/trained_entity_linker"
+path_output_kb_vocab = "models/trained_entity_linker"
 
 
 #----
