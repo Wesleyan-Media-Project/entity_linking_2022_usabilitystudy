@@ -77,7 +77,7 @@ There are separate folders for running the entity linker depending on whether yo
    1. [facebook/train/01_create_EL_training_data.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/01_create_EL_training_data.R)
    2. [facebook/train/02_train_entity_linking.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/02_train_entity_linking.py)
 
-   To do so, run the following commands in your terminal:
+   To do so, run the following commands in your terminal. The necessary R packages can be installed by following the instructions of the previous step, if you have not done so already:
 
    ```bash
    Rscript facebook/train/01_create_EL_training_data.R
