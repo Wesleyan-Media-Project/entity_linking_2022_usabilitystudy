@@ -10,7 +10,7 @@ library(tidyr)
 # Input files
 # GET FIGSHARE LINK
 # Make sure you place the file in the same directory as entity_linking_2022
-path_ads <- "../google_2022/g2022_adid_01062021_11082022_text.csv.gz"
+path_ads <- "../g2022_adid_01062021_11082022_text.csv.gz"
 # Output files
 path_prepared_ads <- "google/data/inference_all_google22_ads.csv.gz"
 
