@@ -9,7 +9,7 @@ library(tidyr)
 # Set your working directory below by uncommenting and inserting your own wd
 # We recommend setting it to the entity_linking_2022 directory
 
-setwd("/Users/bella.tassone/GitHub_Repos/CREATIVE/entity_linking_2022")
+# setwd("local/path/to/entity_linking_2022")
 
 # NOTE: The paths below are written with the assumption that you are running
 # from the entity_linking_2022 directory. If you are running from elsewhere,
@@ -149,7 +149,9 @@ people$middle_name_extracted[which(people$middle_name_extracted == "")] <- NA # 
 
 # ----
 # JASMINE'S FIXES to candidate names
-fixes <- read_xlsx("../../../face_url_scraper_2022/data/bp2022_house_scraped_face_jasmine.xlsx")
+# This file is located in our face_url_scraper_2022 repository (https://github.com/Wesleyan-Media-Project/face_url_scraper_2022)
+# Make sure the face_url_scraper_2022 folder is located in the same directory as entity_linking_2022
+fixes <- read_xlsx("../face_url_scraper_2022/data/bp2022_house_scraped_face_jasmine.xlsx") # nolint: line_length_linter.
 fixes <- fixes %>%
   select(wmpid, cand_name, full_name, starts_with("hc")) %>%
   select(-c(hc_face_note, hc_face_url, hc_office_district, hc_office_district_note))
