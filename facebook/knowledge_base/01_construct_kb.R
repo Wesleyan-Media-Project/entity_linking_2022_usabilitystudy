@@ -6,6 +6,15 @@ library(quanteda)
 library(readxl)
 library(tidyr)
 
+# Set your working directory below by uncommenting and inserting your own wd
+# We recommend setting it to the entity_linking_2022 directory
+
+setwd("/Users/bella.tassone/GitHub_Repos/CREATIVE/entity_linking_2022")
+
+# NOTE: The paths below are written with the assumption that you are running
+# from the entity_linking_2022 directory. If you are running from elsewhere,
+# they may need to be adjusted.
+
 # File paths
 # In
 
