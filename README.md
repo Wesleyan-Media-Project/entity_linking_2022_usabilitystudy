@@ -46,7 +46,7 @@ There are separate folders for running the entity linker depending on whether yo
    | --------- | --------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------- |
    | WMPID1770 | Adam Gray | Adam Gray is a Democratic candidate for the 13rd District of California. | Adam Gray,Gray,Adam Gray's,Gray's,ADAM GRAY,GRAY,ADAM GRAY'S,GRAY'S |
 
-   **Note**: The knowledge base construction is optional for running the scripts in this repo. You can run the inference scripts with our [existing knowledge base (for both Google and Facebook)](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv). If you want to construct your own knowledge base, you would need to run the [knowledge base creation script](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/knowledge_base). This also requires scripts from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) repository.
+   **Note**: The knowledge base construction is optional for running the inference scripts in this repo. You can run the inference scripts with our [existing knowledge base (for both Google and Facebook)](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv). If you want to construct your own knowledge base, you would need to run the [knowledge base creation script](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/knowledge_base). This also requires scripts from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) repository.
 
 2. **Training the Entity Linking Model**
 
@@ -54,9 +54,7 @@ There are separate folders for running the entity linker depending on whether yo
 
    Once the knowledge base of people of interest is constructed, the entity linker can be initialized with [spaCy](https://spacy.io/), a natural language processing library we use, in [facebook/train/02_train_entity_linking.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/02_train_entity_linking.py).
 
-   **Note**: The training of the entity linking models is optional for running the scripts in this repo. You can run the inference scripts with our pre-trained model by downloading it [here](https://figshare.wesleyan.edu/articles/model/Trained_Entity_Linker_Model/25773600/2) or by using the bash script we provide that automates its download. Instructions for using this script can be found below, in the setup section.
-
-   If you want to train your own models, you can follow the same instructions for the [inference set up](#3-setup) to set up your Python virtual environment and R working directory. After that, run the training scripts in this repo according to their numbering. For example, if you want to run the training pipeline, you can run the scripts in the following order:
+   If you want to train your own models, you can follow the same instructions for the [inference setup](#3-setup) to set up your Python virtual environment and R working directory. After that, run the training scripts in this repo according to their numbering. For example, if you want to run the training pipeline, you can run the scripts in the following order:
 
    1. [facebook/train/01_create_EL_training_data.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/01_create_EL_training_data.R)
    2. [facebook/train/02_train_entity_linking.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/02_train_entity_linking.py)
@@ -72,6 +70,8 @@ There are separate folders for running the entity linker depending on whether yo
 
    - `intermediate_kb`
    - `trained_entity_linker`
+
+   **Note**: The training of the entity linking models is optional for running the inference scripts in this repo. You can run the inference scripts with our pre-trained model by downloading it [here](https://figshare.wesleyan.edu/articles/model/Trained_Entity_Linker_Model/25773600) or by using the bash script we provide that automates its download. Instructions for using this script can be found below, in the [setup](#3-setup) section. This also requires scripts from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) and [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repositories. The files required from the data-post-production repo are too large to be kept there, so you can either run the scripts to produce the data yourself, or download the necessary files (`fb_2022_adid_text.csv.gz` and `fb_2022_adid_var1.csv.gz`) from Figshare.
 
 3. **Making Inferences with the Trained Model**
 
