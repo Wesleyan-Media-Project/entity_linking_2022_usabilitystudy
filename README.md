@@ -40,6 +40,24 @@ There are separate folders for running the entity linker depending on whether yo
 
    The knowledge base of people of interest is constructed from [facebook/knowledge_base/01_construct_kb.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/knowledge_base/01_construct_kb.R). The input to the file is the data sourced from the 2022 WMP persons file [person_2022.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/people/person_2022.csv). The script constructs one sentence for each person with a basic description. Districts and party are sourced from the 2022 WMP candidates file [wmpcand_120223_wmpid.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/candidates/wmpcand_120223_wmpid.csv), a comprehensive file with names of candidates.
 
+   To run [01_construct_kb.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/knowledge_base/01_construct_kb.R), you first need to install various R packages. You can do this by opening your terminal, typing `R` to open the R console, and then running the following commands:
+
+   ```R
+   install.packages("dplyr")
+   install.packages("haven")
+   install.packages("data.table")
+   install.packages("stringr")
+   install.packages("quanteda")
+   install.packages("readxl")
+   install.packages("tidyr")
+   ```
+
+   Then, you can exit the `R` console by typing `q()`, and run the script by inputting the following command (assuming you're in the entity_linking_2022 directory):
+
+   ```bash
+   Rscript facebook/knowledge_base/01_construct_kb.R
+   ```
+
    The knowledge base has four columns that include entities' `id`, `name`, `descr` (for description), and `aliases`. Examples of aliases include Joseph R. Biden being referred to as Joe or Robert Francis O’Rourke generally being known as Beto O’Rourke. Here is an example of one row in the knowledge base:
 
    | id        | name      | descr                                                                    | aliases                                                             |
