@@ -164,9 +164,10 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
     ./download_files.sh -model
     ```
 
-    If you are using Windows, you can use our Bash equivalent Windows PowerShell script by typing the following command in PowerShell terminal:
+    If you are using Windows, you can use our Bash equivalent Windows PowerShell script by running the following commands in PowerShell terminal:
 
     ```bash
+    unblock-file -path .\download_files.ps1
     .\download_files.ps1 -model
     ```
 
