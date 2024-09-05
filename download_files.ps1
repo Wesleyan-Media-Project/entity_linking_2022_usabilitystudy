@@ -28,7 +28,7 @@ $data_urls = @(
 
 # Filenames for the downloaded files
 $model_file = "trained_entity_linker.zip"
-$data_files = @("fb_2022_adid_text.csv.gz" "g2022_adid_01062021_11082022_text.csv.gz")
+$data_files = @("fb_2022_adid_text.csv.gz", "g2022_adid_01062021_11082022_text.csv.gz")
 
 # Function to download files
 function Download-File {
