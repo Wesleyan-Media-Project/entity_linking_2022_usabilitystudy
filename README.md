@@ -52,7 +52,7 @@ There are separate folders for running the entity linker depending on whether yo
    install.packages("tidyr")
    ```
 
-   Then, you can exit the `R` console by typing `q()`, and run the script by inputting the following command (assuming you're in the entity_linking_2022 directory):
+   Then, you can exit the `R` console by typing `q()`, and run the script by inputting the following command (assuming you're in the entity_linking_2022 directory). Make sure to first check the code and ensure your working directory is in accorance with your own local path (you will need to do this any time you're running an R script):
 
    ```bash
    Rscript facebook/knowledge_base/01_construct_kb.R
@@ -150,7 +150,7 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
     pip3 install pandas==2.1.1
     ```
 
-7.  In order to successfully run each R script, you must first set your working directory. You can achieve this by adding the line `setwd("your/working/directory")` to the top of the R scripts, replacing `"your/working/directory"` with whatever directory you are running from. Additionally, make sure that the locations to which you are retrieving input files and/or sending output files are accurate.
+7.  In order to successfully run each R script, you must first set your working directory. If you are running from the entity_linking_2022 directory as suggested, you should not need to make any changes to the paths. However, if you're running from somewhere else they may need to be adjusted.
 
 8.  (Jump to step 10 if you want to use the [pre-trained model](https://figshare.wesleyan.edu/articles/model/Trained_Entity_Linker_Model/25773600) we provided.) Now, you can create the [knowledge base](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv) by running the [R script](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/knowledge_base/01_construct_kb.R) in the `facebook/knowledge_base` folder (See above for more details).
 
