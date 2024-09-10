@@ -6,10 +6,11 @@ library(dplyr)
 library(tidyr)
 library(stringr)
 
-# Set your working directory below by uncommenting and inserting your own wd
-# We recommend setting it to the entity_linking_2022 directory
+# The working directory below assumes that you are running scripts
+# from the entity_linking_2022 directory. If you are running from
+# anywhere else, it may need to be adjusted.
 
-# setwd("local/path/to/entity_linking_2022")
+setwd("./")
 
 # NOTE: The paths below are written with the assumption that you are running
 # from the entity_linking_2022 directory. If you are running from elsewhere,

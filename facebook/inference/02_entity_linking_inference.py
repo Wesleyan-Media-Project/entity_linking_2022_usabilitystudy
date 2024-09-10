@@ -24,11 +24,11 @@ path_el_results_notext = "./facebook/data/entity_linking_results_fb22_notext.csv
 # Read in prepared ads
 df = pd.read_csv(path_prepared_ads)
 
-# In order to run a random sample of rows from the input dataframe, 
-# uncomment the two lines of code below, where n equals the # of rows
+# Code below runs a random sample of rows from the input dataframe,
+# where n equals the # of rows
 
-#df = df.sample(n=200)
-#df = df.reset_index(drop=True)
+df = df.sample(n=500)
+df = df.reset_index(drop=True)
 
 
 df = df.replace(np.nan, '', regex=True)

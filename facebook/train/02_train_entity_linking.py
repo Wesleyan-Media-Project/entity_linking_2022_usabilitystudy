@@ -170,7 +170,7 @@ loss_list = []
 with nlp.select_pipes(enable=["entity_linker"]):   # train only the entity_linker
     optimizer = nlp.resume_training() # This used to be begin_training, in spacy3 it seems it's resume because the component has already been initialized
     optimizer.learn_rate = 0.001
-    for itn in range(500):   # one itn is one full pass over TRAIN_EXAMPLES
+    for itn in tqdm(range(500)):   # one itn is one full pass over TRAIN_EXAMPLES
         random.shuffle(TRAIN_EXAMPLES)
         batches = minibatch(TRAIN_EXAMPLES, size=128)#size=compounding(4.0, 32.0, 1.001))  # increasing batch sizes -- seems to train WAY faster with a larger batch size (i.e. 128 rather than 32)
         losses = {} #at the end of the epoch, this will contain the cumulative loss of all of its batches (and as far as I can tell, the loss for one batch is the mean loss of all the samples in it)
