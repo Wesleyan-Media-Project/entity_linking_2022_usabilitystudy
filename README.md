@@ -38,6 +38,8 @@ There are separate folders for running the entity linker depending on whether yo
 
    The first task is to construct a knowledge base of political entities (people) of interest.
 
+   **Note**: The knowledge base construction is optional for running the inference scripts in this repo. You can run the inference scripts with our [existing knowledge base (for both Google and Facebook)](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv). If you want to construct your own knowledge base, you would need to run the [knowledge base creation script](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/knowledge_base). This also requires scripts from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) and [face_url_scraper_2022](https://github.com/Wesleyan-Media-Project/face_url_scraper_2022) repositories.
+
    The knowledge base of people of interest is constructed from [facebook/knowledge_base/01_construct_kb.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/knowledge_base/01_construct_kb.R). The input to the file is the data sourced from the 2022 WMP persons file [person_2022.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/people/person_2022.csv). The script constructs one sentence for each person with a basic description. Districts and party are sourced from the 2022 WMP candidates file [wmpcand_120223_wmpid.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/candidates/wmpcand_120223_wmpid.csv), a comprehensive file with names of candidates.
 
    To run [01_construct_kb.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/knowledge_base/01_construct_kb.R), you first need to install various R packages. You can do this by opening your terminal, typing `R` to open the R console, and then running the following commands:
@@ -64,11 +66,11 @@ There are separate folders for running the entity linker depending on whether yo
    | --------- | --------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------- |
    | WMPID1770 | Adam Gray | Adam Gray is a Democratic candidate for the 13rd District of California. | Adam Gray,Gray,Adam Gray's,Gray's,ADAM GRAY,GRAY,ADAM GRAY'S,GRAY'S |
 
-   **Note**: The knowledge base construction is optional for running the inference scripts in this repo. You can run the inference scripts with our [existing knowledge base (for both Google and Facebook)](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv). If you want to construct your own knowledge base, you would need to run the [knowledge base creation script](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/knowledge_base). This also requires scripts from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) and [face_url_scraper_2022](https://github.com/Wesleyan-Media-Project/face_url_scraper_2022) repositories.
-
 2. **Training the Entity Linking Model**
 
    The second task is to train an entity linking model using the knowledge base.
+
+   **Note**: The training of the entity linking models is optional for running the inference scripts in this repo. You can run the inference scripts with our pre-trained model by downloading it [here](https://figshare.wesleyan.edu/articles/model/Trained_Entity_Linker_Model/25773600) or by using the bash script we provide that automates its download. Instructions for using this script can be found below, in the [setup](#3-setup) section. This also requires scripts from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) and [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repositories. The files required from the data-post-production repo are too large to be kept there, so you can either run the scripts to produce the data yourself, or download the necessary files ([`fb_2022_adid_text.csv.gz`](https://figshare.wesleyan.edu/ndownloader/files/47298157) and [`fb_2022_adid_var1.csv.gz`](https://figshare.wesleyan.edu/ndownloader/files/47298205)) from Figshare.
 
    Once the knowledge base of people of interest is constructed, the entity linker can be initialized with [spaCy](https://spacy.io/), a natural language processing library we use, in [facebook/train/02_train_entity_linking.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/02_train_entity_linking.py).
 
@@ -88,8 +90,6 @@ There are separate folders for running the entity linker depending on whether yo
 
    - `intermediate_kb`
    - `trained_entity_linker`
-
-   **Note**: The training of the entity linking models is optional for running the inference scripts in this repo. You can run the inference scripts with our pre-trained model by downloading it [here](https://figshare.wesleyan.edu/articles/model/Trained_Entity_Linker_Model/25773600) or by using the bash script we provide that automates its download. Instructions for using this script can be found below, in the [setup](#3-setup) section. This also requires scripts from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) and [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repositories. The files required from the data-post-production repo are too large to be kept there, so you can either run the scripts to produce the data yourself, or download the necessary files ([`fb_2022_adid_text.csv.gz`](https://figshare.wesleyan.edu/ndownloader/files/47298157) and [`fb_2022_adid_var1.csv.gz`](https://figshare.wesleyan.edu/ndownloader/files/47298205)) from Figshare.
 
 3. **Making Inferences with the Trained Model**
 
