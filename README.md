@@ -150,7 +150,16 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
     pip3 install pandas==2.1.1
     ```
 
-7.  In order to successfully run each R script, you must first set your working directory. If you are running from the entity_linking_2022 directory as suggested, you should not need to make any changes to the paths. However, if you're running from somewhere else they may need to be adjusted.
+7.  To run [01_combine_text_asr_ocr.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/01_combine_text_asr_ocr.R) and [03_combine_results.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/03_combine_results.R), you first need to install various R packages. You can do this by opening your terminal, typing `R` to open the R console, and then running the following commands:
+
+    ```R
+    install.packages("dplyr")
+    install.packages("data.table")
+    install.packages("stringr")
+    install.packages("tidyr")
+    ```
+
+    In order to successfully run each R script, you must also first set your working directory. If you are running from the entity_linking_2022 directory as suggested, you should not need to make any changes to the paths. However, if you're running from somewhere else they may need to be adjusted.
 
 8.  (Jump to step 10 if you want to use the [pre-trained model](https://figshare.wesleyan.edu/articles/model/Trained_Entity_Linker_Model/25773600) we provided.) Now, you can create the [knowledge base](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv) by running the [R script](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/knowledge_base/01_construct_kb.R) in the `facebook/knowledge_base` folder (See above for more details).
 
