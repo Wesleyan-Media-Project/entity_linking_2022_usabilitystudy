@@ -217,18 +217,18 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
 
     Note that only the Python script needs to be run in the virtual environment that we initially created. However, all commands may be executed from the virtual environment command prompt.
 
-After successfully running the above scripts in the inference folder, you should see the following entity linking results in the `data` folder:
-
-- `entity_linking_results_fb22.csv.gz`
-- `entity_linking_results_fb22_notext.csv.gz`
-- `detected_entities_fb22.csv.gz`
-- `detected_entities_fb22_for_ad_tone.csv.gz`
-
 **Note**: The scripts in this repo are numbered in the order in which they should be run. Scripts that directly depend on one another are ordered sequentially. Scripts with the same number are alternatives. Usually, they are the same scripts on different data or with minor variations. For example, [facebook/train/02_train_entity_linking.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/02_train_entity_linking.py) and [facebook/train/02_untrained_model.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/02_untrained_model.py) are both scripts for training an entity linking model, but they differ slightly as to their training datasets.
 
 ## 4. Results Storage
 
-When you run the inference scripts, the entity linking results are stored in the `data` folder. The data will be in `csv.gz` and `csv` format. Here is an example of the entity linking results [facebook/data/entity_linking_results_fb22.csv.gz](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_linking_results_fb22.csv.gz):
+After successfully running the above scripts in the inference folder, you should see the entity linking results in the `data` folder. The data will be in `csv.gz` and `csv` format. The various Facebook results, for instance, are as follows:
+
+- [**`entity_linking_results_fb22.csv.gz`**](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_linking_results_fb22.csv.gz): ADD DESCRIPTION HERE
+- [**`entity_linking_results_fb22_notext.csv.gz`**](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_linking_results_fb22_notext.csv.gz): ADD DESCRIPTION HERE
+- [**`detected_entities_fb22.csv.gz`**](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/detected_entities_fb22.csv.gz): ADD DESCRIPTION HERE
+- [**`detected_entities_fb22_for_ad_tone.csv.gz`**](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/detected_entities_fb22_for_ad_tone.csv.gz): ADD DESCRIPTION HERE
+
+Here is an example of the entity linking results [facebook/data/entity_linking_results_fb22.csv.gz](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_linking_results_fb22.csv.gz):
 
 | text                                                  | text_detected_entities | text_start | text_end | ad_id  | field            |
 | ----------------------------------------------------- | ---------------------- | ---------- | -------- | ------ | ---------------- |
