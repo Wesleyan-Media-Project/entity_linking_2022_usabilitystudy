@@ -7,10 +7,10 @@ library(stringr)
 path_ner_4k <- "facebook/validation/fb_2022_sample.csv"
 path_text <- "../fb_2022/fb_2022_adid_text.csv.gz"
 # Output files
-path_ner_4k_prepared <- "facebook/validation/ner_linking_sample_4k_separate.csv"
+path_ner_4k_prepared <- "facebook/data/ner_linking_sample_4k_separate.csv"
 
 
-df <- fread(path_ner_3k, colClasses = "character", encoding = "UTF-8")
+df <- fread(path_ner_4k, colClasses = "character", encoding = "UTF-8")
 text <- fread(path_text, colClasses = "character", encoding = "UTF-8")
 
 df2 <- merge(df, text, by = 'ad_id')
@@ -28,13 +28,13 @@ df2$disclaimer <- df2$disclaimer.x
 df2$ad_creative_body <- df2$ad_creative_body.x
 
 df3 <- df2 %>%
-  select(page_name, disclaimer, ad_creative_body, 
+  select(ad_creative_body, 
          ad_creative_link_caption, ad_creative_link_title, 
          ad_creative_link_description, google_asr_text,
          aws_ocr_text_img, aws_ocr_text_vid, ad_id)
 
 df3 <- df3 %>%
-  mutate(across(c(page_name, disclaimer, ad_creative_body, 
+  mutate(across(c(ad_creative_body, 
                   ad_creative_link_caption, ad_creative_link_title, 
                   ad_creative_link_description, google_asr_text,
                   aws_ocr_text_img, aws_ocr_text_vid),
