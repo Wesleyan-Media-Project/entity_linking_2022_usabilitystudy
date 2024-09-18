@@ -83,7 +83,7 @@ TP <- length(in_both_c)
 FP <- length(in_clf_c[in_clf_c!=""])
 FN <- length(in_val_c[in_val_c!=""])
 
-# Precision, recall, and F1 calculations
+# Precision, recall, F1, and accuracy calculations
 precision <- TP / (TP + FP)
 recall <- TP / (TP + FN)
 f1 <- TP / (TP + 0.5 * (FP + FN))
