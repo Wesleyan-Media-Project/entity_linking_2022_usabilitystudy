@@ -87,19 +87,16 @@ FN <- length(in_val_c[in_val_c!=""])
 precision <- TP / (TP + FP)
 recall <- TP / (TP + FN)
 f1 <- TP / (TP + 0.5 * (FP + FN))
-accuracy <- TP / (TP + FP + FN)
 
 # Output the results
 print(paste0("Precision: ", precision))
 print(paste0("Recall: ", recall))
 print(paste0("F1: ", f1))
-print(paste0("Accuracy: ", accuracy))
 
 # Save the results to a text file
 results <- paste0("Precision: ", precision, "\n", 
                   "Recall: ", recall, "\n", 
-                  "F1: ", f1, "\n",
-                  "Accuracy: ", accuracy)
+                  "F1: ", f1)
 
 write(results, file = "performance.txt")
 
