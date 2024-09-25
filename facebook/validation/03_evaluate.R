@@ -13,36 +13,20 @@ load(path_val_ents)
 
 #load predicted entities
 df_classified <- read.csv(path_pred_ents)
-df_classified <- df_classified %>% select(ad_id, detected_entities) 
 
 #Shape the classifier results into the same format
-df_classified$detected_entities <- str_remove_all(df_classified$detected_entities, "[\\[\\'\\]]")
-df_classified$detected_entities <- str_split(df_classified$detected_entities, ", ")
-df_classified$detected_entities <- lapply(df_classified$detected_entities, unique)
-
+df_classified$combined_entities <- str_remove_all(df_classified$combined_entities, "[\\[\\'\\]]")
+df_classified$combined_entities <- str_split(df_classified$combined_entities, ", ")
 
 # Remove the unwanted characters
-df_classified$detected_entities2 <- gsub('c\\(|\\)|"', '', df_classified$detected_entities)
-
-all_ad_ids <- df_classified %>% 
-  select(ad_id) %>%
-  distinct()
-
-df_classified2 <- df_classified %>%
-  filter(!is.na(detected_entities2) & detected_entities2 != "") %>%
-  group_by(ad_id) %>%
-  summarize(detected_entities2 = paste(unique(detected_entities2), collapse = ", "), .groups = 'drop')
-
-df_classified3 <- all_ad_ids %>%
-  left_join(df_classified2, by = "ad_id") %>%
-  mutate(detected_entities2 = ifelse(is.na(detected_entities2), "", detected_entities2))
+df_classified$combined_entities2 <- gsub('c\\(|\\)|"', '', df_classified$combined_entities)
 
 val3$val_all <- sapply(val3$val_all, function(x) if(length(x) == 0) "" else x)
 
 # Merge both dfs
 df_classified4 <- left_join(val3, df_classified3, by = c("ad_id" = "ad_id"))
 
-df_classified4$detected_entities3 <- sapply(df_classified4$detected_entities2, function(x) unlist(strsplit(x, ",")))
+df_classified4$detected_entities3 <- sapply(df_classified4$combined_entities2, function(x) unlist(strsplit(x, ",")))
 df_classified4$detected_entities4 <- sapply(df_classified4$detected_entities3, function(x) if(length(x) == 0) "" else x)
 
 df_classified4$detected_entities <- lapply(df_classified4$detected_entities4, function(vec) unique(trimws(vec)))
@@ -83,7 +67,7 @@ TP <- length(in_both_c)
 FP <- length(in_clf_c[in_clf_c!=""])
 FN <- length(in_val_c[in_val_c!=""])
 
-# Precision, recall, F1, and accuracy calculations
+# Precision, recall, and F1 calculations
 precision <- TP / (TP + FP)
 recall <- TP / (TP + FN)
 f1 <- TP / (TP + 0.5 * (FP + FN))
@@ -96,7 +80,7 @@ print(paste0("F1: ", f1))
 # Save the results to a text file
 results <- paste0("Precision: ", precision, "\n", 
                   "Recall: ", recall, "\n", 
-                  "F1: ", f1)
+                  "F1: ", f1, "\n")
 
 write(results, file = "performance.txt")
 
