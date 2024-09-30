@@ -166,18 +166,13 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
 9.  Next, you will train the entity linking model using spaCy library. The scripts are in the `facebook/train` [folder](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/train) (See above for more details).
 
 10. If you are using the [pre-trained model](https://figshare.wesleyan.edu/articles/model/Trained_Entity_Linker_Model/25773600) we provide, you will need to download it.
-    To do so, you will need to either navigate to Figshare and download from there, or use the Bash file we provide. To use the Bash file, make sure that you are in the entity_linking_2022 directory as your working directory and run the following commands in terminal:
+    To do so, you will need to either navigate to Figshare and download from there, or use the Bash file we provide. 
+    
+    To use the Bash file, make sure that you are in the entity_linking_2022 directory as your working directory and run the following commands in terminal:
 
     ```bash
     chmod +x download_files.sh
     ./download_files.sh -model
-    ```
-
-    If you are using Windows, you can use our Bash equivalent Windows PowerShell script by running the following commands in PowerShell terminal:
-
-    ```bash
-    unblock-file -path .\download_files.ps1
-    .\download_files.ps1 -model
     ```
 
     Once you have done this, the pre-trained model will download. This will take some time, as it takes up 1.44 GB. Once it has finished downloading, run the following command in terminal to unzip the model.
@@ -193,12 +188,6 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
     ```bash
     chmod +x download_files.sh
     ./download_files.sh -data
-    ```
-
-    If you are using Windows, you can use our Windows PowerShell equivalent bash script by typing the following command in PowerShell terminal:
-
-    ```bash
-    .\download_files.ps1 -data
     ```
 
 12. Finally, run the inferences scripts in this repo according to their numbering. For example, if you want to run the Facebook inference pipeline, you can run the scripts in the following order:
