@@ -30,6 +30,11 @@ $data_urls = @(
 $model_file = "trained_entity_linker.zip"
 $data_files = @("fb_2022_adid_text.csv.gz", "g2022_adid_01062021_11082022_text.csv.gz")
 
+# Process input arguments
+param (
+    [string]$option
+)
+
 # Function to download files
 function Download-File {
     param (
@@ -56,10 +61,6 @@ function Show-Help {
     Write-Host "  -help     Display this help message."
 }
 
-# Process input arguments
-param (
-    [string]$option
-)
 
 switch ($option) {
     "-model" {
