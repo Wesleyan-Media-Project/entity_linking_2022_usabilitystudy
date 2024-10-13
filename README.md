@@ -166,8 +166,8 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
 9.  Next, you will train the entity linking model using spaCy library. The scripts are in the `facebook/train` [folder](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/train) (See above for more details).
 
 10. If you are using the [pre-trained model](https://figshare.wesleyan.edu/articles/model/Trained_Entity_Linker_Model/25773600) we provide, you will need to download it.
-    To do so, you will need to either navigate to Figshare and download from there, or use the Bash file we provide. 
-    
+    To do so, you will need to either navigate to Figshare and download from there, or use the Bash file we provide.
+
     To use the Bash file, make sure that you are in the entity_linking_2022 directory as your working directory and run the following commands in terminal:
 
     ```bash
@@ -181,6 +181,8 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
     unzip trained_entity_linker.zip
     ```
 
+    **NOTE**: Make sure to move the `trained_entity_linker` folder into a `models` folder within the main `entity_linking_2022` directory.
+
 11. In order to run the scripts in the inference folders, you will need to download datasets which are hosted on our Figshare. For [facebook/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/inference), you will require the [fb_2022_adid_text.csv.gz](https://figshare.wesleyan.edu/account/articles/26124295) dataset and for [google/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/google/inference) you will require the [g2022_adid_01062021_11082022_text.csv.gz](https://figshare.wesleyan.edu/account/articles/26124343) dataset. When running the inference files, make sure you have changed the file paths so that they match up to how things are set up on your machine.
 
     To download these datasets, you can either navigate to Figshare and download from there, or use the Bash file we provide for this purpose. To use the Bash file, run these commands in terminal.
@@ -189,6 +191,8 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
     chmod +x download_files.sh
     ./download_files.sh -data
     ```
+
+    **NOTE**: Make sure to move the datasets into the same directory as where the main `entity_linking_2022` directory is located (**not** inside the `entity_linking_2022` directory).
 
 12. Finally, run the inferences scripts in this repo according to their numbering. For example, if you want to run the Facebook inference pipeline, you can run the scripts in the following order:
 
@@ -212,9 +216,9 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
 
 After successfully running the above scripts in the inference folder, you should see the entity linking results in the `data` folder. The data will be in `csv.gz` and `csv` format. The various Facebook results, for instance, are as follows:
 
-- [**`entity_linking_results_fb22.csv.gz`**](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_linking_results_fb22.csv.gz): Ad ID - text field level political entity detection results. Detected entities in each textual variable (e.g., disclaimer, creative boides, detected OCR text) are stored in a list. Each textual variable can have multiple detected entities or no detected entities. Entities are represented by their WMPIDs, which are WMP's unique identifiers for political figures.     
-- [**`entity_linking_results_fb22_notext.csv.gz`**](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_linking_results_fb22_notext.csv.gz): This file drops the text column from `entity_linking_results_fb22.csv.gz` for space saving purpose (see below preview table as an example). 
-- [**`detected_entities_fb22.csv.gz`**](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/detected_entities_fb22.csv.gz): A compact ad ID level entity linking results file. It concatenated all detected entities (given by `entity_linking_results_fb22.csv.gz`) from all textual fields of each ad ID. 
+- [**`entity_linking_results_fb22.csv.gz`**](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_linking_results_fb22.csv.gz): Ad ID - text field level political entity detection results. Detected entities in each textual variable (e.g., disclaimer, creative boides, detected OCR text) are stored in a list. Each textual variable can have multiple detected entities or no detected entities. Entities are represented by their WMPIDs, which are WMP's unique identifiers for political figures.
+- [**`entity_linking_results_fb22_notext.csv.gz`**](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_linking_results_fb22_notext.csv.gz): This file drops the text column from `entity_linking_results_fb22.csv.gz` for space saving purpose (see below preview table as an example).
+- [**`detected_entities_fb22.csv.gz`**](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/detected_entities_fb22.csv.gz): A compact ad ID level entity linking results file. It concatenated all detected entities (given by `entity_linking_results_fb22.csv.gz`) from all textual fields of each ad ID.
 - [**`detected_entities_fb22_for_ad_tone.csv.gz`**](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/detected_entities_fb22_for_ad_tone.csv.gz): Filtered entity linking results (compared to `detected_entities_fb22.csv.gz`) prepared as input for [ad tone detection](https://github.com/Wesleyan-Media-Project/ad_tone) (a downstream classification task). It excluded detected entities from page names and disclaimers and aggregated text field level results to ad ID level (see [this script](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/03_combine_results.R)).
 
 Here is an example of the entity linking results [facebook/data/entity_linking_results_fb22.csv.gz](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_linking_results_fb22.csv.gz):
