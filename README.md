@@ -70,7 +70,7 @@ There are separate folders for running the entity linker depending on whether yo
 
    The second task is to train an entity linking model using the knowledge base.
 
-   **Note**: The training of the entity linking models is optional for running the inference scripts in this repo. You can run the inference scripts with our pre-trained model by downloading it [here](https://figshare.wesleyan.edu/articles/model/Trained_Entity_Linker_Model/25773600) or by using the bash script we provide that automates its download. Instructions for using this script can be found below, in the [setup](#3-setup) section. This also requires scripts from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) and [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repositories. The files required from the data-post-production repo are too large to be kept there, so you can either run the scripts to produce the data yourself, or download the necessary files ([`fb_2022_adid_text.csv.gz`](https://figshare.wesleyan.edu/ndownloader/files/47298157) and [`fb_2022_adid_var1.csv.gz`](https://figshare.wesleyan.edu/ndownloader/files/47298205)) from Figshare.
+   **Note**: The training of the entity linking models is optional for running the inference scripts in this repo. You can run the inference scripts with our pre-trained model by downloading it [here](https://figshare.wesleyan.edu/articles/model/Trained_Entity_Linker_Model/25773600) or by using the bash script we provide that automates its download. Instructions for using this script can be found below, in the [setup](#3-setup) section. This also requires scripts from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) and [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repositories. The files required from the data-post-production repo are too large to be kept there, so you can either run the scripts to produce the data yourself, or download the necessary files (`fb_2022_adid_text.csv.gz` and `fb_2022_adid_var1.csv.gz`) from Figshare through [this link](https://www.creativewmp.com/data-access/).
 
    Once the knowledge base of people of interest is constructed, the entity linker can be initialized with [spaCy](https://spacy.io/), a natural language processing library we use, in [facebook/train/02_train_entity_linking.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/02_train_entity_linking.py).
 
@@ -97,27 +97,29 @@ There are separate folders for running the entity linker depending on whether yo
 
    To perform this task you can use the scripts in the inferences folders, [facebook/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/inference) and [google/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/google/inference). The folders incluced variations of scripts to disambiguate people, for example, multiple "Harrises" (e.g., Kamala Harris and Andy Harris).
 
-   In order to run the scripts in the inferences folders, you will need to download datasets which are hosted on our Figshare. For [facebook/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/inference), you will require the [fb_2022_adid_text.csv.gz](https://figshare.wesleyan.edu/account/articles/26124295) dataset and for [google/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/google/inference) you will require the [g2022_adid_01062021_11082022_text.csv.gz](https://figshare.wesleyan.edu/account/articles/26124343) dataset. When running the inference files, make sure you have changed the file paths so that they match up to how things are set up on your machine.
+   In order to run the scripts in the inferences folders, you will need to download datasets which are hosted on our Figshare. For [facebook/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/inference), you will require the `fb_2022_adid_text.csv.gz` dataset and for [google/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/google/inference) you will require the `g2022_adid_01062021_11082022_text.csv.gz` dataset. You can download these files by following [this link](https://www.creativewmp.com/data-access/), and completing the form, which will redirect you to a page with all necessary links.
+
+   When running the inference files, make sure you have changed the file paths so that they match up to how things are set up on your machine.
 
    To download these datasets, you can go to their Figshare pages and download from there, or you can use the Bash script we provide that automates this download. Instructions for using this script are present in the setup section, found below.
 
 ## 3. Setup
 
-The following setup instructions are for the default terminal on macOS/Linux. For Windows the steps are the same but the commands may be slightly different.
+The following setup instructions are for **the default terminal on macOS/Linux**. For Windows the steps are the same but the commands may be slightly different.
 
 **Note**: The following instructions are for setting up the inference scripts only as we provide a [knowledge base](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv) and [pre-trained model](https://figshare.wesleyan.edu/articles/model/Trained_Entity_Linker_Model/25773600) that are ready for you to use on Google and Facebook 2022 data. To create your own knowledge base and train your own models, you can format your knowledge base according to our [existing knowledge base (for both Google and Facebook)](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv). In such case, please note that the entity linking model training scripts require datasets from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) repo and tables from the [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repo. These dependencies must be cloned into the same local top-level folder as this repo. The training may take multiple hours or even days, depending on your hardware.
 
-0. Here are some helpful links for using the CLI (Command-line interface) on [Mac](https://support.apple.com/guide/terminal/welcome/mac) and [Windows](https://www.ninjaone.com/blog/how-to-use-windows-command-prompt/) if you need additional support.
-
-1. To start setting up the inference scripts based on our existing knowledge base and pre-trained models, first clone this repo to your local directory:
+1. To start setting up the inference scripts based on our existing knowledge base and pre-trained models, first clone this repo to your local directory. You can do this by opening up the Terminal application and running the following command:
 
    ```bash
    git clone https://github.com/Wesleyan-Media-Project/entity_linking_2022.git
    ```
 
-2. The scripts in this repo are in [Python](https://www.python.org/) and [R](https://www.r-project.org/). Make sure you have both installed and set up before continuing. The scripts in this repo were tested on Python 3.10, as it is required by one of the necessary dependencies. To install Python 3.10, follow [this link](https://www.python.org/downloads/release/python-3105/), download and open the appropriate package, and follow the instructions of the installer. To install and set up R you can follow the [CRAN website](https://cran.r-project.org/). We also recommend using R Studio as an interface of R. Here is the [R Studio website](https://posit.co/download/rstudio-desktop/). If you have to install either tool, make sure that you restart your terminal before moving forward!
+   This will clone the `entity_linking_2022` repository into your home directory. If you want it in a different location, you'll have to move into that directory using the `cd` command beforehand (e.g., `cd GitHub_Repos/CREATIVE/`).
 
-3. To run the Python scripts we recommend that you create a Python virtual environment. Create the virtual environment using python v3.10, as it supports the installation of spaCy v3.2.4, which some scripts in this repo require:
+2. The scripts in this repo are in [Python](https://www.python.org/) and [R](https://www.r-project.org/). Make sure you have both installed and set up before continuing. The scripts in this repo were tested on Python 3.10, as it is required by one of the necessary dependencies. To install Python 3.10, follow [this link](https://www.python.org/downloads/release/python-3105/), download and open the appropriate package, and follow the instructions of the installer. To install and set up R you can follow the [CRAN website](https://cran.r-project.org/). If you have to install either tool, make sure that you restart your terminal before moving forward!
+
+3. To run the Python scripts we recommend that you create a Python virtual environment. Create the virtual environment using python v3.10, as it supports the installation of spaCy v3.2.4, which some scripts in this repo require. In order to do so, run the following command:
 
    ```bash
    python3.10 -m venv venv
@@ -135,8 +137,10 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
    deactivate
    ```
 
+   Make sure your virtual environment is active before proceeding to the next step!
+
 5. Some scripts in this repo require [spaCy](https://spacy.io/) v3.2.4, particularly, spaCy's `en_core_web_lg`. To install
-   `en_core_web_lg`, run:
+   `en_core_web_lg`, run the following commands in the order given:
 
    ```bash
    pip3 install spacy==3.2.4
@@ -146,28 +150,33 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
 
 - Note: We require this version of [spaCy](https://spacy.io/) because this repo used the [KnowledgeBase](https://spacy.io/api/kb) class in spacy.kb implemented up to spaCy v3.5. Since v3.5, the KnowledgeBase class became abstract ([reference here](https://spacy.io/api/kb)). If you install a later version of spaCy, in particular spaCy v3.5 and above, you will need to import the [InMemoryLookupKB](https://spacy.io/api/inmemorylookupkb) class instead. Relevant comments have been made in scripts.
 
-6.  Additionally, some scripts in this repository require pandas 2.1.1. To install it, run:
+6.  Additionally, some scripts in this repository require pandas 2.1.1. To install it, next run:
 
     ```bash
     pip3 install pandas==2.1.1
     ```
 
-7.  To run [01_combine_text_asr_ocr.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/01_combine_text_asr_ocr.R) and [03_combine_results.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/03_combine_results.R), you first need to install various R packages. You can do this by opening your terminal, typing `R` to open the R console, and then running the following commands:
+7.  To run [01_combine_text_asr_ocr.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/01_combine_text_asr_ocr.R) and [03_combine_results.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/03_combine_results.R), you first need to install various R packages.
+
+    To do this, run the `R` command in your terminal (which opens the R console) and then running the following commands in the order provided:
 
     ```R
     install.packages("dplyr")
     install.packages("data.table")
     install.packages("stringr")
     install.packages("tidyr")
+    install.packages("R.utils")
     ```
 
-    In order to successfully run each R script, you must also first set your working directory. If you are running from the entity_linking_2022 directory as suggested, you should not need to make any changes to the paths. However, if you're running from somewhere else they may need to be adjusted.
+    You may need to select a CRAN mirror for use in your session when installing the first package – you can simply choose `1: 0-Cloud [https]` for our purposes.
+
+    In order to successfully run our R scripts, you must also first set your working directory. If you are running from the `entity_linking_2022` directory as suggested, you do not need to make any changes to the paths. However, if you're running from somewhere else they may need to be adjusted.
 
 8.  (Jump to step 10 if you want to use the [pre-trained model](https://figshare.wesleyan.edu/articles/model/Trained_Entity_Linker_Model/25773600) we provided.) Now, you can create the [knowledge base](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv) by running the [R script](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/knowledge_base/01_construct_kb.R) in the `facebook/knowledge_base` folder (See above for more details).
 
 9.  Next, you will train the entity linking model using spaCy library. The scripts are in the `facebook/train` [folder](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/train) (See above for more details).
 
-10. If you are using the [pre-trained model](https://figshare.wesleyan.edu/articles/model/Trained_Entity_Linker_Model/25773600) we provide, you will need to download it.
+10. If you are using the [pre-trained model](https://figshare.wesleyan.edu/articles/model/Trained_Entity_Linker_Model/25773600) we provide, you will need to download it. If you have already downloaded the **trained_entity_linker**, you may **skip this step**.
     To do so, you will need to either navigate to Figshare and download from there, or use the Bash file we provide.
 
     To use the Bash file, make sure that you are in the entity_linking_2022 directory as your working directory and run the following commands in terminal:
@@ -183,26 +192,21 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
     unzip trained_entity_linker.zip
     ```
 
-    **NOTE**: Make sure to move the `trained_entity_linker` folder into a `models` folder within the main `entity_linking_2022` directory.
+11. Before proceeding, make sure to move the `trained_entity_linker` folder into a `models` folder within the main `entity_linking_2022` directory.
 
-11. In order to run the scripts in the inference folders, you will need to download datasets which are hosted on our Figshare. For [facebook/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/inference), you will require the [fb_2022_adid_text.csv.gz](https://figshare.wesleyan.edu/account/articles/26124295) dataset and for [google/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/google/inference) you will require the [g2022_adid_01062021_11082022_text.csv.gz](https://figshare.wesleyan.edu/account/articles/26124343) dataset. When running the inference files, make sure you have changed the file paths so that they match up to how things are set up on your machine.
+    Next, in order to run the scripts in the inference folders, you will need to download datasets which are hosted on our Figshare. For [facebook/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/inference), you will require the `fb_2022_adid_text.csv.gz` dataset and for [google/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/google/inference) you will require the `g2022_adid_01062021_11082022_text.csv.gz` dataset. If you have not downloaded these datasets yet, you can do so by following [this link](https://www.creativewmp.com/data-access/) and completing the Data Access form, which will redirect you to a page with the download files.
 
-    To download these datasets, you can either navigate to Figshare and download from there, or use the Bash file we provide for this purpose. To use the Bash file, run these commands in terminal.
+    Once downloaded, move the datasets into the same directory as where the main `entity_linking_2022` directory is located (so that the `entity_linking_2022` folder, the `fb_2022_adid_text.csv.gz` file, and the `g2022_adid_01062021_11082022_text.csv.gz` file are all located in the same place).
 
-    ```bash
-    chmod +x download_files.sh
-    ./download_files.sh -data
-    ```
+12. Make sure that the working directory of your terminal is the `entity_linking_2022` directory before moving forward. You can achieve this through using the `cd` command, e.g., `cd GitHub_Repos/CREATIVE/entity_linking_2022/`. If you need to move back a directory, `cd ..` works for that purpose.
 
-    **NOTE**: Make sure to move the datasets into the same directory as where the main `entity_linking_2022` directory is located (**not** inside the `entity_linking_2022` directory).
-
-12. Finally, run the inferences scripts in this repo according to their numbering. For example, if you want to run the Facebook inference pipeline, you can run the scripts in the following order:
+13. You are now ready to run the inferences scripts in this repo according to their numbering. For example, if you want to run the Facebook inference pipeline, you can run the scripts in the following order:
 
     1. [facebook/inference/01_combine_text_asr_ocr.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/01_combine_text_asr_ocr.R)
     2. [facebook/inference/02_entity_linking_inference.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/02_entity_linking_inference.py)
     3. [facebook/inference/03_combine_results.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/03_combine_results.R)
 
-    You can do so by running the following commands in your terminal:
+    You can do so by running the following commands in your terminal in the order given:
 
     ```bash
     Rscript facebook/inference/01_combine_text_asr_ocr.R
