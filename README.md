@@ -170,6 +170,8 @@ The following setup instructions are for **the default terminal on macOS/Linux**
 
     You may need to select a CRAN mirror for use in your session when installing the first package – you can simply choose `1: 0-Cloud [https]` for our purposes.
 
+    After installing these packages, you may quit the R console by typing q(). It should ask you if you want to save your workspace image – your answer here does not matter one way or another.
+
     In order to successfully run our R scripts, you must also first set your working directory. If you are running from the `entity_linking_2022` directory as suggested, you do not need to make any changes to the paths. However, if you're running from somewhere else they may need to be adjusted.
 
 8.  (Jump to step 10 if you want to use the [pre-trained model](https://figshare.wesleyan.edu/articles/model/Trained_Entity_Linker_Model/25773600) we provided.) Now, you can create the [knowledge base](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv) by running the [R script](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/knowledge_base/01_construct_kb.R) in the `facebook/knowledge_base` folder (See above for more details).
