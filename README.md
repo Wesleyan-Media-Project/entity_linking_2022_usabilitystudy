@@ -107,6 +107,8 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
 
 **Note**: The following instructions are for setting up the inference scripts only as we provide a [knowledge base](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv) and [pre-trained model](https://figshare.wesleyan.edu/articles/model/Trained_Entity_Linker_Model/25773600) that are ready for you to use on Google and Facebook 2022 data. To create your own knowledge base and train your own models, you can format your knowledge base according to our [existing knowledge base (for both Google and Facebook)](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv). In such case, please note that the entity linking model training scripts require datasets from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) repo and tables from the [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repo. These dependencies must be cloned into the same local top-level folder as this repo. The training may take multiple hours or even days, depending on your hardware.
 
+0. Here are some helpful links for using the CLI (Command-line interface) on [Mac](https://support.apple.com/guide/terminal/welcome/mac) and [Windows](https://www.ninjaone.com/blog/how-to-use-windows-command-prompt/) if you need additional support.
+
 1. To start setting up the inference scripts based on our existing knowledge base and pre-trained models, first clone this repo to your local directory:
 
    ```bash
