@@ -119,13 +119,13 @@ The following setup instructions are for **the default terminal on macOS/Linux**
 
 2. The scripts in this repo are in [Python](https://www.python.org/) and [R](https://www.r-project.org/). Make sure you have both installed and set up before continuing. The scripts in this repo were tested on Python 3.10, as it is required by one of the necessary dependencies. To install Python 3.10, follow [this link](https://www.python.org/downloads/release/python-3105/), download and open the appropriate package, and follow the instructions of the installer. To install and set up R you can follow the [CRAN website](https://cran.r-project.org/). If you have to install either tool, make sure that you restart your terminal before moving forward!
 
-3. To run the Python scripts we recommend that you create a Python virtual environment. Create the virtual environment using python v3.10, as it supports the installation of spaCy v3.2.4, which some scripts in this repo require. In order to do so, run the following command:
+3. To run the Python scripts we recommend that you create a Python virtual environment. Create the virtual environment using python v3.10, as it supports the installation of spaCy v3.2.4, which some scripts in this repo require. In order to do so, run the following command in your terminal:
 
    ```bash
    python3.10 -m venv venv
    ```
 
-4. Start your Python virtual environment:
+4. To start your Python virtual environment, from your terminal run:
 
    ```bash
    source venv/bin/activate
@@ -140,7 +140,7 @@ The following setup instructions are for **the default terminal on macOS/Linux**
    Make sure your virtual environment is active before proceeding to the next step!
 
 5. Some scripts in this repo require [spaCy](https://spacy.io/) v3.2.4, particularly, spaCy's `en_core_web_lg`. To install
-   `en_core_web_lg`, run the following commands in the order given:
+   `en_core_web_lg`, run the following commands in your terminal in the order given:
 
    ```bash
    pip3 install spacy==3.2.4
