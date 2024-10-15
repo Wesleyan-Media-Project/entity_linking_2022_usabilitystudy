@@ -70,7 +70,9 @@ There are separate folders for running the entity linker depending on whether yo
 
    The second task is to train an entity linking model using the knowledge base.
 
-   **Note**: The training of the entity linking models is optional for running the inference scripts in this repo. You can run the inference scripts with our pre-trained model by downloading it [here](https://figshare.wesleyan.edu/articles/model/Trained_Entity_Linker_Model/25773600) or by using the bash script we provide that automates its download. Instructions for using this script can be found below, in the [setup](#3-setup) section. This also requires scripts from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) and [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repositories. The files required from the data-post-production repo are too large to be kept there, so you can either run the scripts to produce the data yourself, or download the necessary files (`fb_2022_adid_text.csv.gz` and `fb_2022_adid_var1.csv.gz`) from Figshare through [this link](https://www.creativewmp.com/data-access/).
+   **Note**: The training of the entity linking models is optional for running the inference scripts in this repo. You can run the inference scripts with our pre-trained model – instructions on how to do so can be found below, in the [setup](#3-setup) section.
+
+   Training the entity linking model requires scripts from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) and [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repositories. The files required from the data-post-production repo are too large to be kept there, so you can either run the scripts to produce the data yourself, or download the necessary files (`fb_2022_adid_text.csv.gz` and `fb_2022_adid_var1.csv.gz`) from Figshare through [this link](https://www.creativewmp.com/data-access/).
 
    Once the knowledge base of people of interest is constructed, the entity linker can be initialized with [spaCy](https://spacy.io/), a natural language processing library we use, in [facebook/train/02_train_entity_linking.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/02_train_entity_linking.py).
 
@@ -97,7 +99,7 @@ There are separate folders for running the entity linker depending on whether yo
 
    To perform this task you can use the scripts in the inferences folders, [facebook/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/inference) and [google/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/google/inference). The folders incluced variations of scripts to disambiguate people, for example, multiple "Harrises" (e.g., Kamala Harris and Andy Harris).
 
-   In order to run the scripts in the inferences folders, you will need to download datasets which are hosted on our Figshare. For [facebook/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/inference), you will require the `fb_2022_adid_text.csv.gz` dataset and for [google/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/google/inference) you will require the `g2022_adid_01062021_11082022_text.csv.gz` dataset. You can download these files by following [this link](https://www.creativewmp.com/data-access/), and completing the form, which will redirect you to a page with all necessary links.
+   In order to run the scripts in the inferences folders, you will need to download datasets which are hosted on our Figshare. For [facebook/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/inference), you will require the `fb_2022_adid_text.csv.gz` dataset and for [google/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/google/inference) you will require the `g2022_adid_01062021_11082022_text.csv.gz` dataset. You can download these files by following [this link](https://www.creativewmp.com/data-access/) (also provided above), and completing the Data Access form, which will redirect you to a page with all necessary links.
 
    When running the inference files, make sure you have changed the file paths so that they match up to how things are set up on your machine.
 
@@ -107,7 +109,7 @@ There are separate folders for running the entity linker depending on whether yo
 
 The following setup instructions are for **the default terminal on macOS/Linux**. For Windows the steps are the same but the commands may be slightly different.
 
-**Note**: The following instructions are for setting up the inference scripts only as we provide a [knowledge base](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv) and [pre-trained model](https://figshare.wesleyan.edu/articles/model/Trained_Entity_Linker_Model/25773600) that are ready for you to use on Google and Facebook 2022 data. To create your own knowledge base and train your own models, you can format your knowledge base according to our [existing knowledge base (for both Google and Facebook)](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv). In such case, please note that the entity linking model training scripts require datasets from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) repo and tables from the [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repo. These dependencies must be cloned into the same local top-level folder as this repo. The training may take multiple hours or even days, depending on your hardware.
+**Note**: The following instructions are for setting up the inference scripts only as we provide a [knowledge base](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv) and pre-trained model (see above) that are ready for you to use on Google and Facebook 2022 data. To create your own knowledge base and train your own models, you can format your knowledge base according to our [existing knowledge base (for both Google and Facebook)](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv). In such case, please note that the entity linking model training scripts require datasets from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) repo and tables from the [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repo. These dependencies must be cloned into the same local top-level folder as this repo. The training may take multiple hours or even days, depending on your hardware.
 
 1. To start setting up the inference scripts based on our existing knowledge base and pre-trained models, first clone this repo to your local directory. You can do this by opening up the Terminal application and running the following command:
 
@@ -174,29 +176,17 @@ The following setup instructions are for **the default terminal on macOS/Linux**
 
     **NOTE**: In order to successfully run our R scripts, you must also first set your working directory. If you are running from the `entity_linking_2022` directory as suggested, you do not need to make any changes to the paths. However, if you're running from somewhere else they may need to be adjusted.
 
-8.  (Jump to step 10 if you want to use the [pre-trained model](https://figshare.wesleyan.edu/articles/model/Trained_Entity_Linker_Model/25773600) we provided.) Now, you can create the [knowledge base](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv) by running the [R script](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/knowledge_base/01_construct_kb.R) in the `facebook/knowledge_base` folder (See above for more details).
+8.  (Jump to step 10 if you want to use the **pre-trained model** we provide) Now, you can create the [knowledge base](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv) by running the [R script](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/knowledge_base/01_construct_kb.R) in the `facebook/knowledge_base` folder (See above for more details).
 
 9.  Next, you will train the entity linking model using spaCy library. The scripts are in the `facebook/train` [folder](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/train) (See above for more details).
 
-10. If you are using the [pre-trained model](https://figshare.wesleyan.edu/articles/model/Trained_Entity_Linker_Model/25773600) we provide, you will need to download it. If you have already downloaded the **trained_entity_linker**, you may **skip this step**.
-    To do so, you will need to either navigate to Figshare and download from there, or use the Bash file we provide.
+10. If you are using the **pre-trained entity linker model** we provide, you will need to download it. If you have already done so, you may **skip this step**.
 
-    To use the Bash file, make sure that you are in the entity_linking_2022 directory as your working directory and run the following commands in terminal:
-
-    ```bash
-    chmod +x download_files.sh
-    ./download_files.sh -model
-    ```
-
-    Once you have done this, the pre-trained model will download. This will take some time, as it takes up 1.44 GB. Once it has finished downloading, run the following command in terminal to unzip the model.
-
-    ```bash
-    unzip trained_entity_linker.zip
-    ```
+    To download the pre-trained model, you will need to follow [this link](https://www.creativewmp.com/data-access/) and complete the Data Access form – this will redirect you to a page from which you will be able to directly download the entity linker through a link.
 
 11. Before proceeding, make sure to move the `trained_entity_linker` folder into a `models` folder within the main `entity_linking_2022` directory.
 
-    Next, in order to run the scripts in the inference folders, you will need to download datasets which are hosted on our Figshare. For [facebook/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/inference), you will require the `fb_2022_adid_text.csv.gz` dataset and for [google/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/google/inference) you will require the `g2022_adid_01062021_11082022_text.csv.gz` dataset. If you have not downloaded these datasets yet, you can do so by following [this link](https://www.creativewmp.com/data-access/) and completing the Data Access form, which will redirect you to a page with the download files.
+    Next, in order to run the scripts in the inference folders, you will need to download datasets which are hosted on our Figshare. For [facebook/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/inference), you will require the `fb_2022_adid_text.csv.gz` dataset and for [google/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/google/inference) you will require the `g2022_adid_01062021_11082022_text.csv.gz` dataset. If you have not downloaded these datasets yet, you can do so from the same link that you downloaded the entity linker from in Step 10.
 
     Once downloaded, move the datasets into the same directory as where the main `entity_linking_2022` directory is located (so that the `entity_linking_2022` folder, the `fb_2022_adid_text.csv.gz` file, and the `g2022_adid_01062021_11082022_text.csv.gz` file are all located in the same place).
 
