@@ -103,8 +103,6 @@ There are separate folders for running the entity linker depending on whether yo
 
    When running the inference files, make sure you have changed the file paths so that they match up to how things are set up on your machine.
 
-   To download these datasets, you can go to their Figshare pages and download from there, or you can use the Bash script we provide that automates this download. Instructions for using this script are present in the setup section, found below.
-
 ## 3. Setup
 
 The following setup instructions are for **the default terminal on macOS/Linux**. For Windows the steps are the same but the commands may be slightly different.
