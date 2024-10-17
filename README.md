@@ -109,7 +109,7 @@ The following setup instructions are for **the default terminal on macOS/Linux**
 
 **Note**: The following instructions are for setting up the inference scripts only as we provide a [knowledge base](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv) and pre-trained model (see above) that are ready for you to use on Google and Facebook 2022 data. To create your own knowledge base and train your own models, you can format your knowledge base according to our [existing knowledge base (for both Google and Facebook)](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv). In such case, please note that the entity linking model training scripts require datasets from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) repo and tables from the [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repo. These dependencies must be cloned into the same local top-level folder as this repo. The training may take multiple hours or even days, depending on your hardware.
 
-1. To start setting up the inference scripts based on our existing knowledge base and pre-trained models, first clone this repo to your local directory. You can do this by opening up the Terminal application and running the following command:
+1. To start setting up the inference scripts based on our existing knowledge base and pre-trained models, first clone this repo to your local directory. You can do this by opening up the Terminal application (which is located in `Applications/Utilities` in Finder) and running the following command:
 
    ```bash
    git clone https://github.com/Wesleyan-Media-Project/entity_linking_2022.git
@@ -158,7 +158,7 @@ The following setup instructions are for **the default terminal on macOS/Linux**
 
 7.  To run [01_combine_text_asr_ocr.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/01_combine_text_asr_ocr.R) and [03_combine_results.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/03_combine_results.R), you first need to install various R packages.
 
-    If you're using **RStudio**:
+    ### If you're using RStudio:
 
     Open up RStudio, and in the console (bottom-left panel) run the following commands one-by-one:
 
@@ -170,7 +170,7 @@ The following setup instructions are for **the default terminal on macOS/Linux**
     install.packages("R.utils")
     ```
 
-    If you're using the **Command Line**:
+    ### If you're using the Command Line:
 
     Run the `R` command in your terminal (which opens the R console) and then running the following commands in the order provided:
 
@@ -210,9 +210,13 @@ The following setup instructions are for **the default terminal on macOS/Linux**
     2. [facebook/inference/02_entity_linking_inference.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/02_entity_linking_inference.py)
     3. [facebook/inference/03_combine_results.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/03_combine_results.R)
 
-    If you are using **RStudio**, you'll need to manually set your working directory to the `entity_linking_2022` repository in order to run the scripts as they're written. You can do this by running the following command in the console: `Rsetwd("~/path/to/entity_linking_2022/")` where `"~/path/to/entity_linking_2022/"` is the complete path to the `entity_linking_2022` directory in your local. You can then run the R scripts in RStudio as normal – just make sure to run `02_entity_linking_inference.py` in between the two R scripts! You can run the Python script in terminal using the same command as given below.
+    ### If you are using RStudio:
 
-    If you are strictly using the **Command Line**, you can run all the scripts by running the following commands in your terminal in the order given:
+    You'll need to manually set your working directory to the `entity_linking_2022` repository in order to run the scripts as they're written. You can do this by running the following command in the console: `Rsetwd("~/path/to/entity_linking_2022/")` where `"~/path/to/entity_linking_2022/"` is the complete path to the `entity_linking_2022` directory in your local. You can then run the R scripts in RStudio as normal – just make sure to run `02_entity_linking_inference.py` in between the two R scripts! You can run the Python script in terminal using the same command as given below.
+
+    ### If you are strictly using the Command Line:
+
+    You can run all the scripts by running the following commands in your terminal in the order given:
 
     ```bash
     Rscript facebook/inference/01_combine_text_asr_ocr.R
