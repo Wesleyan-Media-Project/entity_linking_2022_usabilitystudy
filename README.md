@@ -117,7 +117,7 @@ The following setup instructions are for **the default terminal on macOS/Linux**
 
    This will clone the `entity_linking_2022` repository into your home directory. If you want it in a different location, you'll have to move into that directory using the `cd` command beforehand (e.g., `cd GitHub_Repos/CREATIVE/`).
 
-2. The scripts in this repo are in [Python](https://www.python.org/) and [R](https://www.r-project.org/). Make sure you have both installed and set up before continuing. The scripts in this repo were tested on Python 3.10, as it is required by one of the necessary dependencies. To install Python 3.10, follow [this link](https://www.python.org/downloads/release/python-3105/), download and open the appropriate package, and follow the instructions of the installer. To install and set up R you can follow the [CRAN website](https://cran.r-project.org/). If you have to install either tool, make sure that you restart your terminal before moving forward!
+2. The scripts in this repo are in [Python](https://www.python.org/) and [R](https://www.r-project.org/). Make sure you have both installed and set up before continuing. The scripts in this repo were tested on Python 3.10, as it is required by one of the necessary dependencies. To install Python 3.10, follow [this link](https://www.python.org/downloads/release/python-3105/), download and open the appropriate package, and follow the instructions of the installer. To install and set up R you can follow the [CRAN website](https://cran.r-project.org/). We also recommend installing RStudio, the recommended IDE for R. You can install it [here](https://posit.co/downloads/). If you have to install either tool, make sure that you restart your terminal before moving forward!
 
 3. To run the Python scripts we recommend that you create a Python virtual environment. Create the virtual environment using python v3.10, as it supports the installation of spaCy v3.2.4, which some scripts in this repo require. In order to do so, run the following command in your terminal:
 
@@ -158,7 +158,21 @@ The following setup instructions are for **the default terminal on macOS/Linux**
 
 7.  To run [01_combine_text_asr_ocr.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/01_combine_text_asr_ocr.R) and [03_combine_results.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/03_combine_results.R), you first need to install various R packages.
 
-    To do this, run the `R` command in your terminal (which opens the R console) and then running the following commands in the order provided:
+    If you're using **RStudio**:
+
+    Open up RStudio, and in the console (bottom-left panel) run the following commands one-by-one:
+
+    ```R
+    install.packages("dplyr")
+    install.packages("data.table")
+    install.packages("stringr")
+    install.packages("tidyr")
+    install.packages("R.utils")
+    ```
+
+    If you're using the **Command Line**:
+
+    Run the `R` command in your terminal (which opens the R console) and then running the following commands in the order provided:
 
     ```R
     install.packages("dplyr")
@@ -196,7 +210,9 @@ The following setup instructions are for **the default terminal on macOS/Linux**
     2. [facebook/inference/02_entity_linking_inference.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/02_entity_linking_inference.py)
     3. [facebook/inference/03_combine_results.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/03_combine_results.R)
 
-    You can do so by running the following commands in your terminal in the order given:
+    If you are using **RStudio**, you'll need to manually set your working directory to the `entity_linking_2022` repository in order to run the scripts as they're written. You can do this by running the following command in the console: `Rsetwd("~/path/to/entity_linking_2022/")` where `"~/path/to/entity_linking_2022/"` is the complete path to the `entity_linking_2022` directory in your local. You can then run the R scripts in RStudio as normal – just make sure to run `02_entity_linking_inference.py` in between the two R scripts! You can run the Python script in terminal using the same command as given below.
+
+    If you are strictly using the **Command Line**, you can run all the scripts by running the following commands in your terminal in the order given:
 
     ```bash
     Rscript facebook/inference/01_combine_text_asr_ocr.R
