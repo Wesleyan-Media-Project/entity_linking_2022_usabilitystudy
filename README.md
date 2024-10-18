@@ -212,7 +212,7 @@ The following setup instructions are for **the default terminal on macOS/Linux**
 
     ### If you are using RStudio:
 
-    You'll need to manually set your working directory to the `entity_linking_2022` repository in order to run the scripts as they're written. You can do this by running the following command in the console: `Rsetwd("~/path/to/entity_linking_2022/")` where `"~/path/to/entity_linking_2022/"` is the complete path to the `entity_linking_2022` directory in your local. You can then run the R scripts in RStudio as normal – just make sure to run `02_entity_linking_inference.py` in between the two R scripts! You can run the Python script in terminal using the same command as given below.
+    You'll need to manually set your working directory to the `entity_linking_2022` repository in order to run the scripts as they're written. You can do this by running the following command in the console: `setwd("your_local_path/entity_linking_2022/")` where `"your_local_path/entity_linking_2022/"` is the complete path to the `entity_linking_2022` directory in your local. You can then run the R scripts in RStudio as normal – just make sure to run `02_entity_linking_inference.py` in between the two R scripts! You can run the Python script in terminal using the same command as given below.
 
     ### If you are strictly using the Command Line:
 
