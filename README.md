@@ -71,6 +71,8 @@ There are separate folders for running the entity linker depending on whether yo
 
 ### 0. Cloning the entity_linking_2022_usabilitystudy Repository
 
+In order to run the scripts in this repository, you'll need to copy them onto your own computer. To do so:
+
 #### If you use macOS/Linux:
 
 1. Open up your Terminal application, which is located in `Applications/Utilities` on a Mac
