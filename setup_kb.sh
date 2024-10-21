@@ -18,20 +18,25 @@ repo_exists() {
 }
 
 install_r_packages() {
-    echo
     echo "*** Installing necessary R packages using the command line... ***"
-    echo
 
-    Rscript -e "install.packages('dplyr', repos='http://cran.rstudio.com/')"
-    Rscript -e "install.packages('haven', repos='http://cran.rstudio.com/')"
-    Rscript -e "install.packages('data.table', repos='http://cran.rstudio.com/')"
-    Rscript -e "install.packages('stringr', repos='http://cran.rstudio.com/')"
-    Rscript -e "install.packages('quanteda', repos='http://cran.rstudio.com/')"
-    Rscript -e "install.packages('readxl', repos='http://cran.rstudio.com/')"
-    Rscript -e "install.packages('tidyr', repos='http://cran.rstudio.com/')"
-    Rscript -e "install.packages('R.utils', repos='http://cran.rstudio.com/')"
+    # Define an array of packages to install
+    packages=(
+        "dplyr"
+        "haven"
+        "data.table"
+        "stringr"
+        "quanteda"
+        "readxl"
+        "tidyr"
+        "R.utils"
+    )
 
-    echo
+    # Loop through the array and install each package
+    for package in "${packages[@]}"; do
+        Rscript -e "install.packages('$package', repos='http://cran.rstudio.com/')"
+    done
+
     echo "*** All R installations completed successfully. ***"
 }
 
@@ -55,13 +60,10 @@ install_r_packages
 
 # Makes entity_linking_2022_usabilitystudy repo current directory
 
-echo
 echo "*** Moving into '$ENTITY' directory... ***"
-echo
 cd $ENTITY
 
 # Runs script
-echo
 echo "*** Running facebook/knowledge_base/01_construct_kb.R... ***"
 Rscript facebook/knowledge_base/01_construct_kb.R
 
