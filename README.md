@@ -127,7 +127,7 @@ To completely set your computer up for, as well as run, the `facebook/train` scr
 
 #### If you use macOS/Linux:
 
-3. Execute the following two commands in order to set up and run `facebook/train`:
+2. Execute the following two commands in order to set up and run `facebook/train`:
 
    ```bash
    chmod +x ./entity_linking_2022_usabilitystudy/setup_train.sh
@@ -136,7 +136,7 @@ To completely set your computer up for, as well as run, the `facebook/train` scr
 
 #### If you use Windows:
 
-3. Execute the following two commands in order to set up and run `facebook/train`:
+2. Execute the following two commands in order to set up and run `facebook/train`:
 
    ```powershell
    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
