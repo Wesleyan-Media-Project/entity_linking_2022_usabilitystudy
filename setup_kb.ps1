@@ -36,6 +36,9 @@ function install_r_packages {
 
 ## Main Execution
 
+# Confirm we're in home directory
+Set-Location -Path $HOME
+
 # Makes entity_linking_2022_usabilitystudy repo current directory
 Write-Host
 Write-Host "*** Moving into '$ENTITY' directory... ***"

@@ -101,12 +101,10 @@ run_inference_scripts() {
     
 }
 
-remove_venv() {
-    rm -r "venv"
-    echo "Deleted virtual environment"    
-}
-
 ## Main Execution
+
+#Confirm we're in home directory
+cd ~
 
 # Clones datasets repo into parent directory if it doesn't already exist there
 if ! repo_exists "$DATASETS"; then
@@ -131,9 +129,6 @@ if dataset_exists "$FBTEXT" && dataset_exists "$FBVAR1"; then
 
     # Attempts to run scripts
     run_inference_scripts
-
-    # Deletes virtual environment at the end of process
-    remove_venv
 
 else
 

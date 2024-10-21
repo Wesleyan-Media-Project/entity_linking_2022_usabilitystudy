@@ -92,6 +92,9 @@ function remove_venv {
 
 # Main Execution
 
+# Confirm we're in home directory
+Set-Location -Path $HOME
+
 # Clones datasets repo into parent directory if it doesn't already exist there
 if (-not (repo_exists $DATASETS)) {
     git clone https://github.com/Wesleyan-Media-Project/datasets.git

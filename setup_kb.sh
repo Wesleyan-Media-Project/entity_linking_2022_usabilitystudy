@@ -37,6 +37,9 @@ install_r_packages() {
 
 ## Main Execution
 
+#Confirm we're in home directory
+cd ~
+
 # Clones datasets repo into parent directory if it doesn't already exist there
 if ! repo_exists "$DATASETS"; then
     git clone https://github.com/Wesleyan-Media-Project/datasets.git

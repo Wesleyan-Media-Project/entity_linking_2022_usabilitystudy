@@ -147,6 +147,30 @@ To completely set your computer up for, as well as run, the `facebook/train` scr
 
 ### 3. Making Inferences with the Trained Model
 
+To completely set your computer up for, as well as run, the `facebook/inference` scripts, you can use the `setup_inference` scripts we prvoide!
+
+1. Running the `facebook/inference` scripts requires the `fb_2022_adid_text.csv.gz` dataset, and running the `google/inference` scripts requires the `g2022_adid_01062021_11082022_text.csv.gz` dataset, both of which are hosted on our Figshare. If you have not downloaded these datasets yet, you can do so by following [this link](https://www.creativewmp.com/data-access/) and completing the Data Access Form, which will redirect you to a page from which you can download both datasets.
+
+#### If you use macOS/Linux:
+
+2. Execute the following two commands in order to set up and run `facebook/inference`:
+
+   ```bash
+   chmod +x ./entity_linking_2022_usabilitystudy/setup_inf.sh
+   ./entity_linking_2022_usabilitystudy/setup_inf.sh
+   ```
+
+#### If you use Windows:
+
+2. Execute the following two commands in order to set up and run `facebook/inference`:
+
+   ```powershell
+   Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+   .\entity_linking_2022_usabilitystudy\setup_inf.ps1
+   ```
+
+**TODO**: Add note with link to detailed instructions here
+
 ## 4. Results Storage
 
 After successfully running the above scripts in the inference folder, you should see the entity linking results in the `data` folder. The data will be in `csv.gz` and `csv` format. The various Facebook results, for instance, are as follows:

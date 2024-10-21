@@ -1,0 +1,192 @@
+#!/bin/bash
+
+DATASET="fb_2022_adid_text.csv"
+ENTITYLINKER="trained_entity_linker"
+REPO="entity_linking_2022_usabilitystudy"
+
+dataset_exists() {
+    # Check if the file exists in Downloads as a csv or gz
+    if [[ -f "Downloads/$DATASET" || -f "Downloads/$DATASET.gz" ]]; then
+        # If it exists as a csv then gzip
+        if [ -f "Downloads/$DATASET" ]; then
+            echo "File '$DATASET' exists. Compressing it now..."
+            gzip "$DATASET"
+            echo "File '$DATASET' has been compressed to '$DATASET.gz'."
+        fi
+        sudo mv ~/Downloads/$DATASET.gz ~/   
+        echo "File '$DATASET' has been moved to your home directory."
+        return 0
+    else
+        # Check if file is already in home directory
+        if [ -f "$DATASET.gz" ]; then
+            return 0
+        fi
+        return 1
+    fi
+}
+
+entitylinker_exists() {
+    # Check if the file exists in Downloads as a folder or zip
+    if [[ -d "Downloads/$ENTITYLINKER" || -d "Downloads/$ENTITYLINKER.zip" ]]; then
+        # If it's a zip, then unzip
+        if [ -d "Downloads/$ENTITYLINKER.zip" ]; then
+            echo "Folder '$ENTITYLINKER.zip' exists. Unzipping it now..."
+            unzip "$ENTITYLINKER.zip"
+            echo "Folder '$ENTITYLINKER.zip' has been unzipped to '$ENTITYLINKER'."
+        fi
+        # Move into a models folder in the entity_linking_2022_usabilitystudy folder
+        echo "Folder '$ENTITYLINKER' exists. Moving it now..."
+        mkdir "models"
+        sudo mv ~/Downloads/$ENTITYLINKER ~/      
+        mv "$ENTITYLINKER" "models"
+        mv "models" "$REPO"
+        echo "File '$ENTITYLINKER' has been moved to a models folder in the $REPO directory."
+        return 0
+    else
+        # Check and see if it already exists in models/entity_linking_2022_usabilitystudy
+        if [ -d "$REPO/models/$ENTITYLINKER" ]; then
+            return 0
+        fi
+        return 1
+    fi
+}
+
+# Function to check if Python 3.10 is installed
+check_python_version() {
+    # Get the Python 3.10 version if installed
+    PYTHON_VERSION=$(python3.10 --version 2>/dev/null)
+    
+    if [[ $PYTHON_VERSION == *"Python 3.10"* ]]; then
+        echo "Python 3.10 is installed: $PYTHON_VERSION"
+        return 0  # Python 3.10 is installed
+    else
+        return 1  # Python 3.10 is not installed
+    fi
+}
+
+check_r_version() {
+    # Check if R is installed
+    if command -v R >/dev/null 2>&1; then
+        # Get the R version
+        R_VERSION=$(R --version | grep -o "[0-9]*\.[0-9]*\.[0-9]*")
+        echo "R is installed. Version: $R_VERSION"
+        return 0
+    else
+        echo "R is not installed."
+        return 1
+    fi
+}
+
+run_inference_scripts() {
+
+    echo "*** Now running 01_combine_text_asr_ocr.R... ***"
+    Rscript facebook/inference/01_combine_text_asr_ocr.R
+    # If first script runs successfully, continue
+    if [ $? -eq 0 ]; then    
+        echo "*** 01_combine_text_asr_ocr.R ran successfully! ***"
+        echo "*** Now running 02_entity_linking_inference.py... ***"
+        python3 facebook/inference/02_entity_linking_inference.py
+        # If second script runs successfully, continue
+        if [ $? -eq 0 ]; then 
+            echo "*** 02_entity_linking_inference.py ran successfully! ***"
+            echo "*** Now running 03_combine_results.R... ***"
+            Rscript facebook/inference/03_combine_results.R
+            # If third script runs successfully, done!
+            if [ $? -eq 0 ]; then 
+                echo "*** 03_combine_results.R ran successfully! ***"
+            else
+                exit
+            fi
+        else
+            exit
+        fi
+    else
+        exit
+    fi
+
+}
+
+setup_venv() {
+    echo "Creating Python 3.10 virtual environment..."
+    python3.10 -m venv venv
+
+    echo "Starting virtual environment venv..."
+    source venv/bin/activate
+}
+
+install_python_packages() {
+    echo "Installing spaCy version 3.2.4..."
+    pip3 install spacy==3.2.4
+
+    echo "Installing numpy version 1.26.2..."
+    pip3 install numpy==1.26.2
+
+    echo "Downloading spaCy's large English model..."
+    python3.10 -m spacy download en_core_web_lg
+
+    echo "Installing pandas version 2.1.1..."
+    pip3 install pandas==2.1.1
+
+    echo "All python installations completed successfully."
+}
+
+install_r_packages() {
+    echo "Installing necessary R packages using the command line..."
+
+    # Define an array of packages to install
+    packages=(
+        "dplyr"
+        "data.table"
+        "stringr"
+        "tidyr"
+        "R.utils"
+    )
+
+    # Loop through the array and install each package
+    for package in "${packages[@]}"; do
+        Rscript -e "install.packages('$package', repos='http://cran.rstudio.com/')"
+    done
+
+    echo "All R installations completed successfully."
+}
+
+#Confirm we're in home directory
+cd ~
+
+# Check if Python 3.10 is installed
+if check_python_version && check_r_version; then
+    
+    if dataset_exists && entitylinker_exists; then
+        echo "Files '$DATASET' and '$ENTITYLINKER' exist!"
+
+        setup_venv
+        install_python_packages
+        install_r_packages
+
+        echo "Making $REPO current directory..."
+        cd $REPO
+
+        run_inference_scripts
+
+    else
+        if ! dataset_exists; then
+            echo "File '$DATASET' does not exist."
+        fi
+        if ! entitylinker_exists; then
+            echo "File '$ENTITYLINKER' does not exist."
+        fi
+    fi
+
+else
+
+    if ! check_r_version; then
+        echo "R is not installed."
+        echo "Please install R by downloading and opening this package (macOS): https://cran.r-project.org/bin/macosx/"
+    fi
+    if ! check_python_version; then
+        echo "Python 3.10 is not installed."
+        echo "Please install Python 3.10.5 by downloading and opening this package (macOS): https://www.python.org/ftp/python/3.10.5/python-3.10.5-macos11.pkg.
+        Make sure to add Python 3.10.5 to your PATH during installation!"
+    fi
+fi
+
