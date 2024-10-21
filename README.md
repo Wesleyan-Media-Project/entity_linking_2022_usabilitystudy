@@ -14,7 +14,7 @@ To analyze the different dimensions of political ad transparency we have develop
 
 [1. Video Tutorial](#1-video-tutorial)  
 [2. Overview](#2-overview)  
-[3. Setup](#3-setup)  
+[3. How to Run the Scripts](#3-how-to-run-the-scripts)  
 [4. Results Storage](#4-results-storage)  
 [5. Results Analysis](#5-results-analysis)  
 [6. Thank You](#6-thank-you)
@@ -65,9 +65,55 @@ There are separate folders for running the entity linker depending on whether yo
 
    To perform this task you can use the scripts in the inferences folders, [facebook/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/inference) and [google/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/google/inference). The folders incluced variations of scripts to disambiguate people, for example, multiple "Harrises" (e.g., Kamala Harris and Andy Harris).
 
-## 3. Setup
+## 3. How to Run the Scripts
+
+**TODO** note about skipping steps 1 and 2 if you have the pre-trained entity linker.
+
+### 0. Cloning the entity_linking_2022_usabilitystudy Repository
+
+#### If you use macOS/Linux:
+
+1. Open up your Terminal application, which is located in `Applications/Utilities` on a Mac
+
+2. Execute the following command in order to clone this repository onto your computer, in your home directory:
+
+   ```bash
+   git clone https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy.git
+   ```
+
+#### If you use Windows:
+
+1. Click the Start Menu, search for the Powershell application, and select **Windows Powershell** in order to open up the Powershell application.
+
+2. Execute the following command in order to clone this repository onto your computer, in your home directory:
+
+   ```bash
+   git clone https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy.git
+   ```
 
 ### 1. Constructing a Knowledge Base of Political Entities
+
+In order to completely set your computer up for, as well as run, the `facebook/knowledge_base` script, you can use the `setup_kb` scripts we prvoide!
+
+#### If you use macOS/Linux:
+
+1. Execute the following two commands in order to set up and run `facebook/knowledge_base/01_construct_kb.R`:
+
+   ```bash
+   chmod +x ./entity_linking_2022_usabilitystudy/setup_kb.sh
+   ./entity_linking_2022_usabilitystudy/setup_kb.sh
+   ```
+
+#### If you use Windows:
+
+1. Execute the following two commands in order to set up and run `facebook/knowledge_base/01_construct_kb.R`:
+
+   ```powershell
+   Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+   .\entity_linking_2022_usabilitystudy\setup_kb.sh
+   ```
+
+**TODO**: Add note with link to detailed instructions here
 
 ### 2. Training the Entity Linking Model
 
