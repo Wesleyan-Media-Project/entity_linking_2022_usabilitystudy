@@ -75,7 +75,7 @@ In order to run the scripts in this repository, you'll need to copy them onto yo
 
 #### If you use macOS/Linux:
 
-1. Open up your Terminal application, which is located in `Applications/Utilities` on a Mac
+1. Open up your Terminal application, which is located in `Applications/Utilities` on a Mac.
 
 2. Execute the following command in order to clone this repository onto your computer, in your home directory:
 
@@ -95,7 +95,7 @@ In order to run the scripts in this repository, you'll need to copy them onto yo
 
 ### 1. Constructing a Knowledge Base of Political Entities
 
-In order to completely set your computer up for, as well as run, the `facebook/knowledge_base` script, you can use the `setup_kb` scripts we prvoide!
+To completely set your computer up for, as well as run, the `facebook/knowledge_base` script, you can use the `setup_kb` scripts we prvoide!
 
 #### If you use macOS/Linux:
 
@@ -112,12 +112,38 @@ In order to completely set your computer up for, as well as run, the `facebook/k
 
    ```powershell
    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-   .\entity_linking_2022_usabilitystudy\setup_kb.sh
+   .\entity_linking_2022_usabilitystudy\setup_kb.ps1
    ```
 
 **TODO**: Add note with link to detailed instructions here
 
 ### 2. Training the Entity Linking Model
+
+To completely set your computer up for, as well as run, the `facebook/train` scripts, you can use the `setup_train` scripts we prvoide!
+
+**TODO** Note about how long this step can take
+
+1. Running these scripts requires `fb_2022_adid_text.csv.gz` and `fb_2022_adid_text.csv.gz`, which are hosted on our Figshare. If you have not downloaded these datasets yet, you can do so by following [this link](https://www.creativewmp.com/data-access/) and completing the Data Access Form, which will redirect you to a page from which you can download both datasets.
+
+#### If you use macOS/Linux:
+
+3. Execute the following two commands in order to set up and run `facebook/train`:
+
+   ```bash
+   chmod +x ./entity_linking_2022_usabilitystudy/setup_train.sh
+   ./entity_linking_2022_usabilitystudy/setup_train.sh
+   ```
+
+#### If you use Windows:
+
+3. Execute the following two commands in order to set up and run `facebook/train`:
+
+   ```powershell
+   Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+   .\entity_linking_2022_usabilitystudy\setup_train.ps1
+   ```
+
+**TODO**: Add note with link to detailed instructions here
 
 ### 3. Making Inferences with the Trained Model
 
