@@ -14,7 +14,13 @@ To analyze the different dimensions of political ad transparency we have develop
 
 [1. Video Tutorial](#1-video-tutorial)  
 [2. Overview](#2-overview)  
-[3. How to Run the Scripts](#3-how-to-run-the-scripts)  
+[3. How to Run the Scripts](#3-how-to-run-the-scripts)
+
+- [0. Cloning](#0-cloning-the-entity_linking_2022_usabilitystudy-repository)
+- [1. Constructing Knowledge Base](#1-constructing-a-knowledge-base-of-political-entities)
+- [2. Training Entity Linker](#2-training-the-entity-linking-model)
+- [3. Making Inferences](#3-making-inferences-with-the-trained-model)
+
 [4. Results Storage](#4-results-storage)  
 [5. Results Analysis](#5-results-analysis)  
 [6. Thank You](#6-thank-you)
