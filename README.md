@@ -16,7 +16,7 @@ To analyze the different dimensions of political ad transparency we have develop
 [2. Overview](#2-overview)  
 [3. How to Run the Scripts](#3-how-to-run-the-scripts)
 
-- [0. Cloning](#0-cloning-the-entity_linking_2022_usabilitystudy-repository)
+- [0. Cloning This Repository](#0-cloning-the-entity_linking_2022_usabilitystudy-repository)
 - [1. Constructing Knowledge Base](#1-constructing-a-knowledge-base-of-political-entities)
 - [2. Training Entity Linker](#2-training-the-entity-linking-model)
 - [3. Making Inferences](#3-making-inferences-with-the-trained-model)
@@ -276,42 +276,7 @@ python3 analysis/readcsv.py --h
 
 Please note that this script may take a while (>10 min) to run depending on the size of the data and the number of rows you requested. If you request the script to read more than 1048570 rows, the output would be saved in multiple Excel files due to the maximum number of rows Excel can handle.
 
-### Script `readcsvGUI.py`
-
-In addition to the `readcsv.py` script, we also provide a GUI version of the script that displays the data in a graphical user interface via [PandasGui](https://pypi.org/project/pandasgui/).
-
-To run the `readcsvGUI.py` script, you need to first install the required packages:
-
-```bash
-pip install pandas pandasgui
-```
-
-If you are working on a non-Windows computer, you will need to go into the file `.../site-packages/pandasgui/constants.py`, which is located wherever pandasgui was installed. If you created and have been using a python virtual environment as recommended, the file would be located at `.../entity_linking_2022/venv/lib/python3.10/site-packages/pandasgui/constants.py`, assuming you created the virtual environment from the repository's local directory. Otherwise, the file will likely be outside of the entity_linking_2022 repository file structure. Change the line of code:
-
-```bash
-SHORTCUT_PATH = os.path.join(os.getenv('APPDATA'), 'Microsoft/Windows/Start Menu/Programs/PandasGUI.lnk')
-```
-
-to instead be
-
-```bash
-if sys.platform == 'win32':
-    SHORTCUT_PATH = os.path.join(os.getenv('APPDATA'), 'Microsoft/Windows/Start Menu/Programs/PandasGUI.lnk')
-else:
-    SHORTCUT_PATH = NonePY_INTERPRETTER_PATH = os.path.join(os.path.dirname(sys.executable), 'python.exe')
-```
-
-After installing the required packages and potentially changing the SHORTCUT_PATH, you can run the script with the following command:
-
-```bash
-python3 analysis/readcsvGUI.py --file facebook/data/entity_linking_results_fb22.csv.gz
-```
-
-You can change the file to read by replacing the path `facebook/data/entity_linking_results_fb22.csv.gz` to other file paths.
-
-Here is an example of the GUI interface:
-![A picture of the PandasGui interface](images/PandasGUI_example.png)
-For more information on how to use the GUI interface, please refer to the [PandasGui documentation](https://pypi.org/project/pandasgui/).
+If you feel comfortable working with Terminal and would like results presented in a graphical user interface, you can read instructions on how to set up and run our [`analysis/readcsvGUI.py`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/analysis/readcsvGUI.py) script [here](https://docs.google.com/document/d/1CvV-XmUam3MEt7lTsQFPuEtgENOyBxlrOlznTrO7l5U/edit?usp=sharing).
 
 ## 6. Thank You
 
