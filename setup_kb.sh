@@ -59,7 +59,6 @@ install_r_packages() {
     echo "*** All necessary R packages are installed. ***"
 }
 
-
 ## Main Execution
 
 #Confirm we're in home directory

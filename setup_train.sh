@@ -42,22 +42,6 @@ dataset_exists() {
     fi
 }
 
-setup_venv() {
-    VENV_DIR="venv"
-
-    # Check if the virtual environment already exists
-    if [ -d "$VENV_DIR" ]; then
-        echo "Virtual environment '$VENV_DIR' already exists. Skipping creation."
-    else
-        echo "Creating Python 3.10 virtual environment..."
-        python3.10 -m venv $VENV_DIR
-
-        echo "Virtual environment '$VENV_DIR' created successfully."
-    fi
-    echo "Starting virtual environment venv..."
-    source $VENV_DIR/bin/activate
-}
-
 # Function to check if Python 3.10 is installed
 check_python_version() {
     # Get the Python 3.10 version if installed
@@ -82,6 +66,22 @@ check_r_version() {
         echo "R is not installed."
         return 1
     fi
+}
+
+setup_venv() {
+    VENV_DIR="venv"
+
+    # Check if the virtual environment already exists
+    if [ -d "$VENV_DIR" ]; then
+        echo "Virtual environment '$VENV_DIR' already exists. Skipping creation."
+    else
+        echo "Creating Python 3.10 virtual environment..."
+        python3.10 -m venv $VENV_DIR
+
+        echo "Virtual environment '$VENV_DIR' created successfully."
+    fi
+    echo "Starting virtual environment venv..."
+    source $VENV_DIR/bin/activate
 }
 
 install_python_packages() {
@@ -193,7 +193,6 @@ if check_python_version && check_r_version; then
 
     if dataset_exists "$FBTEXT" && dataset_exists "$FBVAR1"; then
         echo "Files '$FBTEXT' and '$FBVAR1' exist!"
-        echo
 
         # Sets up virtual environment, installs all necessary packages
         setup_venv
@@ -201,9 +200,7 @@ if check_python_version && check_r_version; then
         install_r_packages
 
         # Makes entity_linking_2022_usabilitystudy repo current directory
-        echo
         echo "*** Moving into '$ENTITY' directory... ***"
-        echo
         cd $ENTITY
 
         # Attempts to run scripts

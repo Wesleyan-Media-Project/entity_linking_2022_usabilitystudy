@@ -77,35 +77,6 @@ check_r_version() {
     fi
 }
 
-run_inference_scripts() {
-
-    echo "*** Now running 01_combine_text_asr_ocr.R... ***"
-    Rscript facebook/inference/01_combine_text_asr_ocr.R
-    # If first script runs successfully, continue
-    if [ $? -eq 0 ]; then    
-        echo "*** 01_combine_text_asr_ocr.R ran successfully! ***"
-        echo "*** Now running 02_entity_linking_inference.py... ***"
-        python3 facebook/inference/02_entity_linking_inference.py
-        # If second script runs successfully, continue
-        if [ $? -eq 0 ]; then 
-            echo "*** 02_entity_linking_inference.py ran successfully! ***"
-            echo "*** Now running 03_combine_results.R... ***"
-            Rscript facebook/inference/03_combine_results.R
-            # If third script runs successfully, done!
-            if [ $? -eq 0 ]; then 
-                echo "*** 03_combine_results.R ran successfully! ***"
-            else
-                exit
-            fi
-        else
-            exit
-        fi
-    else
-        exit
-    fi
-
-}
-
 setup_venv() {
     VENV_DIR="venv"
 
@@ -171,7 +142,6 @@ install_python_packages() {
     echo "*** All installations and checks completed successfully. ***"
 }
 
-
 install_r_packages() {
     echo "*** Installing necessary R packages using the command line... ***"
 
@@ -196,6 +166,35 @@ install_r_packages() {
     done
 
     echo "*** All necessary R packages are installed. ***"
+}
+
+run_inference_scripts() {
+
+    echo "*** Now running 01_combine_text_asr_ocr.R... ***"
+    Rscript facebook/inference/01_combine_text_asr_ocr.R
+    # If first script runs successfully, continue
+    if [ $? -eq 0 ]; then    
+        echo "*** 01_combine_text_asr_ocr.R ran successfully! ***"
+        echo "*** Now running 02_entity_linking_inference.py... ***"
+        python3 facebook/inference/02_entity_linking_inference.py
+        # If second script runs successfully, continue
+        if [ $? -eq 0 ]; then 
+            echo "*** 02_entity_linking_inference.py ran successfully! ***"
+            echo "*** Now running 03_combine_results.R... ***"
+            Rscript facebook/inference/03_combine_results.R
+            # If third script runs successfully, done!
+            if [ $? -eq 0 ]; then 
+                echo "*** 03_combine_results.R ran successfully! ***"
+            else
+                exit
+            fi
+        else
+            exit
+        fi
+    else
+        exit
+    fi
+
 }
 
 #Confirm we're in home directory
