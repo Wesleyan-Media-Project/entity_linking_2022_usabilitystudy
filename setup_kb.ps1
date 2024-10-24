@@ -1,16 +1,14 @@
-# Define variables
 $DATASETS = "datasets"
 $SCRAPER = "face_url_scraper_2022"
 $ENTITY = "entity_linking_2022_usabilitystudy"
 
-# Function to check if the repository exists
-function repo_exists {
+function Repo-Exists {
     param (
         [string]$param1
     )
-
-    # Check if the directory exists
-    if (Test-Path $param1) {
+    
+    # Check if the folder exists
+    if (Test-Path -Path $param1 -PathType Container) {
         Write-Host "Folder '$param1' already exists."
         return $true
     } else {
@@ -18,53 +16,81 @@ function repo_exists {
     }
 }
 
-# Function to install necessary R packages
-function install_r_packages {
-    Write-Host
+function Check-R-Version {
+    # Check if R is installed
+    if (Get-Command "R" -ErrorAction SilentlyContinue) {
+        $R_Version = (& R --version | Select-String -Pattern "[0-9]+\.[0-9]+\.[0-9]+" | ForEach-Object { $_.Matches[0].Value })
+        Write-Host "R is installed. Version: $R_Version"
+        return $true
+    } else {
+        Write-Host "R is not installed."
+        return $false
+    }
+}
+
+function Install-R-Packages {
     Write-Host "*** Installing necessary R packages using the command line... ***"
-    Write-Host
 
-    $packages = @('dplyr', 'haven', 'data.table', 'stringr', 'quanteda', 'readxl', 'tidyr', 'R.utils')
+    # Define an array of packages to install
+    $packages = @(
+        "dplyr",
+        "haven",
+        "data.table",
+        "stringr",
+        "quanteda",
+        "readxl",
+        "tidyr",
+        "R.utils"
+    )
 
+    # Loop through the array and check if each package is installed
     foreach ($package in $packages) {
-        Rscript -e "install.packages('$package', repos='http://cran.rstudio.com/')"
+        & Rscript -Command "
+            if (!require('$package', quietly = TRUE)) {
+                install.packages('$package', repos='http://cran.rstudio.com/')
+            } else {
+                cat('$package is already installed.\n')
+            }
+        "
     }
 
-    Write-Host
-    Write-Host "*** All R installations completed successfully. ***"
+    Write-Host "*** All necessary R packages are installed. ***"
 }
 
-## Main Execution
+# Main Execution
 
-# Confirm we're in home directory
-Set-Location -Path $HOME
+Set-Location $HOME
 
-# Makes entity_linking_2022_usabilitystudy repo current directory
-Write-Host
-Write-Host "*** Moving into '$ENTITY' directory... ***"
-Write-Host
-Set-Location $ENTITY
+# Check if R is installed
+if (Check-R-Version) {
 
-# Clones datasets repo into parent directory if it doesn't already exist there
-if (-not (repo_exists "../$DATASETS")) {
-    git clone https://github.com/Wesleyan-Media-Project/datasets.git "../$DATASETS"
-}
+    # Clone datasets repo into parent directory if it doesn't already exist there
+    if (-not (Repo-Exists $DATASETS)) {
+        git clone https://github.com/Wesleyan-Media-Project/datasets.git
+    }
 
-# Clones face_url_scraper_2022 into parent directory if it doesn't already exist there
-if (-not (repo_exists "../$SCRAPER")) {
-    git clone https://github.com/Wesleyan-Media-Project/face_url_scraper_2022.git "../$SCRAPER"
-}
+    # Clone face_url_scraper_2022 into parent directory if it doesn't already exist there
+    if (-not (Repo-Exists $SCRAPER)) {
+        git clone https://github.com/Wesleyan-Media-Project/face_url_scraper_2022.git
+    }
 
-# Install necessary R packages via command line
-install_r_packages
+    # Install necessary R packages via command line
+    Install-R-Packages
 
-# Runs the R script
-Write-Host
-Write-Host "*** Running facebook/knowledge_base/01_construct_kb.R... ***"
-Rscript "facebook/knowledge_base/01_construct_kb.R"
+    # Change directory to entity_linking_2022_usabilitystudy repo
+    Write-Host "*** Moving into '$ENTITY' directory... ***"
+    Set-Location $ENTITY
 
-# Checks whether the script ran successfully
-if ($LASTEXITCODE -eq 0) {
-    Write-Host
-    Write-Host "*** 01_construct_kb.R ran successfully! ***"
+    # Run the R script
+    Write-Host "*** Running facebook/knowledge_base/01_construct_kb.R... ***"
+    & Rscript facebook/knowledge_base/01_construct_kb.R
+
+    # Check whether script ran successfully
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "*** 01_construct_kb.R ran successfully! ***"
+    }
+
+} else {
+    Write-Host "R is not installed."
+    Write-Host "Please install R by downloading and opening this package: https://cran.r-project.org/bin/windows/"
 }
