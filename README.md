@@ -99,7 +99,7 @@ To completely set your computer up for, as well as run, the `facebook/knowledge_
 
 #### If you use macOS/Linux:
 
-1. If you haven't already, make sure you have Python 3.10.5 and R both installed on your computer. [Here](https://www.python.org/ftp/python/3.10.5/python-3.10.5-macos11.pkg) is a direct link to the Python 3.10.5 package for macOS, and [here](https://cran.r-project.org/bin/macosx/) is a direct link to the R package for macOS. After downloading, open each and follow the prompts. **Don't forget to check the box that adds each package to your PATH during installation!**
+1. If you haven't already, make sure you have Python 3.10.5 and R both installed on your computer. [Here](https://www.python.org/ftp/python/3.10.5/python-3.10.5-macos11.pkg) is a direct link to the Python 3.10.5 package for macOS, and [here](https://cran.r-project.org/bin/macosx/) is a direct link to the R package for macOS. After downloading, open each package and follow the prompts. **Don't forget to check the box that adds each package to your PATH during installation!**
 
    If you need further documentation, you can visit the main [Python](https://www.python.org/downloads/release/python-3105/) and [R](https://cran.r-project.org) sites.
 
@@ -112,7 +112,7 @@ To completely set your computer up for, as well as run, the `facebook/knowledge_
 
 #### If you use Windows:
 
-1. If you haven't already, make sure you have Python 3.10.5 and R both installed on your computer. [Here](https://www.python.org/ftp/python/3.10.5/python-3.10.5-amd64.exe) is a direct link to the Python 3.10.5 package for Windows, and [here](https://cran.r-project.org/bin/windows/) is a direct link to the R package for Windows. After downloading, open each and follow the prompts. **Don't forget to check the box that adds each package to your PATH during installation!**
+1. If you haven't already, make sure you have Python 3.10.5 and R both installed on your computer. [Here](https://www.python.org/ftp/python/3.10.5/python-3.10.5-amd64.exe) is a direct link to the Python 3.10.5 package for Windows, and [here](https://cran.r-project.org/bin/windows/) is a direct link to the R package for Windows. After downloading, open each package and follow the prompts. **Don't forget to check the box that adds each package to your PATH during installation!**
 
    If you need further documentation, you can visit the main [Python](https://www.python.org/downloads/release/python-3105/) and [R](https://cran.r-project.org) sites.
 
@@ -167,7 +167,7 @@ To completely set your computer up for, as well as run, the `facebook/inference`
 
 #### If you use macOS/Linux:
 
-3. If you haven't already, make sure you have Python 3.10.5 and R both installed on your computer. [Here](https://www.python.org/ftp/python/3.10.5/python-3.10.5-macos11.pkg) is a direct link to the Python 3.10.5 package for macOS, and [here](https://cran.r-project.org/bin/macosx/) is a direct link to the R package for macOS. After downloading, open each and follow the prompts. **Don't forget to check the box that adds each package to your PATH during installation!**
+3. If you haven't already, make sure you have Python 3.10.5 and R both installed on your computer. [Here](https://www.python.org/ftp/python/3.10.5/python-3.10.5-macos11.pkg) is a direct link to the Python 3.10.5 package for macOS, and [here](https://cran.r-project.org/bin/macosx/) is a direct link to the R package for macOS. After downloading, open each package and follow the prompts. **Don't forget to check the box that adds each package to your PATH during installation!**
 
    If you need further documentation, you can visit the main [Python](https://www.python.org/downloads/release/python-3105/) and [R](https://cran.r-project.org) sites.
 
@@ -182,7 +182,7 @@ To completely set your computer up for, as well as run, the `facebook/inference`
 
 #### If you use Windows:
 
-3. If you haven't already, make sure you have Python 3.10.5 and R both installed on your computer. [Here](https://www.python.org/ftp/python/3.10.5/python-3.10.5-amd64.exe) is a direct link to the Python 3.10.5 package for Windows, and [here](https://cran.r-project.org/bin/windows/) is a direct link to the R package for Windows. After downloading, open each and follow the prompts. **Don't forget to check the box that adds each package to your PATH during installation!**
+3. If you haven't already, make sure you have Python 3.10.5 and R both installed on your computer. [Here](https://www.python.org/ftp/python/3.10.5/python-3.10.5-amd64.exe) is a direct link to the Python 3.10.5 package for Windows, and [here](https://cran.r-project.org/bin/windows/) is a direct link to the R package for Windows. After downloading, open each package and follow the prompts. **Don't forget to check the box that adds each package to your PATH during installation!**
 
    If you need further documentation, you can visit the main [Python](https://www.python.org/downloads/release/python-3105/) and [R](https://cran.r-project.org) sites.
 
