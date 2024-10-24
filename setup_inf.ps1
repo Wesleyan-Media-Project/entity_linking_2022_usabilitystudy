@@ -2,7 +2,7 @@ $DATASET = "fb_2022_adid_text.csv"
 $ENTITYLINKER = "trained_entity_linker"
 $REPO = "entity_linking_2022_usabilitystudy"
 
-function DatasetExists {
+function Dataset-Exists {
     $datasetPath = "$HOME\Downloads\$DATASET"
     $datasetGzPath = "$HOME\Downloads\$DATASET.gz"
 
@@ -22,7 +22,7 @@ function DatasetExists {
     }
 }
 
-function EntityLinkerExists {
+function Entity-Linker-Exists {
     $entityLinkerPath = "$HOME\Downloads\$ENTITYLINKER"
     $entityLinkerZipPath = "$HOME\Downloads\$ENTITYLINKER.zip"
 
@@ -45,7 +45,7 @@ function EntityLinkerExists {
     }
 }
 
-function CheckPythonVersion {
+function Check-Python-Version {
     $pythonVersion = python3.10 --version 2>$null
     if ($pythonVersion -match "Python 3.10") {
         Write-Host "Python 3.10 is installed: $pythonVersion"
@@ -55,7 +55,7 @@ function CheckPythonVersion {
     }
 }
 
-function CheckRVersion {
+function Check-R-Version {
     $rVersion = & R --version 2>$null
     if ($rVersion) {
         $rVersionNum = $rVersion | Select-String -Pattern "[0-9]+\.[0-9]+\.[0-9]+" | ForEach-Object { $_.Matches[0].Value }
@@ -64,27 +64,6 @@ function CheckRVersion {
     } else {
         Write-Host "R is not installed."
         return $false
-    }
-}
-
-function RunInferenceScripts {
-    Write-Host "*** Now running 01_combine_text_asr_ocr.R... ***"
-    if (& Rscript facebook/inference/01_combine_text_asr_ocr.R) {
-        Write-Host "*** 01_combine_text_asr_ocr.R ran successfully! ***"
-        Write-Host "*** Now running 02_entity_linking_inference.py... ***"
-        if (& python3 facebook/inference/02_entity_linking_inference.py) {
-            Write-Host "*** 02_entity_linking_inference.py ran successfully! ***"
-            Write-Host "*** Now running 03_combine_results.R... ***"
-            if (& Rscript facebook/inference/03_combine_results.R) {
-                Write-Host "*** 03_combine_results.R ran successfully! ***"
-            } else {
-                exit
-            }
-        } else {
-            exit
-        }
-    } else {
-        exit
     }
 }
 
@@ -104,39 +83,52 @@ function Setup-Venv {
     . "$VENV_DIR\Scripts\Activate.ps1"
 }
 
-function InstallPythonPackages {
+function Install-Python-Packages {
     Write-Host "*** Installing necessary Python packages... ***"
-    $packages = @("spacy", "numpy", "pandas")
-    $versions = @("3.2.4", "1.26.2", "2.1.1")
 
-    for ($i = 0; $i -lt $packages.Length; $i++) {
-        $package = $packages[$i]
-        $version = $versions[$i]
-        if (pip show $package) {
-            $installedVersion = pip show $package | Select-String "Version:" | ForEach-Object { $_.ToString().Split()[1] }
+    $packages = @(
+        @{ Name = "spacy"; Version = "3.2.4" },
+        @{ Name = "numpy"; Version = "1.26.2" },
+        @{ Name = "pandas"; Version = "2.1.1" }
+    )
+
+    foreach ($package in $packages) {
+        $name = $package.Name
+        $version = $package.Version
+
+        # Check if the package is installed
+        $installedPackage = pip show $name 2>&1
+        if ($installedPackage) {
+            # Extract the installed version
+            $installedVersion = ($installedPackage | Select-String "Version:" | ForEach-Object { $_.ToString().Split()[1] })
+
             if ($installedVersion -eq $version) {
-                Write-Host "$package (version $version) is already installed. Skipping."
+                Write-Host "$name (version $version) is already installed. Skipping."
             } else {
-                Write-Host "$package is installed, but not the correct version ($installedVersion). Installing version $version..."
-                pip install "$package==$version"
+                Write-Host "$name is installed, but not the correct version ($installedVersion). Installing version $version..."
+                pip install "$name==$version" | Out-Null
             }
         } else {
-            Write-Host "Installing $package (version $version)..."
-            pip install "$package==$version"
+            Write-Host "Installing $name (version $version)..."
+            pip install "$name==$version" | Out-Null
         }
     }
 
     Write-Host "*** All Python packages installed successfully. ***"
+
+    # Check if spaCy's large English model is installed
     Write-Host "*** Downloading spaCy's large English model if not present... ***"
-    if (python -m spacy validate | Select-String "en_core_web_lg") {
-        Write-Host "spaCy's large English model already installed. Skipping."
+    if (-not (python -m spacy validate | Select-String "en_core_web_lg")) {
+        Write-Host "Downloading spaCy's large English model..."
+        python -m spacy download en_core_web_lg | Out-Null
     } else {
-        python -m spacy download en_core_web_lg
+        Write-Host "spaCy's large English model already installed. Skipping."
     }
+
     Write-Host "*** All installations and checks completed successfully. ***"
 }
 
-function InstallRPackages {
+function Install-R-Packages {
     Write-Host "*** Installing necessary R packages using the command line... ***"
     $packages = @("dplyr", "data.table", "stringr", "tidyr", "R.utils")
     foreach ($package in $packages) {
@@ -145,34 +137,65 @@ function InstallRPackages {
     Write-Host "*** All necessary R packages are installed. ***"
 }
 
+function Run-Inference-Scripts {
+    Write-Host "*** Now running 01_combine_text_asr_ocr.R... ***"
+    & Rscript facebook/inference/01_combine_text_asr_ocr.R
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "*** 01_combine_text_asr_ocr.R ran successfully! ***"
+        Write-Host "*** Now running 02_entity_linking_inference.py... ***"
+        
+        & python3 facebook/inference/02_entity_linking_inference.py
+        if ($LASTEXITCODE -eq 0) {
+            Write-Host "*** 02_entity_linking_inference.py ran successfully! ***"
+            Write-Host "*** Now running 03_combine_results.R... ***"
+            
+            & Rscript facebook/inference/03_combine_results.R
+            if ($LASTEXITCODE -eq 0) {
+                Write-Host "*** 03_combine_results.R ran successfully! ***"
+            } else {
+                Write-Host "*** 03_combine_results.R failed! ***"
+                return
+            }
+        } else {
+            Write-Host "*** 02_entity_linking_inference.py failed! ***"
+            return
+        }
+    } else {
+        Write-Host "*** 01_combine_text_asr_ocr.R failed! ***"
+        return
+    }
+}
+
+# Main Execution
+
 cd $HOME
 
-if (CheckPythonVersion -and CheckRVersion) {
-    if (DatasetExists -and EntityLinkerExists) {
+if (Check-Python-Version -and Check-R-Version) {
+    if (Dataset-Exists -and Entity-Linker-Exists) {
         Write-Host "Files '$DATASET' and '$ENTITYLINKER' exist!"
 
-        SetupVenv
-        InstallPythonPackages
-        InstallRPackages
+        Setup-Venv
+        Install-Python-Packages
+        Install-R-Packages
 
         Write-Host "Making $REPO current directory..."
         cd $REPO
 
-        RunInferenceScripts
+        Run-Inference-Scripts
     } else {
-        if (-not (DatasetExists)) {
+        if (-not (Dataset-Exists)) {
             Write-Host "File '$DATASET' does not exist."
         }
-        if (-not (EntityLinkerExists)) {
+        if (-not (Entity-Linke-Exists)) {
             Write-Host "File '$ENTITYLINKER' does not exist."
         }
     }
 } else {
-    if (-not (CheckRVersion)) {
+    if (-not (Check-R-Version)) {
         Write-Host "R is not installed."
         Write-Host "Please install R by downloading and opening this package: https://cran.r-project.org/bin/windows/"
     }
-    if (-not (CheckPythonVersion)) {
+    if (-not (Check-Python-Version)) {
         Write-Host "Python 3.10 is not installed."
         Write-Host "Please install Python 3.10.5 by downloading and opening this package: https://www.python.org/ftp/python/3.10.5/python-3.10.5-amd64.exe. Make sure to add Python 3.10.5 to your PATH during installation!"
     }

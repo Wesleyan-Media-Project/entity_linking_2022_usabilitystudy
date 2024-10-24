@@ -43,22 +43,6 @@ function Dataset-Exists {
     return $false
 }
 
-function Setup-Venv {
-    $VENV_DIR = "venv"
-
-    # Check if the virtual environment already exists
-    if (Test-Path -Path $VENV_DIR -PathType Container) {
-        Write-Host "Virtual environment '$VENV_DIR' already exists. Skipping creation."
-    } else {
-        Write-Host "Creating Python 3.10 virtual environment..."
-        python3.10 -m venv $VENV_DIR
-
-        Write-Host "Virtual environment '$VENV_DIR' created successfully."
-    }
-    Write-Host "Starting virtual environment venv..."
-    . "$VENV_DIR\Scripts\Activate.ps1"
-}
-
 function Check-Python-Version {
     # Check if Python 3.10 is installed
     $PYTHON_VERSION = & python3.10 --version 2>$null
@@ -83,6 +67,22 @@ function Check-R-Version {
     }
 }
 
+function Setup-Venv {
+    $VENV_DIR = "venv"
+
+    # Check if the virtual environment already exists
+    if (Test-Path -Path $VENV_DIR -PathType Container) {
+        Write-Host "Virtual environment '$VENV_DIR' already exists. Skipping creation."
+    } else {
+        Write-Host "Creating Python 3.10 virtual environment..."
+        python3.10 -m venv $VENV_DIR
+
+        Write-Host "Virtual environment '$VENV_DIR' created successfully."
+    }
+    Write-Host "Starting virtual environment venv..."
+    . "$VENV_DIR\Scripts\Activate.ps1"
+}
+
 function Install-Python-Packages {
     Write-Host "*** Installing necessary Python packages... ***"
 
@@ -96,32 +96,38 @@ function Install-Python-Packages {
         $name = $package.Name
         $version = $package.Version
 
-        if (pip show $name) {
-            $installedVersion = (pip show $name | Select-String "Version:" | ForEach-Object { $_.ToString().Split()[1] })
+        # Check if the package is installed
+        $installedPackage = pip show $name 2>&1
+        if ($installedPackage) {
+            # Extract the installed version
+            $installedVersion = ($installedPackage | Select-String "Version:" | ForEach-Object { $_.ToString().Split()[1] })
 
             if ($installedVersion -eq $version) {
                 Write-Host "$name (version $version) is already installed. Skipping."
             } else {
                 Write-Host "$name is installed, but not the correct version ($installedVersion). Installing version $version..."
-                pip install "$name==$version"
+                pip install "$name==$version" | Out-Null
             }
         } else {
             Write-Host "Installing $name (version $version)..."
-            pip install "$name==$version"
+            pip install "$name==$version" | Out-Null
         }
     }
 
     Write-Host "*** All Python packages installed successfully. ***"
 
+    # Check if spaCy's large English model is installed
     Write-Host "*** Downloading spaCy's large English model if not present... ***"
     if (-not (python -m spacy validate | Select-String "en_core_web_lg")) {
-        python -m spacy download en_core_web_lg
+        Write-Host "Downloading spaCy's large English model..."
+        python -m spacy download en_core_web_lg | Out-Null
     } else {
         Write-Host "spaCy's large English model already installed. Skipping."
     }
 
     Write-Host "*** All installations and checks completed successfully. ***"
 }
+
 
 function Install-R-Packages {
     Write-Host "*** Installing necessary R packages using the command line... ***"
