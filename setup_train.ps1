@@ -132,16 +132,23 @@ function Install-Python-Packages {
 function Install-R-Packages {
     Write-Host "*** Installing necessary R packages using the command line... ***"
 
-    $packages = @("dplyr", "data.table", "stringr", "tidyr", "R.utils")
+    # Define an array of packages to install
+    $packages = @(
+        "dplyr",
+        "data.table",
+        "stringr",
+        "tidyr",
+        "R.utils"
+    )
 
+    # Loop through the array and check if each package is installed
     foreach ($package in $packages) {
-        & Rscript -Command "
-            if (!require('$package', quietly = TRUE)) {
-                install.packages('$package', repos='http://cran.rstudio.com/')
-            } else {
-                cat('$package is already installed.\n')
-            }
-        "
+        Rscript -e "
+        if (!requireNamespace('$package', quietly = TRUE)) {
+            install.packages('$package', repos='http://cran.rstudio.com/')
+        } else {
+            cat('$package is already installed.\n')
+        }"
     }
 
     Write-Host "*** All necessary R packages are installed. ***"

@@ -45,13 +45,12 @@ function Install-R-Packages {
 
     # Loop through the array and check if each package is installed
     foreach ($package in $packages) {
-        & Rscript -Command "
-            if (!require('$package', quietly = TRUE)) {
-                install.packages('$package', repos='http://cran.rstudio.com/')
-            } else {
-                cat('$package is already installed.\n')
-            }
-        "
+        Rscript -e "
+        if (!requireNamespace('$package', quietly = TRUE)) {
+            install.packages('$package', repos='http://cran.rstudio.com/')
+        } else {
+            cat('$package is already installed.\n')
+        }"
     }
 
     Write-Host "*** All necessary R packages are installed. ***"
