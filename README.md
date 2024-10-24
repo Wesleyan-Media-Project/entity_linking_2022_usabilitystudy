@@ -67,7 +67,7 @@ There are separate folders for running the entity linker depending on whether yo
 
 ## 3. How to Run the Scripts
 
-**TODO** note about skipping steps 1 and 2 if you have the pre-trained entity linker.
+**Note**: You can **skip** steps [1 (Constructing a Knowledge Base of Political Entities)](#1-constructing-a-knowledge-base-of-political-entities) and [2 (Training the Entity Linking Model)](#2-training-the-entity-linking-model), if you decide to instead use our own knowledge base and **pre-trained entity linker model**. Our knowledge base ([`entity_kb.csv`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/data/entity_kb.csv)) is already conveniently located within the repository, but you'll need to download the pre-trained entity linker manually. The model is hosted on our Figshare, which you can access by following [this link](https://www.creativewmp.com/data-access/) and completing the Data Access Form. This will immediately redirect you to a page from which you can download the model!
 
 ### 0. Cloning the entity_linking_2022_usabilitystudy Repository
 
@@ -99,7 +99,11 @@ To completely set your computer up for, as well as run, the `facebook/knowledge_
 
 #### If you use macOS/Linux:
 
-1. Execute the following two commands in order to set up and run `facebook/knowledge_base/01_construct_kb.R`:
+1. If you haven't already, make sure you have Python 3.10.5 and R both installed on your computer. [Here](https://www.python.org/ftp/python/3.10.5/python-3.10.5-macos11.pkg) is a direct link to the Python 3.10.5 package for macOS, and [here](https://cran.r-project.org/bin/macosx/) is a direct link to the R package for macOS. **Don't forget to check the box that adds each package to your PATH during installation!**
+
+   If you need further documentation, you can visit the main [Python](https://www.python.org/downloads/release/python-3105/) and [R](https://cran.r-project.org) sites.
+
+2. Execute the following two commands in order to set up and run `facebook/knowledge_base/01_construct_kb.R`:
 
    ```bash
    chmod +x ./entity_linking_2022_usabilitystudy/setup_kb.sh
@@ -108,22 +112,26 @@ To completely set your computer up for, as well as run, the `facebook/knowledge_
 
 #### If you use Windows:
 
-1. Execute the following two commands in order to set up and run `facebook/knowledge_base/01_construct_kb.R`:
+1. If you haven't already, make sure you have Python 3.10.5 and R both installed on your computer. [Here](https://www.python.org/ftp/python/3.10.5/python-3.10.5-amd64.exe) is a direct link to the Python 3.10.5 package for Windows, and [here](https://cran.r-project.org/bin/windows/) is a direct link to the R package for Windows. **Don't forget to check the box that adds each package to your PATH during installation!**
+
+   If you need further documentation, you can visit the main [Python](https://www.python.org/downloads/release/python-3105/) and [R](https://cran.r-project.org) sites.
+
+2. Execute the following two commands in order to set up and run `facebook/knowledge_base/01_construct_kb.R`:
 
    ```powershell
    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
    .\entity_linking_2022_usabilitystudy\setup_kb.ps1
    ```
 
-**TODO**: Add note with link to detailed instructions here
+**Note**: For more detailed documentation on how to manually complete this step, you can follow [this link](https://docs.google.com/document/d/1iwiGdOZ8xkXLDT-y9d0xdkRdcujgfJxyHg3CBUDNOEg/edit?usp=sharing).
 
 ### 2. Training the Entity Linking Model
 
-To completely set your computer up for, as well as run, the `facebook/train` scripts, you can use the `setup_train` scripts we prvoide!
+To completely set your computer up for as well as run the `facebook/train` scripts, you can use the `setup_train` scripts we prvoide!
 
-**TODO** Note about how long this step can take
+**Note**: Running the [`02_train_entity_linking.py`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/train/02_train_entity_linking.py) script in this step takes multiple hours to complete!
 
-1. Running these scripts requires `fb_2022_adid_text.csv.gz` and `fb_2022_adid_text.csv.gz`, which are hosted on our Figshare. If you have not downloaded these datasets yet, you can do so by following [this link](https://www.creativewmp.com/data-access/) and completing the Data Access Form, which will redirect you to a page from which you can download both datasets.
+1. Running these scripts requires `fb_2022_adid_text.csv.gz` and `fb_2022_adid_text.csv.gz`, which are hosted on our Figshare. If you have not downloaded these datasets yet, you can do so by following [this link](https://www.creativewmp.com/data-access/) and completing the Data Access Form, which will redirect you to a page from which you can download both datasets. Please do not move the files from your **Downloads** folder!
 
 #### If you use macOS/Linux:
 
@@ -134,6 +142,8 @@ To completely set your computer up for, as well as run, the `facebook/train` scr
    ./entity_linking_2022_usabilitystudy/setup_train.sh
    ```
 
+   **Note**: You may be prompted for your password. This just gives the script permission to move the datasets and trained entity linker model from your Downloads folder to the appropriate locations! You should use the same password that you use to log into your computer!
+
 #### If you use Windows:
 
 2. Execute the following two commands in order to set up and run `facebook/train`:
@@ -143,33 +153,49 @@ To completely set your computer up for, as well as run, the `facebook/train` scr
    .\entity_linking_2022_usabilitystudy\setup_train.ps1
    ```
 
-**TODO**: Add note with link to detailed instructions here
+   **Note**: You may be prompted for your password. This just gives the script permission to move the datasets and trained entity linker model from your Downloads folder to the appropriate locations! You should use the same password that you use to log into your computer!
+
+**Note**: For more detailed documentation on how to manually complete this step, you can follow [this link](https://docs.google.com/document/d/11Wi66xhmrL4mo9NpH7C7n_Gbp4wX9YQL_gGbcYHL4kA/edit?usp=sharing).
 
 ### 3. Making Inferences with the Trained Model
 
 To completely set your computer up for, as well as run, the `facebook/inference` scripts, you can use the `setup_inference` scripts we prvoide!
 
-1. Running the `facebook/inference` scripts requires the `fb_2022_adid_text.csv.gz` dataset, and running the `google/inference` scripts requires the `g2022_adid_01062021_11082022_text.csv.gz` dataset, both of which are hosted on our Figshare. If you have not downloaded these datasets yet, you can do so by following [this link](https://www.creativewmp.com/data-access/) and completing the Data Access Form, which will redirect you to a page from which you can download both datasets.
+1. Running the `facebook/inference` scripts requires the `fb_2022_adid_text.csv.gz` dataset, and running the `google/inference` scripts requires the `g2022_adid_01062021_11082022_text.csv.gz` dataset, both of which are hosted on our Figshare. If you have not downloaded these datasets yet, you can do so by following [this link](https://www.creativewmp.com/data-access/) and completing the Data Access Form, which will redirect you to a page from which you can download both datasets. Please do not move the files from your **Downloads** folder!
+
+2. If you skipped steps [1 (Constructing a Knowledge Base of Political Entities)](#1-constructing-a-knowledge-base-of-political-entities) and [2 (Training the Entity Linking Model)](#2-training-the-entity-linking-model), you'll need to download our **pre-trained entity linker model**. This model is also hosted on our Figshare, and so you can access and download it through the same link as in the prior step! Please do not move the folder from your **Downloads** folder!
 
 #### If you use macOS/Linux:
 
-2. Execute the following two commands in order to set up and run `facebook/inference`:
+3. If you haven't already, make sure you have Python 3.10.5 and R both installed on your computer. [Here](https://www.python.org/ftp/python/3.10.5/python-3.10.5-macos11.pkg) is a direct link to the Python 3.10.5 package for macOS, and [here](https://cran.r-project.org/bin/macosx/) is a direct link to the R package for macOS. **Don't forget to check the box that adds each package to your PATH during installation!**
+
+   If you need further documentation, you can visit the main [Python](https://www.python.org/downloads/release/python-3105/) and [R](https://cran.r-project.org) sites.
+
+4. Execute the following two commands in order to set up and run `facebook/inference`:
 
    ```bash
    chmod +x ./entity_linking_2022_usabilitystudy/setup_inf.sh
    ./entity_linking_2022_usabilitystudy/setup_inf.sh
    ```
 
+   **Note**: You may be prompted for your password. This just gives the script permission to move the datasets and trained entity linker model from your Downloads folder to the appropriate locations! You should use the same password that you use to log into your computer!
+
 #### If you use Windows:
 
-2. Execute the following two commands in order to set up and run `facebook/inference`:
+3. If you haven't already, make sure you have Python 3.10.5 and R both installed on your computer. [Here](https://www.python.org/ftp/python/3.10.5/python-3.10.5-amd64.exe) is a direct link to the Python 3.10.5 package for Windows, and [here](https://cran.r-project.org/bin/windows/) is a direct link to the R package for Windows. **Don't forget to check the box that adds each package to your PATH during installation!**
+
+   If you need further documentation, you can visit the main [Python](https://www.python.org/downloads/release/python-3105/) and [R](https://cran.r-project.org) sites.
+
+4. Execute the following two commands in order to set up and run `facebook/inference`:
 
    ```powershell
    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
    .\entity_linking_2022_usabilitystudy\setup_inf.ps1
    ```
 
-**TODO**: Add note with link to detailed instructions here
+   **Note**: You may be prompted for your password. This just gives the script permission to move the datasets and trained entity linker model from your Downloads folder to the appropriate locations! You should use the same password that you use to log into your computer!
+
+**Note**: For more detailed documentation on how to manually complete this step, you can follow [this link](https://docs.google.com/document/d/1EaA_C_LgopZstTAl8JWLkfbQZdcPentXPTgIyYf7UkA/edit?usp=sharing).
 
 ## 4. Results Storage
 
