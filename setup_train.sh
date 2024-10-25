@@ -92,6 +92,7 @@ install_python_packages() {
         "spacy"
         "numpy"
         "pandas"
+        "openpyxl"  # Added openpyxl
     )
 
     # Define an array of corresponding versions
@@ -99,6 +100,7 @@ install_python_packages() {
         "3.2.4"
         "1.26.2"
         "2.1.1"
+        "3.0.9"  # Added openpyxl version
     )
 
     # Loop through the array and install each package if not already installed

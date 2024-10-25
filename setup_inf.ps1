@@ -86,12 +86,15 @@ function Setup-Venv {
 function Install-Python-Packages {
     Write-Host "*** Installing necessary Python packages... ***"
 
+    # Add the necessary packages and their versions
     $packages = @(
         @{ Name = "spacy"; Version = "3.2.4" },
         @{ Name = "numpy"; Version = "1.26.2" },
-        @{ Name = "pandas"; Version = "2.1.1" }
+        @{ Name = "pandas"; Version = "2.1.1" },
+        @{ Name = "openpyxl"; Version = "3.0.9" }  # Added openpyxl
     )
 
+    # Loop through the array and install or update each package
     foreach ($package in $packages) {
         $name = $package.Name
         $version = $package.Version
