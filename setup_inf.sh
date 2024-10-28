@@ -57,7 +57,6 @@ entitylinker_exists() {
                 return 1
             fi
         else
-            echo "Cannot find trained_entity_linker. Make sure after downloading from Figshare it is located in your Downloads folder!"
             return 1
         fi
     fi
@@ -234,7 +233,7 @@ if check_python_version && check_r_version; then
             echo "File '$DATASET' does not exist."
         fi
         if ! entitylinker_exists; then
-            echo "File '$ENTITYLINKER' does not exist."
+            echo "Cannot find trained_entity_linker. Make sure after downloading from Figshare it is located in your Downloads folder!"
         fi
     fi
 
