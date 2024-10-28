@@ -1,6 +1,7 @@
 $DATASET = "fb_2022_adid_text.csv"
 $ENTITYLINKER = "trained_entity_linker"
 $REPO = "entity_linking_2022_usabilitystudy"
+$homePath = [System.Environment]::GetFolderPath('UserProfile')
 
 function Dataset-Exists {
     $datasetPath = "$HOME\Downloads\$DATASET"
@@ -23,24 +24,53 @@ function Dataset-Exists {
 }
 
 function Entity-Linker-Exists {
-    $entityLinkerPath = "$HOME\Downloads\$ENTITYLINKER"
-    $entityLinkerZipPath = "$HOME\Downloads\$ENTITYLINKER.zip"
 
-    if (Test-Path $entityLinkerPath -or Test-Path $entityLinkerZipPath) {
-        if (Test-Path $entityLinkerZipPath) {
-            Write-Host "Folder '$ENTITYLINKER.zip' exists. Unzipping it now..."
-            Expand-Archive -Path $entityLinkerZipPath -DestinationPath "$HOME\Downloads"
-            Write-Host "Folder '$ENTITYLINKER.zip' has been unzipped to '$ENTITYLINKER'."
+    # Set paths
+    $downloadsPath = "$HOME\Downloads"
+    $repoPath = "$HOME\$REPO"
+    $modelsPath = "$repoPath\models"
+    $entityLinkerPath = "$downloadsPath\$ENTITYLINKER"
+    $zipPath = "$entityLinkerPath.zip"
+
+    # Check if the trained_entity_linker is already in the correct place
+    if (Test-Path -Path (Join-Path -Path $modelsPath -ChildPath $ENTITYLINKER)) {
+        Write-Output "trained_entity_linker is already located within $REPO/models."
+        return $true
+    }
+
+    # Check if the trained_entity_linker exists in Downloads as a folder or zip file
+    elseif ((Test-Path -Path $entityLinkerPath -PathType Container) -or (Test-Path -Path $zipPath -PathType Leaf)) {
+        
+        # Unzip if it's a zip file
+        if (Test-Path -Path $zipPath -PathType Leaf) {
+            Write-Output "Zip file '$ENTITYLINKER.zip' exists. Unzipping it now..."
+            Expand-Archive -Path $zipPath -DestinationPath $downloadsPath
+            Write-Output "Unzipped '$ENTITYLINKER.zip' to '$ENTITYLINKER' in Downloads."
         }
-        Write-Host "Folder '$ENTITYLINKER' exists. Moving it now..."
-        New-Item -ItemType Directory -Path "$HOME\models" -Force
-        Move-Item -Path $entityLinkerPath -Destination "$HOME\models" -Force
-        Move-Item -Path "$HOME\models" -Destination $REPO -Force
-        Write-Host "File '$ENTITYLINKER' has been moved to a models folder in the $REPO directory."
-        return $true
-    } elseif (Test-Path "$REPO\models\$ENTITYLINKER") {
-        return $true
-    } else {
+
+        # Move the folder to the home directory for further organization
+        Write-Output "Moving '$ENTITYLINKER' from Downloads to the home directory..."
+        Move-Item -Path $entityLinkerPath -Destination "HOME" -Force
+
+        # Check if models directory exists in REPO; create if it doesn’t
+        if (!(Test-Path -Path $modelsPath -PathType Container)) {
+            Write-Output "No models folder in $REPO. Creating models folder..."
+            New-Item -Path $modelsPath -ItemType Directory
+        }
+
+        # Move the EntityLinker into the models directory in REPO
+        try {
+            Move-Item -Path (Join-Path -Path "$HOME" -ChildPath $ENTITYLINKER) -Destination $modelsPath -Force
+            Write-Output "File '$ENTITYLINKER' has been successfully moved to the models folder in $REPO."
+            return $true
+        }
+        catch {
+            Write-Output "Error: Could not move '$ENTITYLINKER' into $REPO/models."
+            return $false
+        }
+    }
+    else {
+        Write-Output "Cannot find trained_entity_linker. Ensure it is located in your Downloads folder after downloading from Figshare."
         return $false
     }
 }
