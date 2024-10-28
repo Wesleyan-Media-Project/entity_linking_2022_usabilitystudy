@@ -26,28 +26,40 @@ dataset_exists() {
 }
 
 entitylinker_exists() {
-    # Check if the file exists in Downloads as a folder or zip
-    if [[ -d "$HOME/Downloads/$ENTITYLINKER" || -d "$HOME/Downloads/$ENTITYLINKER.zip" ]]; then
-        # If it's a zip, then unzip
-        if [ -d "$HOME/Downloads/$ENTITYLINKER.zip" ]; then
-            echo "Folder '$ENTITYLINKER.zip' exists. Unzipping it now..."
-            unzip "$ENTITYLINKER.zip"
-            echo "Folder '$ENTITYLINKER.zip' has been unzipped to '$ENTITYLINKER'."
-        fi
-        # Move into a models folder in the entity_linking_2022_usabilitystudy folder
-        echo "Folder '$ENTITYLINKER' exists. Moving it now..."
-        mkdir "models"
-        sudo mv $HOME/Downloads/$ENTITYLINKER $HOME/      
-        mv "$ENTITYLINKER" "models"
-        mv "models" "$REPO"
-        echo "File '$ENTITYLINKER' has been moved to a models folder in the $REPO directory."
+    # Check to see if trained_entity_linker is already in correct place
+    if [ -d "$REPO/models/$ENTITYLINKER" ]; then
+        echo "trained_entity_linker already located within entity_linking_2022_usabilitystudy/models"
         return 0
     else
-        # Check and see if it already exists in models/entity_linking_2022_usabilitystudy
-        if [ -d "$REPO/models/$ENTITYLINKER" ]; then
-            return 0
+        #Check downloads folder for trained_entity_linker
+        if [[ -d "$HOME/Downloads/$ENTITYLINKER" || -f "$HOME/Downloads/$ENTITYLINKER.zip" ]]; then
+            # If it's a zip, then unzip
+            if [ -d "$HOME/Downloads/$ENTITYLINKER.zip" ]; then
+                echo "Folder '$ENTITYLINKER.zip' exists. Unzipping it now..."
+                unzip "$ENTITYLINKER.zip"
+                echo "Folder '$ENTITYLINKER.zip' has been unzipped to '$ENTITYLINKER'."
+            fi
+            # Move into home directory
+            echo "Folder '$ENTITYLINKER' exists. Moving it now..."
+            sudo mv $HOME/Downloads/$ENTITYLINKER $HOME/    
+            # Check to see if a models folder already exists
+            if [ ! -d "$HOME/$REPO/models" ]; then
+                # if not, make and move
+                echo "No models folder in $REPO. Creating models folder..."
+                mkdir "$HOME/$REPO/models"
+            fi
+            mv "$HOME/$ENTITYLINKER" "$HOME/$REPO/models"
+            if [ $? -eq 0 ]; then
+                echo "File '$ENTITYLINKER' has been successfully moved to the models folder in $REPO."
+                return 0
+            else
+                echo "Error: Could not move '$ENTITYLINKER' into $REPO/models."
+                return 1
+            fi
+        else
+            echo "Cannot find trained_entity_linker. Make sure after downloading from Figshare it is located in your Downloads folder!"
+            return 1
         fi
-        return 1
     fi
 }
 

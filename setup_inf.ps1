@@ -33,7 +33,7 @@ function Entity-Linker-Exists {
             Write-Host "Folder '$ENTITYLINKER.zip' has been unzipped to '$ENTITYLINKER'."
         }
         Write-Host "Folder '$ENTITYLINKER' exists. Moving it now..."
-        New-Item -ItemType Directory -Path "$REPO\models" -Force
+        New-Item -ItemType Directory -Path "$HOME\models" -Force
         Move-Item -Path $entityLinkerPath -Destination "$HOME\models" -Force
         Move-Item -Path "$HOME\models" -Destination $REPO -Force
         Write-Host "File '$ENTITYLINKER' has been moved to a models folder in the $REPO directory."
