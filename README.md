@@ -137,7 +137,7 @@ To completely set your computer up for as well as run the `facebook/train` scrip
 
 **Note**: Running the [`02_train_entity_linking.py`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/train/02_train_entity_linking.py) script in this step takes multiple hours to complete!
 
-1. Running these scripts requires `fb_2022_adid_text.csv.gz` and `fb_2022_adid_text.csv.gz`, which are hosted on our Figshare. If you have not downloaded these datasets yet, you can do so by following [this link](https://www.creativewmp.com/data-access/) and completing the Data Access Form, which will redirect you to a page from which you can download both datasets. Please do not move the files from your **Downloads** folder!
+1. Running these scripts requires `fb_2022_adid_text.csv.gz` and `fb_2022_adid_var1.csv.gz`, which are hosted on our Figshare. If you have not downloaded these datasets yet, you can do so by following [this link](https://www.creativewmp.com/data-access/) and completing the Data Access Form, which will redirect you to a page from which you can download both datasets. Please do not move the files from your **Downloads** folder!
 
 #### If you use macOS/Linux:
 
