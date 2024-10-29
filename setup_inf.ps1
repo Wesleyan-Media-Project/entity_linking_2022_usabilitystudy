@@ -228,7 +228,6 @@ if ((Check-Python-Version) -and (Check-R-Version)) {
 
         Write-Host "Making $REPO current directory..."
         cd $REPO
-        exit
         Run-Inference-Scripts
     } else {
         if (-not (Dataset-Exists)) {
