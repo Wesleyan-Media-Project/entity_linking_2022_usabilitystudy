@@ -75,6 +75,8 @@ There are separate folders for running the entity linker depending on whether yo
 
 **Note**: You can **skip** steps [1 (Constructing a Knowledge Base of Political Entities)](#1-constructing-a-knowledge-base-of-political-entities) and [2 (Training the Entity Linking Model)](#2-training-the-entity-linking-model) if you decide to instead use our own knowledge base and **pre-trained entity linker model**. Our knowledge base ([`entity_kb.csv`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/data/entity_kb.csv)) is already conveniently located within the repository, but you'll need to download the pre-trained entity linker manually. The model is hosted on our Figshare, which you can access by following [this link](https://www.creativewmp.com/data-access/) and completing the Data Access Form. This will immediately redirect you to a page from which you can download the model!
 
+If you need additional technical support, here is a [Terminal User Guide](https://support.apple.com/guide/terminal/welcome/mac) for macOS/Linux users and here is a [Powershell User Guide](https://learn.microsoft.com/en-us/powershell/scripting/learn/ps101/01-getting-started?view=powershell-7.4) for Windows users.
+
 ### 0. Cloning the entity_linking_2022_usabilitystudy Repository
 
 In order to run the scripts in this repository, you'll need to copy them onto your own computer. To do so:
@@ -83,9 +85,10 @@ In order to run the scripts in this repository, you'll need to copy them onto yo
 
 1. Open up your Terminal application, which is located in `Applications/Utilities` on a Mac.
 
-2. Execute the following command in order to clone this repository onto your computer, in your home directory:
+2. Execute the following commands in order to clone this repository onto your computer, in your home directory:
 
    ```bash
+   cd $HOME
    git clone https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy.git
    ```
 
@@ -93,9 +96,10 @@ In order to run the scripts in this repository, you'll need to copy them onto yo
 
 1. Click the Start Menu, search for the Powershell application, and select **Windows Powershell** in order to open up the Powershell application.
 
-2. Execute the following command in order to clone this repository onto your computer, in your home directory:
+2. Execute the following commands in order to clone this repository onto your computer, in your home directory:
 
    ```bash
+   cd $HOME
    git clone https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy.git
    ```
 
@@ -112,7 +116,7 @@ To completely set your computer up for, as well as run, the `facebook/knowledge_
 2. Execute the following two commands in order to set up and run `facebook/knowledge_base/01_construct_kb.R`:
 
    ```bash
-   chmod +x ./entity_linking_2022_usabilitystudy/setup_kb.sh
+   chmod +x ~/entity_linking_2022_usabilitystudy/setup_kb.sh
    ~/entity_linking_2022_usabilitystudy/setup_kb.sh
    ```
 
@@ -146,7 +150,7 @@ To completely set your computer up for as well as run the `facebook/train` scrip
 2. Execute the following two commands in order to set up and run `facebook/train`:
 
    ```bash
-   chmod +x ./entity_linking_2022_usabilitystudy/setup_train.sh
+   chmod +x ~/entity_linking_2022_usabilitystudy/setup_train.sh
    ~/entity_linking_2022_usabilitystudy/setup_train.sh
    ```
 
@@ -184,7 +188,7 @@ To completely set your computer up for, as well as run, the `facebook/inference`
 4. Execute the following two commands in order to set up and run `facebook/inference`:
 
    ```bash
-   chmod +x ./entity_linking_2022_usabilitystudy/setup_inf.sh
+   chmod +x ~/entity_linking_2022_usabilitystudy/setup_inf.sh
    ~/entity_linking_2022_usabilitystudy/setup_inf.sh
    ```
 
@@ -251,6 +255,7 @@ After confirming that the virtual environment is activated, you can run the scri
 For example, to run the script with the default arguments (start from row 0, read 10000 rows, no text filter), you can enter the following command in your terminal:
 
 ```bash
+cd $HOME/entity_linking_2022_usabilitystudy/
 python3 analysis/readcsv.py --file facebook/data/entity_linking_results_fb22.csv.gz
 ```
 
