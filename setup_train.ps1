@@ -26,7 +26,7 @@ function Dataset-Exists {
     $csvFile = Join-Path $HOME "Downloads\$param1"
     $gzFile = Join-Path $HOME "Downloads\$param1.gz"
 
-    if (Test-Path $csvFile -or Test-Path $gzFile) {
+    if ((Test-Path $csvFile) -or (Test-Path $gzFile)) {
         if (Test-Path $csvFile) {
             Write-Host "File '$param1' exists. Compressing it now..."
             Compress-Archive -Path $csvFile -DestinationPath "$csvFile.gz"
@@ -80,7 +80,7 @@ function Setup-Venv {
         Write-Host "Virtual environment '$VENV_DIR' created successfully."
     }
     Write-Host "Starting virtual environment venv..."
-    . "$VENV_DIR\Scripts\Activate.ps1"
+    . ".\$VENV_DIR\Scripts\Activate.ps1"
 }
 
 function Install-Python-Packages {
@@ -179,7 +179,7 @@ function Run-Inference-Scripts {
 # Main Execution
 Set-Location $HOME
 
-if (Check-Python-Version -and Check-R-Version) {
+if ((Check-Python-Version) -and (Check-R-Version)) {
     if (-not (Repo-Exists $DATASETS)) {
         git clone https://github.com/Wesleyan-Media-Project/datasets.git
     }

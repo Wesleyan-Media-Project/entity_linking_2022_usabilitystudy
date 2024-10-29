@@ -1,13 +1,12 @@
 $DATASET = "fb_2022_adid_text.csv"
 $ENTITYLINKER = "trained_entity_linker"
 $REPO = "entity_linking_2022_usabilitystudy"
-$homePath = [System.Environment]::GetFolderPath('UserProfile')
 
 function Dataset-Exists {
     $datasetPath = "$HOME\Downloads\$DATASET"
     $datasetGzPath = "$HOME\Downloads\$DATASET.gz"
 
-    if (Test-Path $datasetPath -or Test-Path $datasetGzPath) {
+    if ((Test-Path $datasetPath) -or (Test-Path $datasetGzPath)) {
         if (Test-Path $datasetPath) {
             Write-Host "File '$DATASET' exists. Compressing it now..."
             Compress-Archive -Path $datasetPath -DestinationPath "$datasetPath.gz"
@@ -110,7 +109,7 @@ function Setup-Venv {
         Write-Host "Virtual environment '$VENV_DIR' created successfully."
     }
     Write-Host "Starting virtual environment venv..."
-    . "$VENV_DIR\Scripts\Activate.ps1"
+    . ".\$VENV_DIR\Scripts\Activate.ps1"
 }
 
 function Install-Python-Packages {
@@ -219,7 +218,7 @@ function Run-Inference-Scripts {
 
 cd $HOME
 
-if (Check-Python-Version -and Check-R-Version) {
+if ((Check-Python-Version) -and (Check-R-Version)) {
     if (Dataset-Exists -and Entity-Linker-Exists) {
         Write-Host "Files '$DATASET' and '$ENTITYLINKER' exist!"
 
@@ -229,13 +228,13 @@ if (Check-Python-Version -and Check-R-Version) {
 
         Write-Host "Making $REPO current directory..."
         cd $REPO
-
+        exit
         Run-Inference-Scripts
     } else {
         if (-not (Dataset-Exists)) {
             Write-Host "File '$DATASET' does not exist."
         }
-        if (-not (Entity-Linke-Exists)) {
+        if (-not (Entity-Linker-Exists)) {
             Write-Host "File '$ENTITYLINKER' does not exist."
         }
     }

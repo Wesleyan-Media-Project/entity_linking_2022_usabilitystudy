@@ -113,7 +113,7 @@ To completely set your computer up for, as well as run, the `facebook/knowledge_
 
    ```bash
    chmod +x ./entity_linking_2022_usabilitystudy/setup_kb.sh
-   ./entity_linking_2022_usabilitystudy/setup_kb.sh
+   ~/entity_linking_2022_usabilitystudy/setup_kb.sh
    ```
 
 #### If you use Windows:
@@ -126,7 +126,7 @@ To completely set your computer up for, as well as run, the `facebook/knowledge_
 
    ```powershell
    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-   .\entity_linking_2022_usabilitystudy\setup_kb.ps1
+   ~\entity_linking_2022_usabilitystudy\setup_kb.ps1
    ```
 
 **Note**: For more detailed documentation on how to manually complete this step, you can follow [this link](https://docs.google.com/document/d/1iwiGdOZ8xkXLDT-y9d0xdkRdcujgfJxyHg3CBUDNOEg/edit?usp=sharing).
@@ -137,7 +137,9 @@ To completely set your computer up for as well as run the `facebook/train` scrip
 
 **Note**: Running the [`02_train_entity_linking.py`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/train/02_train_entity_linking.py) script in this step takes multiple hours to complete!
 
-1. Running these scripts requires `fb_2022_adid_text.csv.gz` and `fb_2022_adid_var1.csv.gz`, which are hosted on our Figshare. If you have not downloaded these datasets yet, you can do so by following [this link](https://www.creativewmp.com/data-access/) and completing the Data Access Form, which will redirect you to a page from which you can download both datasets. Please do not move the files from your **Downloads** folder!
+1. Running these scripts requires `fb_2022_adid_text.csv.gz` and `fb_2022_adid_var1.csv.gz`, which are hosted on our Figshare. If you have not downloaded these datasets yet, you can do so by following [this link](https://www.creativewmp.com/data-access/) and completing the Data Access Form, which will redirect you to a page from which you can download both datasets. Do not move the files from your **Downloads** folder!
+
+   **Note**: Make sure you download as gzip files! If they don’t download this way automatically and you use Safari, then you may need to uncheck the option to "open 'safe' files after downloading" in your General Safari settings before trying again.
 
 #### If you use macOS/Linux:
 
@@ -145,7 +147,7 @@ To completely set your computer up for as well as run the `facebook/train` scrip
 
    ```bash
    chmod +x ./entity_linking_2022_usabilitystudy/setup_train.sh
-   ./entity_linking_2022_usabilitystudy/setup_train.sh
+   ~/entity_linking_2022_usabilitystudy/setup_train.sh
    ```
 
    **Note**: You may be prompted for your password. This just gives the script permission to move the datasets and trained entity linker model from your Downloads folder to the appropriate locations! You should use the same password that you use to log into your computer!
@@ -156,7 +158,7 @@ To completely set your computer up for as well as run the `facebook/train` scrip
 
    ```powershell
    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-   .\entity_linking_2022_usabilitystudy\setup_train.ps1
+   ~\entity_linking_2022_usabilitystudy\setup_train.ps1
    ```
 
    **Note**: You may be prompted for your password. This just gives the script permission to move the datasets and trained entity linker model from your Downloads folder to the appropriate locations! You should use the same password that you use to log into your computer!
@@ -168,6 +170,8 @@ To completely set your computer up for as well as run the `facebook/train` scrip
 To completely set your computer up for, as well as run, the `facebook/inference` scripts, you can use the `setup_inference` scripts we prvoide!
 
 1. Running the `facebook/inference` scripts requires the `fb_2022_adid_text.csv.gz` dataset, and running the `google/inference` scripts requires the `g2022_adid_01062021_11082022_text.csv.gz` dataset, both of which are hosted on our Figshare. If you have not downloaded these datasets yet, you can do so by following [this link](https://www.creativewmp.com/data-access/) and completing the Data Access Form, which will redirect you to a page from which you can download both datasets. Please do not move the files from your **Downloads** folder!
+
+   **Note**: Again, make sure you download as gzip files! If they don’t download this way automatically and you use Safari, then you may need to uncheck the option to "open 'safe' files after downloading" in your General Safari settings before trying again.
 
 2. If you skipped steps [1 (Constructing a Knowledge Base of Political Entities)](#1-constructing-a-knowledge-base-of-political-entities) and [2 (Training the Entity Linking Model)](#2-training-the-entity-linking-model), you'll need to download our **pre-trained entity linker model**. This model is also hosted on our Figshare, and so you can access and download it through the same link as in the prior step! Please do not move the folder from your **Downloads** folder!
 
@@ -181,7 +185,7 @@ To completely set your computer up for, as well as run, the `facebook/inference`
 
    ```bash
    chmod +x ./entity_linking_2022_usabilitystudy/setup_inf.sh
-   ./entity_linking_2022_usabilitystudy/setup_inf.sh
+   ~/entity_linking_2022_usabilitystudy/setup_inf.sh
    ```
 
    **Note**: You may be prompted for your password. This just gives the script permission to move the datasets and trained entity linker model from your Downloads folder to the appropriate locations! You should use the same password that you use to log into your computer!
@@ -196,7 +200,7 @@ To completely set your computer up for, as well as run, the `facebook/inference`
 
    ```powershell
    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-   .\entity_linking_2022_usabilitystudy\setup_inf.ps1
+   ~\entity_linking_2022_usabilitystudy\setup_inf.ps1
    ```
 
    **Note**: You may be prompted for your password. This just gives the script permission to move the datasets and trained entity linker model from your Downloads folder to the appropriate locations! You should use the same password that you use to log into your computer!
