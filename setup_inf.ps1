@@ -41,7 +41,7 @@ function Entity-Linker-Exists {
         # Unzip if it's a zip file
         if (Test-Path -Path $zipPath -PathType Leaf) {
             Write-Host "Zip file '$ENTITYLINKER.zip' exists. Unzipping it now..."
-            Expand-Archive -Path $zipPath -DestinationPath $downloadsPath
+            Expand-Archive -Path $zipPath -DestinationPath $downloadsPath -Force
             Write-Host "Unzipped '$ENTITYLINKER.zip' to '$ENTITYLINKER' in Downloads."
         }
 

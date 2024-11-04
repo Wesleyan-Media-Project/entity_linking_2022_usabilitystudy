@@ -34,9 +34,13 @@ entitylinker_exists() {
         #Check downloads folder for trained_entity_linker
         if [[ -d "$HOME/Downloads/$ENTITYLINKER" || -f "$HOME/Downloads/$ENTITYLINKER.zip" ]]; then
             # If it's a zip, then unzip
-            if [ -d "$HOME/Downloads/$ENTITYLINKER.zip" ]; then
+            if [ -f "$HOME/Downloads/$ENTITYLINKER.zip" ]; then
                 echo "Folder '$ENTITYLINKER.zip' exists. Unzipping it now..."
-                unzip "$ENTITYLINKER.zip"
+                unzip "$HOME/Downloads/$ENTITYLINKER.zip" -d "$HOME/Downloads/"
+                # Removes meta data if created
+                if [ -d "$HOME/Downloads/__MACOSX" ]; then
+                    rm -rf $HOME/Downloads/__MACOSX
+                fi
                 echo "Folder '$ENTITYLINKER.zip' has been unzipped to '$ENTITYLINKER'."
             fi
             # Move into home directory
@@ -218,6 +222,7 @@ if check_python_version && check_r_version; then
     
     if dataset_exists && entitylinker_exists; then
         echo "Files '$DATASET' and '$ENTITYLINKER' exist!"
+        exit
 
         setup_venv
         install_python_packages
