@@ -222,7 +222,6 @@ if check_python_version && check_r_version; then
     
     if dataset_exists && entitylinker_exists; then
         echo "Files '$DATASET' and '$ENTITYLINKER' exist!"
-        exit
 
         setup_venv
         install_python_packages
