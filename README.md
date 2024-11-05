@@ -79,13 +79,13 @@ If you need additional technical support, here is a [Terminal User Guide](https:
 
 ### 0. Cloning the entity_linking_2022_usabilitystudy Repository
 
-In order to run the scripts in this repository, you'll need to copy them onto your own computer. To do so:
+In order to run the scripts in this repository, you'll need to copy this repository as a folder onto your own computer. To do so:
 
 #### If you use macOS/Linux:
 
 1. Open up your Terminal application, which is located in `Applications/Utilities` on a Mac.
 
-2. Execute the following commands in order to clone this repository onto your computer, in your home directory:
+2. Execute the following commands in order to clone this repository onto your computer, in the home directory of your file manager (Finder):
 
    ```bash
    cd $HOME
@@ -96,7 +96,7 @@ In order to run the scripts in this repository, you'll need to copy them onto yo
 
 1. Click the Start Menu, search for the Powershell application, and select **Windows Powershell** in order to open up the Powershell application.
 
-2. Execute the following commands in order to clone this repository onto your computer, in your home directory:
+2. Execute the following commands in order to clone this repository onto your computer, in the home directory of your file manager (File Explorer):
 
    ```bash
    cd $HOME
