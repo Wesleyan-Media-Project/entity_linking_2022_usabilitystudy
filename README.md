@@ -30,9 +30,9 @@ To analyze the different dimensions of political ad transparency we have develop
 <video src="https://github.com/Wesleyan-Media-Project/entity_linking_2022/assets/104949958/2a7f456f-d2d9-439f-8e64-f9abb589069e" alt="If you are unable to see the video on Firefox with the error: No video with supported format and MIME type found, please try it on Chrome.">
 </video>
 
-If you are unable to see the video above (e.g., you are getting the error "No video with supported format and MIME type found"), try a different browser. The video works on Google Chrome.
+If you are unable to see the video above (e.g., you are getting the error "No video with supported format and MIME type found"), try a different browser. The video works on Google Chrome. Or, you can also watch this tutorial through [YouTube](https://youtu.be/-C29ZL3snxM).
 
-Or, you can also watch this tutorial through [YouTube](https://youtu.be/-C29ZL3snxM).
+**NOTE**: that this video corresponds to an earlier version of the repository. We no longer use the files shown for organization, but all the code is the same, simply moved over to the corresponding sections of the jupyter notebooks.
 
 ## 2. Overview
 
@@ -77,11 +77,11 @@ There are separate folders for running the entity linker depending on whether yo
 
 ### To Run [`facebook/facebook.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/facebook.ipynb):
 
-Click [here](https://colab.research.google.com/github/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/facebook.ipynb) to open up `facebook.ipynb` in a Google colab environment.
+Click [here](https://colab.research.google.com/github/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/facebook.ipynb) to open up `facebook.ipynb` in a Google colab environment. From there, you can follow the instructions provided in the script to successfully execute the various sections.
 
 ### To Run [`google/google.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/google/google.ipynb):
 
-Click [here](https://colab.research.google.com/github/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/google/google.ipynb) to open up `google.ipynb` in a Google colab environment.
+Click [here](https://colab.research.google.com/github/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/google/google.ipynb) to open up `google.ipynb` in a Google colab environment. From there, you can follow the instructions provided in the script to successfully execute the various sections.
 
 ## 4. Results Storage
 
