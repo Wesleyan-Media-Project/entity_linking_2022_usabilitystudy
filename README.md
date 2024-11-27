@@ -46,7 +46,7 @@ There are separate folders for running the entity linker depending on whether yo
 
    The first task is to construct a knowledge base of political entities (people) of interest.
 
-   The knowledge base of people of interest is constructed from [facebook/knowledge_base/01_construct_kb.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/knowledge_base/01_construct_kb.R). The input to the file is the data sourced from the 2022 WMP persons file [person_2022.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/people/person_2022.csv). The script constructs one sentence for each person with a basic description. Districts and party are sourced from the 2022 WMP candidates file [wmpcand_120223_wmpid.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/candidates/wmpcand_120223_wmpid.csv), a comprehensive file with names of candidates.
+   The knowledge base of people of interest is constructed from the `facebook/knowledge_base` section of [`facebook/facebook.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/facebook.ipynb). The input to the file is the data sourced from the 2022 WMP persons file [person_2022.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/people/person_2022.csv). The script constructs one sentence for each person with a basic description. Districts and party are sourced from the 2022 WMP candidates file [wmpcand_120223_wmpid.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/candidates/wmpcand_120223_wmpid.csv), a comprehensive file with names of candidates.
 
    The knowledge base has four columns that include entities' `id`, `name`, `descr` (for description), and `aliases`. Examples of aliases include Joseph R. Biden being referred to as Joe or Robert Francis O’Rourke generally being known as Beto O’Rourke. Here is an example of one row in the knowledge base:
 
@@ -58,9 +58,9 @@ There are separate folders for running the entity linker depending on whether yo
 
    The second task is to train an entity linking model using the knowledge base.
 
-   Once the knowledge base of people of interest is constructed, the entity linker can be initialized with [spaCy](https://spacy.io/), a natural language processing library we use, in [facebook/train/02_train_entity_linking.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/02_train_entity_linking.py).
+   Once the knowledge base of people of interest is constructed, the entity linker can be initialized with [spaCy](https://spacy.io/), a natural language processing library we use, in the `facebook/train` section of [`facebook/facebook.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/facebook.ipynb).
 
-   After successfully running the above scripts in the training folder, you should see the following trained model in the `models` folder:
+   After successfully running the above scripts, you would see the following trained models:
 
    - `intermediate_kb`
    - `trained_entity_linker`
@@ -69,147 +69,19 @@ There are separate folders for running the entity linker depending on whether yo
 
    The third task is to make inferences with the trained model to automatically identify and link entities mentioned in new political ad text.
 
-   To perform this task you can use the scripts in the inferences folders, [facebook/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/inference) and [google/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/google/inference). The folders incluced variations of scripts to disambiguate people, for example, multiple "Harrises" (e.g., Kamala Harris and Andy Harris).
+   To perform this task you can use the scripts in the `facebook/inference` and `google/inference` sections of the respective notebooks, [`facebook/facebook.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/facebook.ipynb) and [`google/google.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/google/google.ipynb). The sections incluced variations of scripts to disambiguate people, for example, multiple "Harrises" (e.g., Kamala Harris and Andy Harris).
 
 ## 3. How to Run the Scripts
 
-**Note**: You can **skip** steps [1 (Constructing a Knowledge Base of Political Entities)](#1-constructing-a-knowledge-base-of-political-entities) and [2 (Training the Entity Linking Model)](#2-training-the-entity-linking-model) if you decide to instead use our own knowledge base and **pre-trained entity linker model**. Our knowledge base ([`entity_kb.csv`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/data/entity_kb.csv)) is already conveniently located within the repository, but you'll need to download the pre-trained entity linker manually. The model is hosted on our Figshare, which you can access by following [this link](https://www.creativewmp.com/data-access/) and completing the Data Access Form. This will immediately redirect you to a page from which you can download the model!
+**Note**: You can **skip** running the knowledge_base and train sections of the notebooks if you decide to instead use our own knowledge base and **pre-trained entity linker model**. Our knowledge base ([`entity_kb.csv`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/data/entity_kb.csv)) is already conveniently located within the repository, but you'll need to download the pre-trained entity linker manually. The model is hosted on our Figshare, which you can access by following [this link](https://www.creativewmp.com/data-access/) and completing the Data Access Form. This will immediately redirect you to a page from which you can download the model!
 
-If you need additional technical support, here is a [Terminal User Guide](https://support.apple.com/guide/terminal/welcome/mac) for macOS/Linux users and here is a [Powershell User Guide](https://learn.microsoft.com/en-us/powershell/scripting/learn/ps101/01-getting-started?view=powershell-7.4) for Windows users.
+### To Run [`facebook/facebook.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/facebook.ipynb):
 
-### 0. Cloning the entity_linking_2022_usabilitystudy Repository
+Click [here](https://colab.research.google.com/github/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/facebook.ipynb) to open up `facebook.ipynb` in a Google colab environment.
 
-In order to run the scripts in this repository, you'll need to copy this repository as a folder onto your own computer. To do so:
+### To Run [`google/google.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/google/google.ipynb):
 
-#### If you use macOS/Linux:
-
-1. Open up your Terminal application, which is located in `Applications/Utilities` on a Mac.
-
-2. Execute the following commands in order to clone this repository onto your computer, in the home directory of your file manager (Finder):
-
-   ```bash
-   cd $HOME
-   git clone https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy.git
-   ```
-
-#### If you use Windows:
-
-1. Click the Start Menu, search for the Powershell application, and select **Windows Powershell** in order to open up the Powershell application.
-
-2. Execute the following commands in order to clone this repository onto your computer, in the home directory of your file manager (File Explorer):
-
-   ```bash
-   cd $HOME
-   git clone https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy.git
-   ```
-
-### 1. Constructing a Knowledge Base of Political Entities
-
-To completely set your computer up for, as well as run, the `facebook/knowledge_base` script, you can use the `setup_kb` scripts we prvoide!
-
-#### If you use macOS/Linux:
-
-1. If you haven't already, make sure you have Python 3.10.5 and R both installed on your computer. [Here](https://www.python.org/ftp/python/3.10.5/python-3.10.5-macos11.pkg) is a direct link to the Python 3.10.5 package for macOS, and [here](https://cran.r-project.org/bin/macosx/) is a direct link to the R package for macOS. After downloading, open each package and follow the prompts. **Don't forget to check the box that adds each package to your PATH during installation!**
-
-   If you need further documentation, you can visit the main [Python](https://www.python.org/downloads/release/python-3105/) and [R](https://cran.r-project.org) sites.
-
-2. Execute the following two commands in order to set up and run `facebook/knowledge_base/01_construct_kb.R`:
-
-   ```bash
-   chmod +x ~/entity_linking_2022_usabilitystudy/setup_kb.sh
-   ~/entity_linking_2022_usabilitystudy/setup_kb.sh
-   ```
-
-#### If you use Windows:
-
-1. If you haven't already, make sure you have Python 3.10.5 and R both installed on your computer. [Here](https://www.python.org/ftp/python/3.10.5/python-3.10.5-amd64.exe) is a direct link to the Python 3.10.5 package for Windows, and [here](https://cran.r-project.org/bin/windows/) is a direct link to the R package for Windows. After downloading, open each package and follow the prompts. **Don't forget to check the box that adds each package to your PATH during installation!**
-
-   If you need further documentation, you can visit the main [Python](https://www.python.org/downloads/release/python-3105/) and [R](https://cran.r-project.org) sites.
-
-2. Execute the following two commands in order to set up and run `facebook/knowledge_base/01_construct_kb.R`:
-
-   ```powershell
-   Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-   ~\entity_linking_2022_usabilitystudy\setup_kb.ps1
-   ```
-
-**Note**: For more detailed documentation on how to manually complete this step, you can follow [this link](https://docs.google.com/document/d/1iwiGdOZ8xkXLDT-y9d0xdkRdcujgfJxyHg3CBUDNOEg/edit?usp=sharing).
-
-### 2. Training the Entity Linking Model
-
-To completely set your computer up for as well as run the `facebook/train` scripts, you can use the `setup_train` scripts we prvoide!
-
-**Note**: Running the [`02_train_entity_linking.py`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/train/02_train_entity_linking.py) script in this step takes multiple hours to complete!
-
-1. Running these scripts requires `fb_2022_adid_text.csv.gz` and `fb_2022_adid_var1.csv.gz`, which are hosted on our Figshare. If you have not downloaded these datasets yet, you can do so by following [this link](https://www.creativewmp.com/data-access/) and completing the Data Access Form, which will redirect you to a page from which you can download both datasets. Do not move the files from your **Downloads** folder!
-
-   **Note**: Make sure you download as gzip files! If they don’t download this way automatically and you use Safari, then you may need to uncheck the option to "open 'safe' files after downloading" in your General Safari settings before trying again.
-
-#### If you use macOS/Linux:
-
-2. Execute the following two commands in order to set up and run `facebook/train`:
-
-   ```bash
-   chmod +x ~/entity_linking_2022_usabilitystudy/setup_train.sh
-   ~/entity_linking_2022_usabilitystudy/setup_train.sh
-   ```
-
-   **Note**: You may be prompted for your password. This just gives the script permission to move the datasets and trained entity linker model from your Downloads folder to the appropriate locations! You should use the same password that you use to log into your computer!
-
-#### If you use Windows:
-
-2. Execute the following two commands in order to set up and run `facebook/train`:
-
-   ```powershell
-   Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-   ~\entity_linking_2022_usabilitystudy\setup_train.ps1
-   ```
-
-   **Note**: You may be prompted for your password. This just gives the script permission to move the datasets and trained entity linker model from your Downloads folder to the appropriate locations! You should use the same password that you use to log into your computer!
-
-**Note**: For more detailed documentation on how to manually complete this step, you can follow [this link](https://docs.google.com/document/d/11Wi66xhmrL4mo9NpH7C7n_Gbp4wX9YQL_gGbcYHL4kA/edit?usp=sharing).
-
-### 3. Making Inferences with the Trained Model
-
-To completely set your computer up for, as well as run, the `facebook/inference` scripts, you can use the `setup_inference` scripts we prvoide!
-
-1. Running the `facebook/inference` scripts requires the `fb_2022_adid_text.csv.gz` dataset, and running the `google/inference` scripts requires the `g2022_adid_01062021_11082022_text.csv.gz` dataset, both of which are hosted on our Figshare. If you have not downloaded these datasets yet, you can do so by following [this link](https://www.creativewmp.com/data-access/) and completing the Data Access Form, which will redirect you to a page from which you can download both datasets. Please do not move the files from your **Downloads** folder!
-
-   **Note**: Again, make sure you download as gzip files! If they don’t download this way automatically and you use Safari, then you may need to uncheck the option to "open 'safe' files after downloading" in your General Safari settings before trying again.
-
-2. If you skipped steps [1 (Constructing a Knowledge Base of Political Entities)](#1-constructing-a-knowledge-base-of-political-entities) and [2 (Training the Entity Linking Model)](#2-training-the-entity-linking-model), you'll need to download our **pre-trained entity linker model**. This model is also hosted on our Figshare, and so you can access and download it through the same link as in the prior step! Please do not move the folder from your **Downloads** folder!
-
-#### If you use macOS/Linux:
-
-3. If you haven't already, make sure you have Python 3.10.5 and R both installed on your computer. [Here](https://www.python.org/ftp/python/3.10.5/python-3.10.5-macos11.pkg) is a direct link to the Python 3.10.5 package for macOS, and [here](https://cran.r-project.org/bin/macosx/) is a direct link to the R package for macOS. After downloading, open each package and follow the prompts. **Don't forget to check the box that adds each package to your PATH during installation!**
-
-   If you need further documentation, you can visit the main [Python](https://www.python.org/downloads/release/python-3105/) and [R](https://cran.r-project.org) sites.
-
-4. Execute the following two commands in order to set up and run `facebook/inference`:
-
-   ```bash
-   chmod +x ~/entity_linking_2022_usabilitystudy/setup_inf.sh
-   ~/entity_linking_2022_usabilitystudy/setup_inf.sh
-   ```
-
-   **Note**: You may be prompted for your password. This just gives the script permission to move the datasets and trained entity linker model from your Downloads folder to the appropriate locations! You should use the same password that you use to log into your computer!
-
-#### If you use Windows:
-
-3. If you haven't already, make sure you have Python 3.10.5 and R both installed on your computer. [Here](https://www.python.org/ftp/python/3.10.5/python-3.10.5-amd64.exe) is a direct link to the Python 3.10.5 package for Windows, and [here](https://cran.r-project.org/bin/windows/) is a direct link to the R package for Windows. After downloading, open each package and follow the prompts. **Don't forget to check the box that adds each package to your PATH during installation!**
-
-   If you need further documentation, you can visit the main [Python](https://www.python.org/downloads/release/python-3105/) and [R](https://cran.r-project.org) sites.
-
-4. Execute the following two commands in order to set up and run `facebook/inference`:
-
-   ```powershell
-   Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-   ~\entity_linking_2022_usabilitystudy\setup_inf.ps1
-   ```
-
-   **Note**: You may be prompted for your password. This just gives the script permission to move the datasets and trained entity linker model from your Downloads folder to the appropriate locations! You should use the same password that you use to log into your computer!
-
-**Note**: For more detailed documentation on how to manually complete this step, you can follow [this link](https://docs.google.com/document/d/1EaA_C_LgopZstTAl8JWLkfbQZdcPentXPTgIyYf7UkA/edit?usp=sharing).
+Click [here](https://colab.research.google.com/github/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/google/google.ipynb) to open up `google.ipynb` in a Google colab environment.
 
 ## 4. Results Storage
 
