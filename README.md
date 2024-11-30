@@ -28,8 +28,6 @@ To analyze the different dimensions of political ad transparency we have develop
 
 If you are unable to see the video above (e.g., you are getting the error "No video with supported format and MIME type found"), try a different browser. The video works on Google Chrome. Or, you can also watch this tutorial through [YouTube](https://youtu.be/-C29ZL3snxM).
 
-**NOTE**: that this video corresponds to an earlier version of the repository. We no longer use the files shown for organization, but all the code is the same, simply moved over to the corresponding sections of the jupyter notebooks.
-
 ## 2. Overview
 
 This repo contains an entity linker for 2022 election data. The entity linker is a machine learning classifier and was trained on data that contains descriptions of people and their names, along with their aliases. Data are sourced from the 2022 WMP [person_2022.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/people/person_2022.csv) and [wmpcand_120223_wmpid.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/candidates/wmpcand_120223_wmpid.csv) --- two comprehensive files with names of candidates and other people in the political process. Data are restricted to general election candidates and other non-candidate people of interest (sitting senators, cabinet members, international leaders, etc.).
