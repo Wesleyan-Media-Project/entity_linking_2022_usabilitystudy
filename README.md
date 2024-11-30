@@ -15,12 +15,6 @@ To analyze the different dimensions of political ad transparency we have develop
 [1. Video Tutorial](#1-video-tutorial)  
 [2. Overview](#2-overview)  
 [3. How to Run the Scripts](#3-how-to-run-the-scripts)
-
-- [0. Cloning This Repository](#0-cloning-the-entity_linking_2022_usabilitystudy-repository)
-- [1. Constructing Knowledge Base](#1-constructing-a-knowledge-base-of-political-entities)
-- [2. Training Entity Linker](#2-training-the-entity-linking-model)
-- [3. Making Inferences](#3-making-inferences-with-the-trained-model)
-
 [4. Results Storage](#4-results-storage)  
 [5. Results Analysis](#5-results-analysis)  
 [6. Thank You](#6-thank-you)
@@ -120,18 +114,9 @@ The script `readcsv.py` is a Python script that reads and filters the `csv.gz` f
 
 #### Usage
 
-To run the script, you should be able to use the same virtual environment as created for running the main scripts. If you use a Mac, you can reactivate this environment (if necessary) with the command `source venv/bin/activate`. If you use a Windows, you would use the command `. venv\Scripts\Activate.ps1`
+Both the [`facebook/facebook.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/facebook.ipynb) and [`google/google.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/google/google.ipynb) notebooks have Results Analysis Example sections, complete with examples of commands that can be run on the various data files.
 
-After confirming that the virtual environment is activated, you can run the script with the command line arguments.
-
-For example, to run the script with the default arguments (start from row 0, read 10000 rows, no text filter), you can enter the following command in your terminal:
-
-```bash
-cd $HOME/entity_linking_2022_usabilitystudy/
-python3 analysis/readcsv.py --file facebook/data/entity_linking_results_fb22.csv.gz
-```
-
-You can customize the behavior of the script by providing additional command-line arguments:
+You can furthermore customize the behavior of the `readcsv.py` script by providing any of these additional command-line arguments:
 
 - `--file`: Path to the csv file (required).
 - `--skiprows`: Number of rows to skip at the start of the file (default: 0).
@@ -141,13 +126,13 @@ You can customize the behavior of the script by providing additional command-lin
 For example, to filter rows containing the text "Biden", starting from row 0 and reading 100000 rows:
 
 ```bash
-python3 analysis/readcsv.py --file facebook/data/entity_linking_results_fb22.csv.gz --nrows 100000 --filter_text Biden
+!python /content/readcsv.py --file /content/entity_linking_results_fb22.csv.gz --nrows 100000 --filter_text Biden
 ```
 
 To see a help message with the description of all available arguments, you can run the following command:
 
 ```bash
-python3 analysis/readcsv.py --h
+!python /content/readcsv.py --h
 ```
 
 Please note that this script may take a while (>10 min) to run depending on the size of the data and the number of rows you requested. If you request the script to read more than 1048570 rows, the output would be saved in multiple Excel files due to the maximum number of rows Excel can handle.
