@@ -14,7 +14,7 @@ To analyze the different dimensions of political ad transparency we have develop
 
 [1. Video Tutorial](#1-video-tutorial)  
 [2. Overview](#2-overview)  
-[3. How to Run the Scripts](#3-how-to-run-the-scripts)
+[3. How to Run the Scripts](#3-how-to-run-the-scripts)  
 [4. Results Storage](#4-results-storage)  
 [5. Results Analysis](#5-results-analysis)  
 [6. Thank You](#6-thank-you)
