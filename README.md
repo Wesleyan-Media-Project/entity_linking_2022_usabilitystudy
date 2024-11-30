@@ -21,6 +21,8 @@ To analyze the different dimensions of political ad transparency we have develop
 
 ## 1. Video Tutorial
 
+**NOTE**: that this video corresponds to an earlier version of the repository. We no longer use the files shown for organization, but all the code is the same, simply moved over to the corresponding sections of the jupyter notebooks.
+
 <video src="https://github.com/Wesleyan-Media-Project/entity_linking_2022/assets/104949958/2a7f456f-d2d9-439f-8e64-f9abb589069e" alt="If you are unable to see the video on Firefox with the error: No video with supported format and MIME type found, please try it on Chrome.">
 </video>
 
