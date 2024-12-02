@@ -40,7 +40,7 @@ There are separate folders for running the entity linker depending on whether yo
 
    The first task is to construct a knowledge base of political entities (people) of interest.
 
-   The knowledge base of people of interest is constructed from the `facebook/knowledge_base` section of [`facebook/facebook.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/facebook.ipynb). The input to the file is the data sourced from the 2022 WMP persons file [person_2022.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/people/person_2022.csv). The script constructs one sentence for each person with a basic description. Districts and party are sourced from the 2022 WMP candidates file [wmpcand_120223_wmpid.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/candidates/wmpcand_120223_wmpid.csv), a comprehensive file with names of candidates.
+   The knowledge base of people of interest is constructed from the `knowledge_base` section of [`facebook/facebook.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/facebook.ipynb). The input to the file is the data sourced from the 2022 WMP persons file [person_2022.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/people/person_2022.csv). The script constructs one sentence for each person with a basic description. Districts and party are sourced from the 2022 WMP candidates file [wmpcand_120223_wmpid.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/candidates/wmpcand_120223_wmpid.csv), a comprehensive file with names of candidates.
 
    The knowledge base has four columns that include entities' `id`, `name`, `descr` (for description), and `aliases`. Examples of aliases include Joseph R. Biden being referred to as Joe or Robert Francis O’Rourke generally being known as Beto O’Rourke. Here is an example of one row in the knowledge base:
 
@@ -52,7 +52,7 @@ There are separate folders for running the entity linker depending on whether yo
 
    The second task is to train an entity linking model using the knowledge base.
 
-   Once the knowledge base of people of interest is constructed, the entity linker can be initialized with [spaCy](https://spacy.io/), a natural language processing library we use, in the `facebook/train` section of [`facebook/facebook.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/facebook.ipynb).
+   Once the knowledge base of people of interest is constructed, the entity linker can be initialized with [spaCy](https://spacy.io/), a natural language processing library we use, in the `train` section of [`facebook/facebook.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/facebook.ipynb).
 
    After successfully running the above scripts, you would see the following trained models:
 
@@ -63,7 +63,7 @@ There are separate folders for running the entity linker depending on whether yo
 
    The third task is to make inferences with the trained model to automatically identify and link entities mentioned in new political ad text.
 
-   To perform this task you can use the scripts in the `facebook/inference` and `google/inference` sections of the respective notebooks, [`facebook/facebook.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/facebook.ipynb) and [`google/google.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/google/google.ipynb). The sections incluced variations of scripts to disambiguate people, for example, multiple "Harrises" (e.g., Kamala Harris and Andy Harris).
+   To perform this task you can use the scripts in the `inference` sections of the respective notebooks, [`facebook/facebook.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/facebook.ipynb) and [`google/google.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/google/google.ipynb). The sections incluced variations of scripts to disambiguate people, for example, multiple "Harrises" (e.g., Kamala Harris and Andy Harris).
 
 ## 3. How to Run the Scripts
 
