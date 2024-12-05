@@ -79,6 +79,8 @@ There are separate folders for running the entity linker depending on whether yo
 
 3.  Proceed to the section that you want to run and follow the instructions provided in the notebook.
 
+## 4. Results Storage
+
 After successfully running the above scripts in the inference folder, you should see the entity linking results in the `data` folder. The data will be in `csv.gz` and `csv` format. The various Facebook results, for instance, are as follows:
 
 - [**`entity_linking_results_fb22.csv.gz`**](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_linking_results_fb22.csv.gz): Ad ID - text field level political entity detection results. Detected entities in each textual variable (e.g., disclaimer, creative boides, detected OCR text) are stored in a list. Each textual variable can have multiple detected entities or no detected entities. Entities are represented by their WMPIDs, which are WMP's unique identifiers for political figures.
