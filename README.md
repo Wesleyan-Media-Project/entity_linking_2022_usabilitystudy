@@ -71,11 +71,19 @@ There are separate folders for running the entity linker depending on whether yo
 
 ### To Run [`facebook/facebook.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/facebook.ipynb):
 
-Click [here](https://colab.research.google.com/github/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/facebook.ipynb) to open up `facebook.ipynb` in a Google colab environment. From there, you can follow the instructions provided in the script to successfully execute the various sections.
+1. Click [here](https://colab.research.google.com/github/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/facebook.ipynb) to open up `facebook.ipynb` in a Google colab environment.
+
+2. Run the `Environment Setup` section of the notebook to install the packages necessary for running the code.
+
+3. Proceed to the section that you want to run and follow the instructions provided in the notebook.
 
 ### To Run [`google/google.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/google/google.ipynb):
 
-Click [here](https://colab.research.google.com/github/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/google/google.ipynb) to open up `google.ipynb` in a Google colab environment. From there, you can follow the instructions provided in the script to successfully execute the various sections.
+1. Click [here](https://colab.research.google.com/github/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/google/google.ipynb) to open up `google.ipynb` in a Google colab environment.
+
+2. Run the `Environment Setup` section of the notebook to install the packages necessary for running the code.
+
+3. Proceed to the section that you want to run and follow the instructions provided in the notebook.
 
 ## 4. Results Storage
 
