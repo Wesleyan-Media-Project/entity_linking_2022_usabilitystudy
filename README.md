@@ -118,7 +118,7 @@ The script `readcsv.py` is a Python script that reads and filters the `csv.gz` f
 
 #### Usage
 
-Both the [`facebook/facebook.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/facebook.ipynb) and [`google/google.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/google/google.ipynb) notebooks have `Results Analysis Example` sections, complete with examples of commands that can be run on the various data files. Additional instructions on how to run this section can be found in each respective notebook.
+Both the [`facebook/facebook.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/usability/facebook/facebook.ipynb) and [`google/google.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/usability/google/google.ipynb) notebooks have `Results Analysis Example` sections, complete with examples of commands that can be run on the various data files. Additional instructions on how to run this section can be found in each respective notebook.
 
 You can furthermore customize the behavior of the `readcsv.py` script by providing any of these additional command-line arguments:
 
