@@ -73,9 +73,9 @@ Note that we provide a **pre-trained entity-linking model** that is ready for yo
 
 1.  Open up the appropriate notebook:
 
-    a. Click [here](https://colab.research.google.com/github/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/facebook.ipynb) to open up `facebook.ipynb` in a Google colab environment
+    a. Click [here](https://colab.research.google.com/github/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/usability/facebook/facebook.ipynb) to open up `facebook.ipynb` in a Google colab environment
 
-    b. Click [here](https://colab.research.google.com/github/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/google/google.ipynb) to open up `google.ipynb` in a Google colab environment.
+    b. Click [here](https://colab.research.google.com/github/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/usability/google/google.ipynb) to open up `google.ipynb` in a Google colab environment.
 
 2.  Run the `Environment Setup` section of the notebook to install the packages necessary for running the code.
 
