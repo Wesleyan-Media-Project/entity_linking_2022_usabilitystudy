@@ -1,6 +1,6 @@
-# Wesleyan Media Project - Entity Linking 2022
+# Wesleyan Media Project - Entity-Linking 2022
 
-NOTE: This repo is for usability study purposes only. The main Entity Linking repo is here: https://github.com/Wesleyan-Media-Project/entity_linking_2022.
+NOTE: This repo is for usability study purposes only. The main Entity-Linking repository is here: https://github.com/Wesleyan-Media-Project/entity_linking_2022.
 
 Welcome! This repo contains scripts for identifying and linking election candidates and other political entities in political ads on Google and Facebook. The scripts provided here are intended to help journalists, academic researchers, and others interested in the democratic process to understand which political entities are connected and how.
 
@@ -30,11 +30,13 @@ If you are unable to see the video above (e.g., you are getting the error "No vi
 
 ## 2. Overview
 
-This repo contains an entity linker for 2022 election data. The entity linker is a machine learning classifier and was trained on data that contains descriptions of people and their names, along with their aliases. Data are sourced from the 2022 WMP [person_2022.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/people/person_2022.csv) and [wmpcand_120223_wmpid.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/candidates/wmpcand_120223_wmpid.csv) --- two comprehensive files with names of candidates and other people in the political process. Data are restricted to general election candidates and other non-candidate people of interest (sitting senators, cabinet members, international leaders, etc.).
+This repository contains an entity-linker for 2022 election data. The entity-linker is a machine learning classifier and was trained on data that contains descriptions of people and their names, along with their aliases. Data are sourced from the 2022 WMP [person_2022.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/people/person_2022.csv) and [wmpcand_120223_wmpid.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/candidates/wmpcand_120223_wmpid.csv) --- two comprehensive files with names of candidates and other people in the political process. Data are restricted to general election candidates and other non-candidate people of interest (sitting senators, cabinet members, international leaders, etc.).
 
-While this repo applies the trained entity linker to the 2022 US elections ads, you can also apply our entity linker to analyze your own political ad text datasets to identify which people of interest are mentioned in ads. The entity linker is especially useful if you have a large amount of ad text data and you do not want to waste time counting how many times a political figure is mentioned within these ads. You can follow the setup instructions below to apply the entity linker to your own data.
+While this repository applies the trained entity-linker to 2022 US elections ads, you can also apply it to your own political ad text datasets to identify which people of interest are mentioned in ads. It is especially useful if you have a large amount of ad text data and you do not want to waste time counting how many times a political figure is mentioned within these ads. You can follow the setup instructions below to apply the entity-linker to your own data.
 
-There are separate folders for running the entity linker depending on whether you want to run it on Facebook or Google data. For both Facebook and Google, the scripts need to be run in the order of three tasks: (1) constructing a knowledge base of political entities, (2) training the entity linking model, and (3) making inferences with the trained model. The repo provides reusable code for these three tasks. For your overview, we describe the three tasks in the following. Note that we provide a knowledge base and pre-trained models that are ready for your use on Google and Facebook 2022 data. For this data you can start right away making inferences and skip steps 1 and 2. However, if you want to apply our inference scripts to a different time period (for example, another election cycle) or in a different context (for example, a non-U.S. election), then you would need to create your own knowledge base and train your own models.
+There are separate folders for running the entity- linker depending on whether you want to run it on Facebook or Google data. For both Facebook and Google, the scripts need to be run in the order of three tasks: (1) constructing a knowledge base of political entities, (2) training the entity-linking model, and (3) making inferences with the trained model. The repo provides reusable code for these three tasks. For your overview, we describe the three tasks in the following. 
+
+Note that we provide a **pre-trained entity-linking model** that is ready for your use on Google and Facebook 2022 data. If you are using this pre-trained model, you can bypass the knowledge base and train steps and skip straight to making inferences. However, if you want to apply our inference scripts to a different time period (for example, another election cycle) or in a different context (for example, a non-U.S. election), then you would need to create your own knowledge base and train your own models.
 
 1. **Constructing a Knowledge Base of Political Entities**
 
@@ -48,11 +50,11 @@ There are separate folders for running the entity linker depending on whether yo
    | --------- | --------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------- |
    | WMPID1770 | Adam Gray | Adam Gray is a Democratic candidate for the 13rd District of California. | Adam Gray,Gray,Adam Gray's,Gray's,ADAM GRAY,GRAY,ADAM GRAY'S,GRAY'S |
 
-2. **Training the Entity Linking Model**
+2. **Training the Entity-Linking Model**
 
-   The second task is to train an entity linking model using the knowledge base.
+   The second task is to train an entity-linking model using the knowledge base.
 
-   Once the knowledge base of people of interest is constructed, the entity linker can be initialized with [spaCy](https://spacy.io/), a natural language processing library we use, in the `train` section of [`facebook/facebook.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/facebook.ipynb).
+   Once the knowledge base of people of interest is constructed, the entity-linker can be initialized with [spaCy](https://spacy.io/), a natural language processing library we use, in the `train` section of [`facebook/facebook.ipynb`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/facebook.ipynb).
 
    After successfully running the above scripts, you would see the following trained models:
 
@@ -67,7 +69,7 @@ There are separate folders for running the entity linker depending on whether yo
 
 ## 3. How to Run the Scripts
 
-**Note**: You can **skip** running the `knowledge_base` and `train` sections of the notebooks if you decide to instead use our own knowledge base and **pre-trained entity linker model**. Our knowledge base ([`entity_kb.csv`](https://github.com/Wesleyan-Media-Project/entity_linking_2022_usabilitystudy/blob/main/facebook/data/entity_kb.csv)) is already conveniently located within the repository, but you'll need to download the pre-trained entity linker manually. The model is hosted on our Figshare, which you can access by following [this link](https://www.creativewmp.com/data-access/) and completing the Data Access Form. This will immediately redirect you to a page from which you can download the model!
+**Note**: If you are using our own **pre-trained entity-linker model**, you should **skip** the `knowledge_base` and `train` sections of the notebooks. The model is available for download on our Figshare, which you can access by following [this link](https://www.creativewmp.com/data-access/) and completing the Data Access Form.
 
 1.  Open up the appropriate notebook:
 
@@ -77,18 +79,18 @@ There are separate folders for running the entity linker depending on whether yo
 
 2.  Run the `Environment Setup` section of the notebook to install the packages necessary for running the code.
 
-3.  Proceed to the section that you want to run and follow the instructions provided in the notebook.
+3.  Proceed to the appropriate section and follow the instructions provided in the notebook.
 
 ## 4. Results Storage
 
-After successfully running the above scripts in the inference folder, you should see the entity linking results in the `data` folder. The data will be in `csv.gz` and `csv` format. The various Facebook results, for instance, are as follows:
+After successfully running the above scripts in the inference folder, you should see the entity-linking results in the `data` folder. The data will be in `csv.gz` and `csv` format. The various Facebook results, for instance, are as follows:
 
 - [**`entity_linking_results_fb22.csv.gz`**](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_linking_results_fb22.csv.gz): Ad ID - text field level political entity detection results. Detected entities in each textual variable (e.g., disclaimer, creative boides, detected OCR text) are stored in a list. Each textual variable can have multiple detected entities or no detected entities. Entities are represented by their WMPIDs, which are WMP's unique identifiers for political figures.
 - [**`entity_linking_results_fb22_notext.csv.gz`**](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_linking_results_fb22_notext.csv.gz): This file drops the text column from `entity_linking_results_fb22.csv.gz` for space saving purpose (see below preview table as an example).
-- [**`detected_entities_fb22.csv.gz`**](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/detected_entities_fb22.csv.gz): A compact ad ID level entity linking results file. It concatenated all detected entities (given by `entity_linking_results_fb22.csv.gz`) from all textual fields of each ad ID.
-- [**`detected_entities_fb22_for_ad_tone.csv.gz`**](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/detected_entities_fb22_for_ad_tone.csv.gz): Filtered entity linking results (compared to `detected_entities_fb22.csv.gz`) prepared as input for [ad tone detection](https://github.com/Wesleyan-Media-Project/ad_tone) (a downstream classification task). It excluded detected entities from page names and disclaimers and aggregated text field level results to ad ID level (see [this script](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/03_combine_results.R)).
+- [**`detected_entities_fb22.csv.gz`**](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/detected_entities_fb22.csv.gz): A compact ad ID level entity-linking results file. It concatenated all detected entities (given by `entity_linking_results_fb22.csv.gz`) from all textual fields of each ad ID.
+- [**`detected_entities_fb22_for_ad_tone.csv.gz`**](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/detected_entities_fb22_for_ad_tone.csv.gz): Filtered entity-linking results (compared to `detected_entities_fb22.csv.gz`) prepared as input for [ad tone detection](https://github.com/Wesleyan-Media-Project/ad_tone) (a downstream classification task). It excluded detected entities from page names and disclaimers and aggregated text field level results to ad ID level (see [this script](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/03_combine_results.R)).
 
-Here is an example of the entity linking results [facebook/data/entity_linking_results_fb22.csv.gz](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_linking_results_fb22.csv.gz):
+Here is an example of the entity-linking results [facebook/data/entity_linking_results_fb22.csv.gz](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_linking_results_fb22.csv.gz):
 
 | text                                                  | text_detected_entities | text_start | text_end | ad_id  | field            |
 | ----------------------------------------------------- | ---------------------- | ---------- | -------- | ------ | ---------------- |
