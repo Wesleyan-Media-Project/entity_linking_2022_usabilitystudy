@@ -34,7 +34,7 @@ This repository contains an entity-linker for 2022 election data. The entity-lin
 
 While this repository applies the trained entity-linker to 2022 US elections ads, you can also apply it to your own political ad text datasets to identify which people of interest are mentioned in ads. It is especially useful if you have a large amount of ad text data and you do not want to waste time counting how many times a political figure is mentioned within these ads. You can follow the setup instructions below to apply the entity-linker to your own data.
 
-There are separate folders for running the entity-linker depending on whether you want to run it on Facebook or Google data. For both Facebook and Google, the scripts need to be run in the order of three tasks: (1) constructing a knowledge base of political entities, (2) training the entity-linking model, and (3) making inferences with the trained model. The repo provides reusable code for these three tasks. For your overview, we describe the three tasks in the following. 
+There are separate folders for running the entity-linker depending on whether you want to run it on Facebook or Google data. For both Facebook and Google, the scripts need to be run in the order of three tasks: (1) constructing a knowledge base of political entities, (2) training the entity-linking model, and (3) making inferences with the trained model. The repo provides reusable code for these three tasks. For your overview, we describe the three tasks in the following.
 
 Note that we provide a **pre-trained entity-linking model** that is ready for your use on Google and Facebook 2022 data. If you are using this pre-trained model, you can bypass the knowledge base and train steps and skip straight to making inferences. However, if you want to apply our inference scripts to a different time period (for example, another election cycle) or in a different context (for example, a non-U.S. election), then you would need to create your own knowledge base and train your own models.
 
@@ -69,7 +69,7 @@ Note that we provide a **pre-trained entity-linking model** that is ready for yo
 
 ## 3. How to Run the Scripts
 
-**Note**: If you are using our own **pre-trained entity-linker model**, you should **skip** the `knowledge_base` and `train` sections of the notebooks. The model is available for download on our Figshare, which you can access by following [this link](https://www.creativewmp.com/data-access/) and completing the Data Access Form.
+**Note**: If you are using our own **pre-trained entity-linker model**, you should **skip** the `knowledge_base` and `train` sections of the notebooks.
 
 1.  Open up the appropriate notebook:
 
